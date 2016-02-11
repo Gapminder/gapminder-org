@@ -1,6 +1,6 @@
 'use strict';
 
-const pkg = require('../package.json');
+//const pkg = require('../package.json');
 let config = {
   baseUrl: 'http://localhost:3000/',
 
@@ -50,7 +50,7 @@ let config = {
   useAllAngular2AppRoots: true
 };
 
-if (process.env.TRAVIS) {
+/*if (process.env.TRAVIS) {
   config.sauceUser = process.env.SAUCE_USERNAME;
   config.sauceKey = process.env.SAUCE_ACCESS_KEY;
   config.multiCapabilities = [
@@ -63,7 +63,7 @@ if (process.env.TRAVIS) {
       'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
     }
   ];
-}
+}*/
 
 exports.config = config;
 
