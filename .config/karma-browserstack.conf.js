@@ -77,7 +77,10 @@ module.exports = function (config) {
       browser: 'edge',
       os: 'Windows',
       os_version: '10'
-    },
+    }
+    // mobile devices are not stable!
+    // doesn't work for some reason
+    /*,
     'BS_WINDOWSPHONE': {
       base: 'BrowserStack',
       device: 'Nokia Lumia 930',
@@ -102,8 +105,7 @@ module.exports = function (config) {
       os: 'android',
       os_version: '4.3'
     }
-    // doesn't work for some reason
-    /*,
+,
     'BS_ANDROID4.2': {
       base: 'BrowserStack',
       device: 'Google Nexus 4',

@@ -37,7 +37,7 @@ script:
 # submit coverage report to coveralls
 - cat ./coverage/report-lcov/lcov.info | ./node_modules/.bin/coveralls --verbose
 # run karma tests at browser stack
-#- npm run test-bs
+- npm run karma-sauce
 # run karma tests at sauce labs
 #- npm run karma-sauce
 
