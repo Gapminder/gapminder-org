@@ -1,17 +1,20 @@
-<nav>
-  <h1></h1>
-  <ul>
-    <li>
-      <a href="">World</a>
-    </li>
-    <li>
-      <a [routerLink]=" ['Videos'] ">Videos</a>
-    </li>
-    <li>
-      <a [routerLink]=" ['Downloads'] ">Downloads</a>
-    </li>
-    <li>
-      <a [routerLink]=" ['About'] ">About</a>
-    </li>
-  </ul>
-</nav>
+<div id="primary-menu">
+  <div class="menu-container clearfix flat-menu">
+    <div id="logo">
+      <a href="http://www.gapminder.org" title="Gapminder">
+        <img class="logo"
+             src="http://www.gapminder.org/wp-content/themes/gapminder/images/logo.png"
+             alt="Gapminder -   About">
+      </a>
+    </div>
+    <div class="menu clearfix">
+      <ul id="menu-primary" class="sf-js-enabled">
+        <li class="menu-item menu-item-type-post_type menu-item-object-page">
+          <a [routerLink]="['Videos', 'List']">
+            Videos
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

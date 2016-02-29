@@ -1,7 +1,7 @@
 <div *ngIf="content">
-  <h2>
+  <h1>
     {{ content.title }}
-  </h2>
+  </h1>
 
   <ul>
     <li *ngFor="#menuItem of submenuItems">
@@ -11,9 +11,9 @@
     </li>
   </ul>
 
-  <div class="content"
-       *ngFor="#entry of content.entries"
-       [innerHTML]="entry.content | markdown">
+  <div class="entry-content entry">
+    <p *ngFor="#entry of content.entries"
+       [innerHTML]="entry.content | markdown"></p>
   </div>
 </div>
 

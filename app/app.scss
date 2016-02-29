@@ -63,7 +63,80 @@
   font-style: normal;
 }
 
+body {
+  background-color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  color: #231f20;
+  margin: 0;
+}
+
 a, a:visited {
   color: inherit;
   text-decoration: none;
+}
+
+h1 {
+  font-size: 50px;
+  line-height: 60px;
+}
+
+h2 {
+  font-size: 31px;
+}
+
+h3 {
+  font-size: 30px;
+  line-height: 1.1;
+}
+
+h4 {
+  font-size: 22px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Bariol Light', Helvetica, Arial, sans-serif;
+  color: #222;
+  font-weight: 300;
+  margin: 0 0 20px;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+img {
+  max-width: 100%;
+}
+
+.entry-content {
+  margin-bottom: 25px;
+}
+
+.entry-content p {
+  font-size: 15px;
+  font-family: 'Bariol Regular', sans-serif;
+  line-height: 19px;
+}
+
+.entry-content p a {
+  color: #b04514;
+}
+
+.entry-content p a:hover {
+  text-decoration: underline;
+}
+
+.content {
+  overflow: hidden;
+  float: left;
+  width: calc(100% - 320px);
+  margin-left: 12px;
+  margin-right: 25px;
+  min-height: 700px;
 }
