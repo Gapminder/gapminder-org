@@ -5,7 +5,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 const CompressionPlugin = require('compression-webpack-plugin');
-//const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProduction = (process.env.NODE_ENV || 'development') === 'production';
@@ -68,6 +68,7 @@ const config = {
       {test: /\.json$/, loader: 'json'},
       // Support for CSS as raw text
       {test: /\.css$/, loader: 'raw'},
+      {test: /\.scss$/, loaders: ['raw', 'sass']},
       // support for .html as raw text
       {test: /\.html$/, loader: 'raw'},
       // Support for .ts files.
@@ -100,7 +101,6 @@ const config = {
     }),
     // static assets
     //new CopyWebpackPlugin([{from: 'demo/favicon.ico', to: 'favicon.ico'}]),
-    //new CopyWebpackPlugin([{from: 'demo/assets', to: 'assets'}]),
     // generating html
     new HtmlWebpackPlugin({template: 'app/index.html'})
   ]
@@ -108,6 +108,9 @@ const config = {
 
 function pushPlugins(conf) {
   if (!isProduction) {
+    conf.plugins.push.apply(conf.plugins, [
+      new CopyWebpackPlugin([{from: 'app/assets', to: 'assets'}])
+    ]);
     return;
   }
 

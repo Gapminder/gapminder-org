@@ -1,0 +1,19 @@
+<div *ngIf="content">
+  <h2>
+    {{ content.title }}
+  </h2>
+
+  <ul>
+    <li *ngFor="#menuItem of submenuItems">
+      <a [routerLink]="['AboutSubsection', {slug: menuItem.slug }]">
+        {{ menuItem.title }}
+      </a>
+    </li>
+  </ul>
+
+  <div class="content"
+       *ngFor="#entry of content.entries"
+       [innerHTML]="entry.content | markdown">
+  </div>
+</div>
+
