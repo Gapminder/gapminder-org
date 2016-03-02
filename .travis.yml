@@ -28,12 +28,14 @@ before_script:
 - sleep 3
 # update webdrived for karma tests
 - npm run update-webdriver
+# up browserstack tunnel
+- npm run bstack-tunnel &
 
 script:
 # run local karma tests
 - npm test
 # run protractor tests
-- npm run e2e
+- npm run e2e-bstack
 # submit coverage report to coveralls
 - cat ./coverage/report-lcov/lcov.info | ./node_modules/.bin/coveralls --verbose
 # run karma tests at browser stack
