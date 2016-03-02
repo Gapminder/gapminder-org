@@ -2,7 +2,7 @@ import {Component} from 'angular2/core';
 import {RouteData, RouteParams} from 'angular2/router';
 import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
 import {ContentfulTypes as ct} from 'ng2-contentful/dist/ng2-contentful';
-import {ContenfulConfig} from '../../app.constans';
+import {ContentfulConfig} from '../../app.constans';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {MarkdownPipe} from '../../shared/pipes/markdown.pipe';
 import {OnActivate, ComponentInstruction, OnReuse} from 'angular2/router';
@@ -36,7 +36,7 @@ export class About implements OnActivate {
         this._contentful
           .withLinksLevel(2)
           .getEntryBySlug(
-            ContenfulConfig.CONTENTFUL_NODE_PAGE_TYPE_ID,
+            ContentfulConfig.CONTENTFUL_NODE_PAGE_TYPE_ID,
             slug
           )
           .map(response => response.json())

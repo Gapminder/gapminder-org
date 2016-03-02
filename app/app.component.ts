@@ -5,8 +5,13 @@ import {Footer} from './shared/components/footer/footer.component';
 import {Root} from './sections/root/root.component';
 import {Videos} from './sections/videos/videos.component.ts';
 import {Downloads} from './sections/downloads/components/downloads.component';
-import {ContenfulConfig} from './app.constans';
+import {ContentfulConfig} from './app.constans';
 import {About} from './sections/about/about.component';
+import {CanActivate} from 'angular2/router';
+import {OnInit} from 'angular2/core';
+import {OnActivate} from 'angular2/router';
+import {ComponentInstruction} from 'angular2/router';
+
 
 @Component({
   selector: 'gapminder-app',
@@ -33,14 +38,14 @@ import {About} from './sections/about/about.component';
   {
     path: '/videos/...', component: Videos, name: 'Videos',
     data: {
-      contentId: ContenfulConfig.VIDEOS_TYPE_NAME
+      contentId: ContentfulConfig.VIDEOS_TYPE_NAME
     }
   },
   {path: '/downloads', component: Downloads, name: 'Downloads'},
   {
     path: '/about/', component: About, name: 'About',
     data: {
-      contentfulSlug: ContenfulConfig.CONTENTFUL_ABOUT_SLUG
+      contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
     }
   },
   {
@@ -49,5 +54,4 @@ import {About} from './sections/about/about.component';
   {path: '/**', redirectTo: ['Root']}
 ])
 export class AppComponent {
-  type: string = 'app component';
 }

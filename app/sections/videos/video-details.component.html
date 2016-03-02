@@ -1,0 +1,9 @@
+<div *ngIf="content">
+  <h1>
+    {{ content.title }}
+  </h1>
+
+  <div class="entry-content">
+    <entries-view [entries]="content.entries"></entries-view>
+  </div>
+</div>
