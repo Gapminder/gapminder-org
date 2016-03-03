@@ -36,7 +36,7 @@ export function transformResponse<T extends ct.Common<any>>
   }
 
   function extendsObjectWithFields(value) {
-    if (includes.hasOwnProperty(value.sys.id)) {
+    if (value.hasOwnProperty('sys') && includes.hasOwnProperty(value.sys.id)) {
       value.fields = includes[value.sys.id].fields;
       value.sys = includes[value.sys.id].sys;
     }

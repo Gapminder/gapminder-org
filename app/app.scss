@@ -140,3 +140,24 @@ img {
   margin-right: 25px;
   min-height: 700px;
 }
+
+#container {
+  position: relative;
+  margin: 5px auto 5px auto;
+  width: 100%;
+  max-width: 990px;
+  padding-top: 18px;
+  padding-bottom: 21px;
+  clear: both;
+}
+
+#primary {
+  background: #ecf4f4;
+  width: 280px;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  float: right;
+  color: #6c6d6f;
+  position: relative;
+  top: 20px;
+}

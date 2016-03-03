@@ -1,19 +1,114 @@
-<div *ngIf="content">
+<div *ngIf="content" class="content" style="min-height: 908px;">
   <h1>
-    {{ content.title }}
+    {{ content.fields.title }}
   </h1>
 
-  <ul>
-    <li *ngFor="#menuItem of submenuItems">
-      <a [routerLink]="['AboutSubsection', {slug: menuItem.slug }]">
+  <div id="about-help-nav">
+    <a *ngFor="#menuItem of submenuItems"
+       [routerLink]="['AboutSubsection', {slug: menuItem.slug }]">
+      <span>
         {{ menuItem.title }}
-      </a>
-    </li>
-  </ul>
+      </span>
+    </a>
+  </div>
+
 
   <div class="entry-content entry">
-    <p *ngFor="#entry of content.entries"
-       [innerHTML]="entry.content | markdown"></p>
+    <p *ngFor="#entry of content.fields.entries"
+       [innerHTML]="entry.fields.content | markdown"></p>
   </div>
+</div>
+
+<div id="primary" class="sidebar aside">
+  <div id="text-29" class="widget widget_text widget-widget_text">
+    <div class="widget-wrap widget-inside">
+      <div class="textwidget">
+        <iframe
+          src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FGapminder%2F143422409026059&amp;width=235&amp;connections=10&amp;stream=false&amp;header=false&amp;height=220&amp;show_border=false"
+          scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100%;margin-top:15px; height:220px;"
+          allowtransparency="true"></iframe>
+      </div>
+    </div>
+  </div>
+  <div id="text-31" class="widget widget_text widget-widget_text">
+    <div class="widget-wrap widget-inside"><h3 class="widget-title">Donate</h3>
+      <div class="textwidget"><h4><a href="/donations/">Help Gapminder provide a fact-based worldview for free!</a></h4>
+
+        <small>
+          <form method="POST" action="" class="sc-checkout-form" id="sc_checkout_form_1" data-sc-id="1"
+                data-parsley-validate="" novalidate="">
+            <div class="sc-form-group"><label for="sc_uea_custom_amount_1">Enter an amount in US dollars:</label>
+              <div class="sc-uea-container"><span class="sc-uea-currency sc-uea-currency-before">$</span> <input
+                type="text" class="sc-form-control sc-uea-custom-amount" name="sc_uea_custom_amount"
+                id="sc_uea_custom_amount_1" value="20.00" placeholder="" required=""
+                data-parsley-required-message="Please enter an amount." data-parsley-type="number"
+                data-parsley-type-message="Please enter a valid amount. Do not include a currency symbol."
+                data-parsley-min="0.5" data-parsley-min-message="Please enter an amount equal to or more than 50 cents."
+                data-parsley-errors-container="#sc_uea_custom_amount_errors_1" data-parsley-id="4">
+                <div id="sc_uea_custom_amount_errors_1"></div>
+              </div>
+            </div>
+            <div class="sc-form-group"><label><input type="checkbox" id="sc_sub_toggle_1" class="sc-cf-checkbox"
+                                                     name="sc_form_field[sc_sub_toggle_1]" value="Yes"
+                                                     data-parsley-errors-container="#sc_cf_checkbox_error_1"
+                                                     data-parsley-multiple="sc_form_fieldsc_sub_toggle_1"
+                                                     data-parsley-id="7">Make this a monthly donation</label><input
+              type="hidden" id="sc_sub_toggle_1_hidden" class="sc-cf-checkbox-hidden"
+              name="sc_form_field[sc_sub_toggle_1]" value="No">
+              <div id="sc_cf_checkbox_error_1"></div>
+            </div>
+
+            <input type="hidden" name="sc-name" value="Gapminder Foundation"><input type="hidden" name="sc-description"
+                                                                                    value="Donation"><input
+            type="hidden" name="sc-amount" class="sc_amount" value=""><input type="hidden" name="sc-redirect"
+                                                                             value="/donations-thank-you/"><input
+            type="hidden" name="sc-redirect-fail" value="http://www.gapminder.org/about-gapminder/history/"><input
+            type="hidden" name="sc-currency" value="USD"><input type="hidden" name="stripeToken" value=""
+                                                                class="sc_stripeToken"><input type="hidden"
+                                                                                              name="stripeEmail"
+                                                                                              value=""
+                                                                                              class="sc_stripeEmail"><input
+            type="hidden" name="wp-simple-pay" value="1"><input type="hidden" name="sc-details-placement" value="above"><input
+            type="hidden" id="wp-simple-pay-pro-nonce" name="wp-simple-pay-pro-nonce" value="816663c166"><input
+            type="hidden" name="sc_sub_id" class="sc_sub_id" value=""><input type="hidden" name="sc_sub_interval"
+                                                                             class="sc_sub_interval"
+                                                                             value="month"><input type="hidden"
+                                                                                                  name="sc_sub_interval_count"
+                                                                                                  class="sc_sub_interval_count"
+                                                                                                  value="1"><input
+            type="hidden" name="sc_sub_statement_description" class="sc_sub_statement_description" value="">
+            <button class="sc-payment-btn stripe-button-el"><span>Donate now</span></button>
+          </form>
+        </small>
+
+        <p>Swish number: 123 327 55 75</p>
+
+        <!--<h2>Help us cross the river of myths</h2>
+
+        <a href="donations/"><img src='http://www.gapminder.org/GapminderMedia/wp-uploads/river_small.jpg' /></a>
+        <br>
+        Please read Hans Rosling’s personal appeal.
+        <br>
+        <a class="read-appeal"  href="/donations/"><span>Read more</span></a>--></div>
+    </div>
+  </div>
+  <div id="text-18" class="widget widget_text widget-widget_text">
+    <div class="widget-wrap widget-inside">
+      <div class="textwidget"><h5>Post Address: </h5>
+        <p>Stiftelsen Gapminder<br>
+          Box 38025<br>
+          100 64 Stockholm</p>
+        <h5>Billing Address: </h5>
+        <p>Stiftelsen Gapminder<br>
+          FE 586<br>
+          Kund ID PMA5334<br>
+          105 69 Stockholm</p>
+        <h5>Organisation number</h5>
+        <p>802424-7721</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="clear: both"></div>
 </div>
 

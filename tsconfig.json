@@ -15,9 +15,7 @@
     "node_modules"
   ],
   "files": [
-    "./app/app.d.ts",
     "./app/index.ts",
-    "./app/app.component.ts",
-    "./app/shared/services/contentful-content-types.service.ts"
+    "./app/app.d.ts"
   ]
 }

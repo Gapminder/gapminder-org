@@ -1,20 +1,17 @@
 import {Component} from 'angular2/core';
-import {RouteData, RouteParams} from 'angular2/router';
+import {RouteData, RouteParams, CanActivate} from 'angular2/router';
 import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
-import {ContentfulTypes as ct} from 'ng2-contentful/dist/ng2-contentful';
 import {ContentfulConfig} from '../../app.constans';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {MarkdownPipe} from '../../shared/pipes/markdown.pipe';
-import {OnActivate, ComponentInstruction, OnReuse} from 'angular2/router';
+import {OnActivate, ComponentInstruction} from 'angular2/router';
+import {transformResponse} from '../../shared/tools/response.tools';
 
 /**
  *
  */
 @Component({
   template: <string> require('./about.component.html'),
-  host: {
-    class: 'content'
-  },
   directives: [...ROUTER_DIRECTIVES],
   providers: [ContentfulService],
   styles: [<string> require('./about.scss')],
@@ -42,7 +39,8 @@ export class About implements OnActivate {
           .map(response => response.json())
           .subscribe(
             response => {
-              this.processResponse(response);
+              this.submenuItems = this.getSubmenuFromResponse(response);
+              this.content = transformResponse<any>(response)[0];
               resolve(true);
             },
             error => console.log(error)
@@ -51,29 +49,22 @@ export class About implements OnActivate {
     );
   }
 
-  private processResponse(response: ct.IterableResponse<any>) {
+  private getSubmenuFromResponse(response) {
     let includes = {};
+    let submenuItems = [];
     for (let entry of response.includes.Entry) {
       includes[entry.sys.id] = entry.fields;
     }
     // about subsection menu
     let item = response.items[0];
-    // add self
     includes[item.sys.id] = item.fields;
     let subsectionSysId = item.fields.subsections.sys.id;
     // collect subsections
     for (let subsection of includes[subsectionSysId].nodes) {
-      this.submenuItems.push(
+      submenuItems.push(
         includes[subsection.sys.id]
       );
     }
-    this.content = item.fields;
-    let entries = [];
-    for (let entry of this.content.entries) {
-      entries.push(
-        includes[entry.sys.id]
-      );
-    }
-    this.content.entries = entries;
+    return submenuItems;
   }
 }

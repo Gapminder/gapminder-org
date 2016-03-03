@@ -7,10 +7,6 @@ import {Videos} from './sections/videos/videos.component.ts';
 import {Downloads} from './sections/downloads/components/downloads.component';
 import {ContentfulConfig} from './app.constans';
 import {About} from './sections/about/about.component';
-import {CanActivate} from 'angular2/router';
-import {OnInit} from 'angular2/core';
-import {OnActivate} from 'angular2/router';
-import {ComponentInstruction} from 'angular2/router';
 
 
 @Component({
@@ -29,7 +25,9 @@ import {ComponentInstruction} from 'angular2/router';
   `],
   template: `
     <header></header>
-    <router-outlet></router-outlet>
+      <div id="container">
+            <router-outlet></router-outlet>
+      </div>
     <footer></footer>
   `
 })
@@ -54,4 +52,5 @@ import {ComponentInstruction} from 'angular2/router';
   {path: '/**', redirectTo: ['Root']}
 ])
 export class AppComponent {
+  type: string = 'app component';
 }

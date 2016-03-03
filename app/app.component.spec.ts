@@ -1,9 +1,7 @@
 import {
   it,
   inject,
-  injectAsync,
   beforeEachProviders,
-  TestComponentBuilder
 } from 'angular2/testing';
 
 import {AppComponent} from './app.component';
