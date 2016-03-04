@@ -4,7 +4,7 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
 @Component({
   selector: 'footer',
   template: <string> require('./footer.component.html'),
-  styles: [<string> require('./footer.scss')],
+  styles: [<string> require('./footer.component.scss')],
   directives: [...ROUTER_DIRECTIVES],
 })
 export class Footer {

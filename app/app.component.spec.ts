@@ -1,7 +1,7 @@
 import {
   it,
   inject,
-  beforeEachProviders,
+  beforeEachProviders
 } from 'angular2/testing';
 
 import {AppComponent} from './app.component';

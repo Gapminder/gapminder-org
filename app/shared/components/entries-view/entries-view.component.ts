@@ -26,6 +26,7 @@ export class EntriesView implements OnInit {
     return;
   }
 
+  // TODO not optimal solution
   resolveType(entry: any, id: string): boolean {
     return entry.sys.contentType.sys.id === id;
   }

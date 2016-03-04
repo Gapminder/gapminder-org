@@ -5,7 +5,7 @@ import {ROUTER_DIRECTIVES} from 'angular2/router';
   selector: 'header',
   directives: [...ROUTER_DIRECTIVES],
   template: <string> require('./header.component.html'),
-  styles: [<string> require('./header.scss')]
+  styles: [<string> require('./header.component.scss')]
 })
 export class Header {
 }

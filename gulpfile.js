@@ -31,7 +31,7 @@ gulp.task('default', function () {
 });
 
 var s3Credentials = JSON.parse(
-  fs.readFileSync('./aws.json')
+  fs.readFileSync('./aws.json') //eslint-disable-line no-sync
 );
 
 gulp.task('deploy', function () {

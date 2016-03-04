@@ -7,7 +7,7 @@ import * as marked from 'marked';
   name: 'markdown'
 })
 export class MarkdownPipe implements PipeTransform {
-  transform(value: any, args: any[]): any {
+  transform(value: any, args: any[]): string {
     return marked(value);
   }
 }
