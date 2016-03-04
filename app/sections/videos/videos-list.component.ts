@@ -11,10 +11,7 @@ import {transformResponse} from '../../shared/tools/response.tools';
   template: <string> require('./videos-list.component.html'),
   providers: [ContentfulService],
   styles: [<string> require('./videos-list.component.scss')],
-  directives: [...ROUTER_DIRECTIVES],
-  host: {
-    class: 'content'
-  }
+  directives: [...ROUTER_DIRECTIVES]
 })
 export class VideosList implements OnActivate {
   private contentId: string;

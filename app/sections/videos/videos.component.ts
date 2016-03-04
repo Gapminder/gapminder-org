@@ -1,6 +1,5 @@
 import {Component} from 'angular2/core';
-import {OnInit} from 'angular2/core';
-import {RouteData, RouteConfig} from 'angular2/router';
+import {RouteConfig} from 'angular2/router';
 import {VideosList} from './videos-list.component';
 import {VideoDetails} from './video-details.component';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
