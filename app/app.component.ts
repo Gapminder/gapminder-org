@@ -12,17 +12,7 @@ import {About} from './sections/about/about.component';
 @Component({
   selector: 'gapminder-app',
   directives: [Header, Footer, ...ROUTER_DIRECTIVES],
-  styles: [`
-    #container {
-      position: relative;
-      margin: 5px auto 5px auto;
-      width: 100%;
-      max-width: 990px;
-      padding-top: 18px;
-      padding-bottom: 21px;
-      clear: both;
-    }
-  `],
+  styles: [ <string> require('./app.component.scss')],
   template: `
     <header></header>
       <div id="container">

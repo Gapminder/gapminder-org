@@ -30,11 +30,10 @@ gulp.task('default', function () {
   gulp.start('tslint');
 });
 
-var s3Credentials = JSON.parse(
-  fs.readFileSync('./aws.json') //eslint-disable-line no-sync
-);
-
 gulp.task('deploy', function () {
+  var s3Credentials = JSON.parse(
+    fs.readFileSync('./aws.json') //eslint-disable-line no-sync
+  );
   gulp.src('./dist/**')
     .pipe(s3(s3Credentials));
 });
