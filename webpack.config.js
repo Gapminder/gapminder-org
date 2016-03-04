@@ -101,6 +101,7 @@ const config = {
     }),
     // static assets
     //new CopyWebpackPlugin([{from: 'demo/favicon.ico', to: 'favicon.ico'}]),
+    new CopyWebpackPlugin([{from: 'app/assets', to: 'assets'}]),
     // generating html
     new HtmlWebpackPlugin({template: 'app/index.html'})
   ]
@@ -108,9 +109,6 @@ const config = {
 
 function pushPlugins(conf) {
   if (!isProduction) {
-    conf.plugins.push.apply(conf.plugins, [
-      new CopyWebpackPlugin([{from: 'app/assets', to: 'assets'}])
-    ]);
     return;
   }
 
