@@ -8,14 +8,7 @@ import {EntriesView} from '../../shared/components/entries-view/entries-view.com
 
 @Component({
   template: <string> require('./video-details.component.html'),
-  styles: [`
-    .entry-content {
-      margin-bottom: 25px;
-    }
-  `],
-  host: {
-    class: 'content'
-  },
+  styles: [<string> require('./video-details.component.scss')],
   directives: [EntriesView]
 })
 export class VideoDetails implements OnActivate {
