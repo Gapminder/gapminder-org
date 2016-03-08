@@ -1,6 +1,7 @@
 /*eslint no-process-env:0, camelcase:0*/
 'use strict';
 
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -12,6 +13,9 @@ const isProduction = (process.env.NODE_ENV || 'development') === 'production';
 const devtool = process.env.NODE_ENV !== 'test' ? 'source-map' : 'inline-source-map';
 const dest = 'dist';
 const absDest = root(dest);
+const contentfulConfig = JSON.parse(
+  fs.readFileSync('./contentful.json') //eslint-disable-line no-sync
+);
 
 const config = {
   devtool: devtool,
@@ -51,15 +55,6 @@ const config = {
     chunkFilename: '[id].chunk.js'
   },
 
-  // our Development Server configs
-  /*devServer: {
-   inline: true,
-   colors: true,
-   historyApiFallback: true,
-   contentBase: dest,
-   //publicPath: dest,
-   watchOptions: {aggregateTimeout: 300, poll: 1000}
-   },*/
   module: {
     loaders: [
       // support markdown
@@ -103,7 +98,11 @@ const config = {
     //new CopyWebpackPlugin([{from: 'demo/favicon.ico', to: 'favicon.ico'}]),
     new CopyWebpackPlugin([{from: 'app/assets', to: 'assets'}]),
     // generating html
-    new HtmlWebpackPlugin({template: 'app/index.html'})
+    new HtmlWebpackPlugin({template: 'app/index.html'}),
+    new webpack.DefinePlugin({
+      CONTENTFUL_ACCESS_TOKEN: JSON.stringify(contentfulConfig.accessToken),
+      CONTENTFUL_SPACE_ID: JSON.stringify(contentfulConfig.spaceId)
+    })
   ]
 };
 

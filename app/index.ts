@@ -12,11 +12,11 @@ require('style!./app.scss');
 
 // contentful config
 Ng2ContentfulConfig.config = {
-  accessToken: '7e33820119e63f72f286be1f474e89be6eafc4af751b2e91b93f130abc5a20a1',
-  space: 'we1a0j890sea'
+  accessToken: CONTENTFUL_ACCESS_TOKEN,
+  space: CONTENTFUL_SPACE_ID
 };
 
-// run app and get ref to global DI 
+// run app and get ref to global DI
 bootstrap(AppComponent, [
   ...ROUTER_PROVIDERS,
   ...HTTP_PROVIDERS,
