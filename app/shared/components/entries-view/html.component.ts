@@ -1,7 +1,6 @@
 import {Component} from 'angular2/core';
 import {Input} from 'angular2/core';
 import {MarkdownPipe} from '../../pipes/markdown.pipe';
-import {OnInit} from 'angular2/core';
 
 @Component({
   selector: 'html-entry',
