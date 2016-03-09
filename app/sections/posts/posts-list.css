@@ -1,0 +1,25 @@
+.posts-list {
+
+}
+
+.post-item {
+
+}
+
+.post-item {
+  & img {
+    height: 240px;
+  }
+}
+
+.post-item > p {
+
+}
+
+.post-pub-date {
+
+}
+
+.post-title {
+
+}
