@@ -1,0 +1,18 @@
+<h1>Videos</h1>
+
+<div class="entry-content">
+  <div class="video-box"
+       *ngFor="#video of videos">
+    <a [routerLink]="['Details', {slug: video.fields.slug}]">
+      <img src="" alt="" bind-src="video.fields.thumbnail.fields.file.url">
+    </a>
+    <div class="name">
+      <a [routerLink]="['Details', {slug: video.fields.slug}]">
+        {{ video.fields.title }}
+      </a>
+    </div>
+    <div class="desc">
+      {{ video.fields.description }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+
+#about-help-nav {
+  padding-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+
+  a {
+    padding-right: 5px;
+
+    span {
+      font-size: 14px;
+      text-decoration: none;
+      color: #4e4e4e;
+
+      &:after {
+        font-size: 30px;
+        content: '.';
+        line-height: 0;
+        top: -2px;
+        color: #FFCA34;
+        position: relative;
+        left: 4px;
+        font-weight: bold;
+      }
+    }
+
+    &:last-child {
+      span:after {
+        content: '';
+      }
+    }
+  }
+}
