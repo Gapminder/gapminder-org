@@ -1,25 +1,23 @@
-import {Component} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-//import {Header} from './shared/components/header/header.component';
-//import {Footer} from './shared/components/footer/footer.component';
-import {Header} from './header/header';
-import {Footer} from './footer/footer';
-import {Root} from './sections/root/root.component';
+import {Component, ViewEncapsulation} from '../node_modules/angular2/core';
+import {RouteConfig, ROUTER_DIRECTIVES} from '../node_modules/angular2/router';
+import {Header} from './shared/components/header/header.component.ts';
+import {Footer} from './shared/components/footer/footer.component.ts';
+import {Root} from './sections/root/root.component.ts';
 import {Videos} from './sections/videos/videos.component.ts';
-import {Downloads} from './sections/downloads/components/downloads.component';
-import {ContentfulConfig} from './app.constans';
-import {About} from './sections/about/about.component';
-
+import {Downloads} from './sections/downloads/components/downloads.component.ts';
+import {ContentfulConfig} from './app.constans.ts';
+import {About} from './sections/about/about.component.ts';
 
 @Component({
   selector: 'gapminder-app',
+  encapsulation: ViewEncapsulation.None,
   directives: [Header, Footer, ...ROUTER_DIRECTIVES],
-  styles: [ <string> require('./app.component.scss')],
+  styles: [ <string> require('./main.styl')],
   template: `
     <header></header>
-      <div id="container" class="container">
-            <router-outlet></router-outlet>
-      </div>
+     <div class="container">
+        <router-outlet></router-outlet>
+     </div>
     <footer></footer>
   `
 })

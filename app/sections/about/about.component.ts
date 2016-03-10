@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {RouteData, RouteParams} from 'angular2/router';
 import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
-import {ContentfulConfig} from '../../app.constans';
+import {ContentfulConfig} from '../../app.constans.ts';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {MarkdownPipe} from '../../shared/pipes/markdown.pipe';
 import {OnActivate, ComponentInstruction} from 'angular2/router';
@@ -14,7 +14,7 @@ import {transformResponse} from '../../shared/tools/response.tools';
   template: <string> require('./about.component.html'),
   directives: [...ROUTER_DIRECTIVES],
   providers: [ContentfulService],
-  styles: [<string> require('./about.component.scss')],
+  styles: [<string> require('./about.component.styl')],
   pipes: [MarkdownPipe]
 })
 export class About implements OnActivate {

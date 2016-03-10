@@ -4,7 +4,7 @@ import {Component, Input} from 'angular2/core';
   selector: 'tweets',
   template: <string> require('./tweets.html'),
   styles: [
-    <string> require('./tweets.css')
+    <string> require('./tweets.styl')
   ],
 })
 export class TweetsComponent {

@@ -1,6 +1,6 @@
 import {bootstrap} from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
-import {AppComponent} from './app.component';
+import {AppComponent} from './app.component.ts';
 import {provide, ComponentRef, PLATFORM_DIRECTIVES} from 'angular2/core';
 import {Ng2ContentfulConfig} from 'ng2-contentful/dist/ng2-contentful';
 import {HTTP_PROVIDERS} from 'angular2/http';
@@ -8,8 +8,6 @@ import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.ser
 import {appInjector} from './shared/tools/app-injector.tool';
 import {ContentfulImageDirective} from './shared/directives/contentful-image.directive';
 
-// global styles
-require('style!./app.scss');
 
 // contentful config
 Ng2ContentfulConfig.config = {

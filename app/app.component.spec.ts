@@ -2,9 +2,9 @@ import {
   it,
   inject,
   beforeEachProviders
-} from 'angular2/testing';
+} from '../../../node_modules/angular2/testing.d';
 
-import {AppComponent} from './app.component';
+import {AppComponent} from './app.component.ts';
 
 describe('App', () => {
   beforeEachProviders(() => [AppComponent]);

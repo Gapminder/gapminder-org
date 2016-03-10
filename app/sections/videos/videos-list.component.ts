@@ -3,14 +3,14 @@ import {RouteData} from 'angular2/router';
 import {Injector} from 'angular2/core';
 import {OnActivate, ComponentInstruction} from 'angular2/router';
 import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
-import {ContentfulConfig} from '../../app.constans';
+import {ContentfulConfig} from '../../app.constans.ts';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {transformResponse} from '../../shared/tools/response.tools';
 
 @Component({
   template: <string> require('./videos-list.component.html'),
   providers: [ContentfulService],
-  styles: [<string> require('./videos-list.component.scss')],
+  styles: [<string> require('./videos-list.component.styl')],
   directives: [...ROUTER_DIRECTIVES]
 })
 export class VideosList implements OnActivate {

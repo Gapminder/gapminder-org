@@ -16,6 +16,6 @@
   ],
   "files": [
     "./app/index.ts",
-    "./app/app.d.ts"
+    "app/app.d.ts"
   ]
 }

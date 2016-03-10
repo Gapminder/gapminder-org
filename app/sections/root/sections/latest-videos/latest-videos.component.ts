@@ -8,7 +8,7 @@ import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'latest-videos',
   template: <string> require('./latest-videos.html'),
-  styles: [<string> require('./latest-videos.css')],
+  styles: [<string> require('./latest-videos.styl')],
   pipes: [DatePipe, AsyncPipe]
 })
 export class LatestVideosComponent {

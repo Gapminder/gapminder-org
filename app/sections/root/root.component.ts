@@ -8,7 +8,7 @@ import {TweetsComponent} from './sections/tweets/tweets.component';
 @Component({
   template: <string> require('./root.component.html'),
   styles: [
-    <string> require('./root.component.scss')
+    <string> require('./root.component.styl')
   ],
   directives: [
     GapminderOverviewComponent,
