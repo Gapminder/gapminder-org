@@ -58,12 +58,13 @@ const config = {
   module: {
     loaders: [
       // support markdown
+      {test: /\.(png|svg)$/, loader: 'raw'},
       {test: /\.md$/, loader: 'html?minimize=false!markdown'},
       // Support for *.json files.
       {test: /\.json$/, loader: 'json'},
       // Support for CSS as raw text
-      {test: /\.css$/, loader: 'raw'},
-      {test: /\.scss$/, loaders: ['raw', 'sass']},
+      {test: /\.css$/, loader: 'to-string!css?-url!postcss'},
+      {test: /\.scss$/, loader: 'raw!sass'},
       // support for .html as raw text
       {test: /\.html$/, loader: 'raw'},
       // Support for .ts files.
@@ -85,6 +86,11 @@ const config = {
       /zone\.js\/dist/
     ]
   },
+  postcss: [
+    require('postcss-cssnext')({
+      browsers: ['ie >= 9', 'last 2 versions']
+    })
+  ],
 
   plugins: [
     new webpack.optimize.DedupePlugin(),
