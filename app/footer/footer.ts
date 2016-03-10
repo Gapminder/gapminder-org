@@ -1,71 +1,51 @@
 import {Component, View} from 'angular2/core';
 import {NgFor} from 'angular2/common';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {Collapse, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 
 
-let menuFooter = [
+const menuFooter = [
   {
     name: 'About',
-    href: ''
+    slug: 'About'
   }, {
     name: 'Contact',
-    href: ''
+    slug: 'Contact'
   }, {
     name: 'Blog',
-    href: ''
+    slug: 'Blog'
   }, {
     name: 'Donate',
-    href: ''
+    slug: 'Donate'
   }, {
     name: 'Terms',
-    href: ''
+    slug: 'Terms'
   }, {
     name: 'Media',
-    href: ''
+    slug: 'Media'
   }, {
     name: 'Help',
-    href: ''
+    slug: 'Help'
   }, {
     name: 'Labs',
-    href: ''
+    slug: 'Labs'
   }, {
     name: 'Report problem',
-    href: ''
+    slug: 'Report'
   }
 ];
 
-let template = `
-   <footer>
-      <div class="footer-logo">
-        <img src="../assets/img/logo.svg">
-        <ul>
-          <li><a href="">Gapminder World</a> </li>
-          <li><a href="">For Teachers</a> </li>
-        </ul>
-
-      </div>
-      <div class="container">
-        <ul class="nav navbar-nav">
-          <li *ngFor="#item of menuFooter">
-            <a class="dropdown-item" href="{{item.href}}">
-              {{item.name}}
-              <span>{{item.description}}</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </footer>`;
-
 @Component({
-  selector: 'footer-gapminder',
-  template: template,
+  selector: 'footer',
+  template: <string> require('./footer.html'),
   directives: [
     NgFor,
     Collapse,
-    DROPDOWN_DIRECTIVES
+    DROPDOWN_DIRECTIVES,
+    ROUTER_DIRECTIVES
   ],
-  styles: [require('./footer.css')]
+  styles: [<string> require('./footer.css')]
 
 })
 export class Footer {
