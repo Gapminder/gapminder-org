@@ -6,10 +6,8 @@
 
 }
 
-.post-item {
-  & img {
-    height: 240px;
-  }
+.post-item img {
+   height: 240px;
 }
 
 .post-item > p {
