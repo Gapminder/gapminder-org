@@ -2,23 +2,29 @@ a {
   color: #374551;
   font-size: 18px;
 }
-
-.navbar {
-  border-bottom:1px solid #edf0f5;
+header {
+  min-height: 67px;
 }
-.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {background: none;}
-
-.nav > li > a:focus, .nav > li > a:hover {
+.navbar {
+  border-bottom: 1px solid #edf0f5;
+  background-color: #fff;
+  min-height: 67px;
+}
+.nav > li:focus > a, .nav > li:hover > a {
   background: #ffc300;
   color: #fff;
   border-radius: 2px;
 }
-.navbar-nav>li {padding: 15px 10px;}
-.navbar-nav>li>a {
+.navbar-nav > li {
+  padding: 20px 10px;
+}
+
+.navbar-nav > li > a {
   padding: 3px 5px;
   color: #374551;
 }
-.navbar-nav  .dropdown-menu {
+
+.navbar-nav .dropdown-menu {
   background: #ffffff;
   box-shadow: 0px 0px 7px #dadbde;
   border: 1px solid #eff2f6;
@@ -26,9 +32,17 @@ a {
   box-sizing: border-box;
   min-width: 360px;
   top: 98%;
+  display: none;
 }
-.dropdown-menu.diff:after{left: 30%;}
-.dropdown-menu:after{
+.navbar-nav li:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu.diff:after {
+  left: 30%;
+}
+
+.dropdown-menu:after {
   content: "";
   position: absolute;
   width: 0;
@@ -43,6 +57,7 @@ a {
   transform: rotate(135deg);
   box-shadow: -2px 2px 2px 0 #eff2f6;
 }
+
 .dropdown-menu.fix-width {
   width: 710px;
   left: -300px;
@@ -53,7 +68,10 @@ a {
   position: relative;
   margin: 33px 0;
 }
-.navbar-nav .dropdown-item:hover {background: none;}
+
+.navbar-nav .dropdown-item:hover {
+  background: none;
+}
 
 .navbar-nav .dropdown-item .frame-img {
   position: absolute;
@@ -61,10 +79,110 @@ a {
   left: 15px;
   display: block;
 }
+
 .navbar-nav .dropdown-item span {
   color: #767d86;
   display: block;
   font-size: 16px;
   white-space: normal;
 }
-.padding-0 {padding:0}
+
+.padding-0 {
+  padding: 0
+}
+
+.menu-mobile {
+  cursor: pointer;
+  right: 0;
+  top: 0;
+  transition-duration: 0.5s;
+  width: 40px;
+  height: 50px;
+  position: absolute;
+  z-index: 9;
+  margin: 0 10px;
+}
+
+.menu-mobile:hover {
+  cursor: pointer;
+}
+
+.menu-mobile .icon {
+  transition-duration: 0.2s;
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background-color: #ffca34;
+  top: 24px;
+}
+
+.menu-mobile .icon:before,
+.menu-mobile .icon:after {
+  transition-duration: 0.5s;
+  background-color: #ffca34;
+  position: absolute;
+  content: "";
+  width: 30px;
+  height: 3px;
+}
+
+.menu-mobile .icon:before {
+  top: -7px;
+}
+
+.menu-mobile .icon:after {
+  top: 7px;
+}
+
+.menu-mobile.open .icon {
+  background-color: transparent;
+}
+
+.menu-mobile.open .icon:before,
+.menu-mobile.open .icon:after {
+  top: 0;
+}
+
+.menu-mobile.open .icon:before {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.menu-mobile.open .icon:after {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+/* header search */
+.search-form {
+  margin-top: 18px;
+}
+.search-form .text {
+  width: 100%;
+  padding: 6px 30px 6px 15px;
+  font-size: 16px;
+  line-height: 18px;
+}
+.search-form .wrap-input {
+  position: relative;
+  padding: 0;
+}
+.search-form .submit {
+  background: none;
+  border: none;
+  position: absolute;
+  top: 2px;
+  outline: none;
+  right: 7px;
+}
+.search-form .btn-search {
+  background: none;
+  border: none;
+  color: #767d86;
+  font-size: 18px;
+  font-family: 'Bariol Regular', sans-serif;
+  outline: none;
+}
+.search-form {
+
+}

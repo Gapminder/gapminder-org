@@ -1,7 +1,9 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {Header} from './shared/components/header/header.component';
-import {Footer} from './shared/components/footer/footer.component';
+//import {Header} from './shared/components/header/header.component';
+//import {Footer} from './shared/components/footer/footer.component';
+import {Header} from './header/header';
+import {Footer} from './footer/footer';
 import {Root} from './sections/root/root.component';
 import {Videos} from './sections/videos/videos.component.ts';
 import {Downloads} from './sections/downloads/components/downloads.component';
@@ -15,12 +17,13 @@ import {About} from './sections/about/about.component';
   styles: [ <string> require('./app.component.scss')],
   template: `
     <header></header>
-      <div id="container">
+      <div id="container" class="container">
             <router-outlet></router-outlet>
       </div>
     <footer></footer>
   `
 })
+// TODO: remove hardcode (component: About)
 @RouteConfig([
   {path: '/', component: Root, name: 'Root', useAsDefault: true},
   {
@@ -38,6 +41,54 @@ import {About} from './sections/about/about.component';
   },
   {
     path: '/about/:slug', component: About, name: 'AboutSubsection'
+  },
+  {
+    path: '/Contact/', component: About, name: 'Contact',
+    data: {
+      contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
+    }
+  },
+  {
+    path: '/Blog/', component: About, name: 'Blog',
+    data: {
+      contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
+    }
+  },
+  {
+    path: '/Donate/', component: About, name: 'Donate',
+    data: {
+      contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
+    }
+  },
+  {
+    path: '/Terms/', component: About, name: 'Terms',
+    data: {
+      contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
+    }
+  },
+  {
+    path: '/Media/', component: About, name: 'Media',
+    data: {
+      contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
+    }
+  },
+  {
+    path: '/Help/', component: About, name: 'Help',
+    data: {
+      contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
+    }
+  },
+  {
+    path: '/Labs/', component: About, name: 'Labs',
+    data: {
+      contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
+    }
+  },
+  {
+    path: '/Report/', component: About, name: 'Report',
+    data: {
+      contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
+    }
   },
   {path: '/**', redirectTo: ['Root']}
 ])

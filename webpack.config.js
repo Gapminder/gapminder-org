@@ -57,17 +57,6 @@ const config = {
 
   module: {
     loaders: [
-      /*{
-        test: /.*\.(gif|png|jpe?g|svg)$/i,
-        loaders: [
-          'file?name=sha512&digest=hex&name=[name].[ext]',
-          'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}'
-        ]
-      },*/
-      {
-        test: /.*\.(gif|png|jpe?g|svg)$/i,
-        loader: 'file?name=[path][name].[ext]'
-      },
       // support markdown
       {test: /\.(png|svg)$/, loader: 'raw'},
       {test: /\.md$/, loader: 'html?minimize=false!markdown'},

@@ -65,7 +65,7 @@
 
 body {
   background-color: #fff;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Bariol Regular', sans-serif;
   color: #231f20;
   margin: 0;
 }
@@ -98,7 +98,7 @@ h5 {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Bariol Light', Helvetica, Arial, sans-serif;
+  font-family: 'Bariol Regular', Helvetica, Arial, sans-serif;
   color: #222;
   font-weight: 300;
   margin: 0 0 20px;
@@ -113,6 +113,8 @@ h1, h2, h3, h4, h5, h6 {
 img {
   max-width: 100%;
 }
+
+input {font-family: 'Bariol Light', sans-serif;}
 
 .entry-content {
   margin-bottom: 25px;
@@ -160,4 +162,30 @@ img {
   color: #6c6d6f;
   position: relative;
   top: 20px;
+}
+
+
+/* btn */
+.btn-yellow {
+  color: #374551;
+  font-size: 18px;
+  line-height: 40px;
+  font-family: 'Bariol Bold', sans-serif;
+  background-color: #ffc300;
+  border: 1px solid #f1b902;
+  border-radius: 2px;
+  padding: 0 10px;
+  text-align: center;
+  min-width: 160px;
+}
+
+
+/* form input (text or search) */
+.text {
+  background-color: #fff;
+  border-radius: 2px;
+  border: 1px solid #edf0f5;
+  font-size: 18px;
+  line-height: 20px;
+  padding: 10px 15px;
 }

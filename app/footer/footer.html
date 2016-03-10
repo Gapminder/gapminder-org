@@ -1,0 +1,71 @@
+<div class="block-subscribe">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <h3>Subscribe To The Newsletter</h3>
+        <p>Do not miss the discussion of professionals</p>
+      </div>
+      <form class="col-md-7">
+        <fieldset>
+          <div class="wrap-row-subscribe">
+            <input type="text" class="text" placeholder="Enter your e-mail ...">
+            <input type="submit" value="Subscribe »" class="btn-yellow">
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="container">
+    <div class="col-md-3">
+      <div class="row">
+        <a [routerLink]="['Root']">
+          <img src="../assets/img/logo.svg">
+        </a>
+        <ul class="menu-footer-small">
+          <li><a href="">Gapminder World</a></li>
+          <li><a href="">For Teachers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div class="row">
+        <ul class="menu-footer">
+          <li *ngFor="#item of menuFooter">
+            <a class="dropdown-item" [routerLink]="[item.slug]">
+              {{item.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="row">
+        <ul class="social">
+          <li>
+            <a href="https://twitter.com/Gapminder">
+              <i class="fa fa-twitter-square"></i>
+
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/gapminder.org">
+              <i class="fa fa-facebook-square"></i>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fa fa-youtube-square"></i>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <i class="fa fa-google-plus-square"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

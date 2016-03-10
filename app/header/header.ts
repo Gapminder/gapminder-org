@@ -1,10 +1,11 @@
 import {Component, View} from 'angular2/core';
-import {NgFor} from 'angular2/common';
+import {NgFor, NgIf} from 'angular2/common';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {Collapse, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 
 
-let listCharts = [
+const listCharts = [
   {
     name: 'Bubbles Chart',
     href: 'tools/bubbles',
@@ -20,7 +21,7 @@ let listCharts = [
   }
 ];
 
-let listFacts = [
+const listFacts = [
   {
     name: 'Answers',
     href: '',
@@ -40,56 +41,17 @@ let listFacts = [
   }
 ];
 
-let template = `
-    <header class="navbar">
-    <div class="container">
-      <nav class="hidden-xs hidden-xs-down">
-        <ul class="nav navbar-nav">
-          <li class="nav-item dropdown" dropdown>
-
-            <a href id="simple-dropdown" dropdownToggle>Gapminder World</a>
-            <ul class="dropdown-menu diff" role="menu" aria-labelledby="split-button">
-              <li *ngFor="#chart of listCharts">
-               <a class="dropdown-item" href="{{chart.href}}">
-
-                  {{chart.name}}
-                  <span>{{chart.description}}</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item"><a href="#" role="button">Videos</a></li>
-          <li class="nav-item"><a href="#" role="button">Downloads</a></li>
-          <li class="nav-item"><a href="#" role="button">Teach</a></li>
-          <li class="nav-item dropdown" dropdown>
-            <a href id="simple-dropdown" dropdownToggle>Facts</a>
-            <ul class="dropdown-menu fix-width" role="menu" aria-labelledby="split-button">
-              <li class="col-md-6 padding-0" *ngFor="#fast of listFacts">
-               <a class="dropdown-item" href="{{fast.href}}">
-                {{fast.name}}
-                <span>{{fast.description}}</span>
-               </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item"><a href="#" role="button">News</a></li>
-          <li class="nav-item"><a href="#" role="button">About</a></li>
-          <li class="nav-item"><a href="#" role="button">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>`;
-
 @Component({
-  selector: 'header-gapminder',
-  template: template,
+  selector: 'header',
+  template: <string> require('./header.html'),
+  styles: [<string> require('./header.css')],
   directives: [
     NgFor,
+    NgIf,
     Collapse,
-    DROPDOWN_DIRECTIVES
-  ],
-  styles: [require('./header.css')]
-
+    DROPDOWN_DIRECTIVES,
+    ROUTER_DIRECTIVES
+  ]
 })
 export class Header {
   private listCharts:Array<any> = listCharts;

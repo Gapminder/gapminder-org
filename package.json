@@ -46,7 +46,7 @@
     "cpy": "4.0.0",
     "css-loader": "0.23.1",
     "del": "2.2.0",
-    "eslint": "1.10.3",
+    "eslint": "2.3.0",
     "exports-loader": "0.6.3",
     "file-loader": "0.8.5",
     "gh-pages": "0.9.0",
