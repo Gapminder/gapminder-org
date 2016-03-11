@@ -1,0 +1,15 @@
+<section>
+  <h2>Latest Blog Posts</h2>
+  <section class="posts-list">
+    <div *ngFor="#post of posts | async" class="post-item col-md-4">
+      <img src="{{post.fields.thumbnail.fields.file.url}}" alt="{{post.fields.title}}">
+      <div class="post-pub-date">{{toDate(post.fields.createdAt) | date}}</div>
+      <div class="post-title">{{post.fields.title}}</div>
+      <p>{{post.fields.description}}</p>
+    </div>
+  </section>
+  <button class="btn btn-default">View All Posts >></button>
+</section>
+
+
+
