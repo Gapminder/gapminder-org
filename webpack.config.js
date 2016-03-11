@@ -10,7 +10,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProduction = (process.env.NODE_ENV || 'development') === 'production';
-const devtool = process.env.NODE_ENV !== 'test' ? 'source-map' : 'inline-source-map';
+const devtool = process.env.NODE_ENV === 'test' ? 'inline-source-map' : 'source-map';
 const dest = 'dist';
 const absDest = root(dest);
 const contentfulConfig = JSON.parse(
@@ -18,7 +18,7 @@ const contentfulConfig = JSON.parse(
 );
 
 const config = {
-  devtool: devtool,
+  devtool,
   debug: false,
 
   verbose: true,
@@ -112,7 +112,7 @@ function pushPlugins(conf) {
     return;
   }
 
-  conf.plugins.push.apply(conf.plugins, [
+  conf.plugins.push(
     //production only
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
@@ -134,13 +134,13 @@ function pushPlugins(conf) {
       threshold: 10240,
       minRatio: 0.8
     })
-  ]);
+  );
 }
 
 pushPlugins(config);
 
 module.exports = config;
 
-function root(p) {
-  return path.join(__dirname, p);
+function root(location) {
+  return path.join(__dirname, location);
 }

@@ -1,10 +1,12 @@
 {
-  "dependencies": {},
+  "dependencies": {
+    "moment": "registry:npm/moment#2.10.5+20160211003958"
+  },
   "devDependencies": {},
   "ambientDependencies": {
-    "es6-collections": "github:DefinitelyTyped/DefinitelyTyped/es6-collections/es6-collections.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c",
-    "es6-promise": "github:DefinitelyTyped/DefinitelyTyped/es6-promise/es6-promise.d.ts#830e8ebd9ef137d039d5c7ede24a421f08595f83",
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160215162030",
     "jasmine": "github:DefinitelyTyped/DefinitelyTyped/jasmine/jasmine.d.ts#bc92442c075929849ec41d28ab618892ba493504",
-    "marked": "github:DefinitelyTyped/DefinitelyTyped/marked/marked.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c"
+    "marked": "github:DefinitelyTyped/DefinitelyTyped/marked/marked.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c",
+    "require": "registry:dt/require#2.1.20+20160215162030"
   }
 }

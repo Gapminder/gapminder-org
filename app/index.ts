@@ -1,3 +1,5 @@
+/// <reference path="../typings/browser.d.ts"/>
+
 import {bootstrap} from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 import {AppComponent} from './app.component';
@@ -9,6 +11,8 @@ import {ContentfulImageDirective} from './shared/directives/contentful-image.dir
 import {ContenfulContent} from './shared/services/contentful-content.service';
 import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
 
+declare var CONTENTFUL_ACCESS_TOKEN: string;
+declare var CONTENTFUL_SPACE_ID: string;
 
 // contentful config
 Ng2ContentfulConfig.config = {

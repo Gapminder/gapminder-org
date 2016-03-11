@@ -1,4 +1,5 @@
 import {Component} from 'angular2/core';
+import {NgIf, NgFor} from 'angular2/common';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {Collapse, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 
@@ -44,6 +45,8 @@ const listFacts = [
   template: <string> require('./header.html'),
   styles: [<string> require('./header.styl')],
   directives: [
+    NgIf,
+    NgFor,
     Collapse,
     DROPDOWN_DIRECTIVES,
     ROUTER_DIRECTIVES
