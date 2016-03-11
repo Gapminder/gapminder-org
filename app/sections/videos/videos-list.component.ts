@@ -10,7 +10,7 @@ import {transformResponse} from '../../shared/tools/response.tools';
 @Component({
   template: <string> require('./videos-list.component.html'),
   providers: [ContentfulService],
-  styles: [<string> require('./videos-list.component.scss')],
+  styles: [<string> require('./videos-list.component.styl')],
   directives: [...ROUTER_DIRECTIVES]
 })
 export class VideosList implements OnActivate {

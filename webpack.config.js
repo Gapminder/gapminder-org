@@ -63,8 +63,8 @@ const config = {
       // Support for *.json files.
       {test: /\.json$/, loader: 'json'},
       // Support for CSS as raw text
-      {test: /\.css$/, loader: 'to-string!css?-url!postcss'},
-      {test: /\.scss$/, loader: 'raw!sass'},
+      {test: /\.styl$/, loader: 'to-string!css?-url!stylus'},
+
       // support for .html as raw text
       {test: /\.html$/, loader: 'raw'},
       // Support for .ts files.
@@ -86,11 +86,6 @@ const config = {
       /zone\.js\/dist/
     ]
   },
-  postcss: [
-    require('postcss-cssnext')({
-      browsers: ['ie >= 9', 'last 2 versions']
-    })
-  ],
 
   plugins: [
     new webpack.optimize.DedupePlugin(),

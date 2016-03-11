@@ -14,7 +14,7 @@ import {transformResponse} from '../../shared/tools/response.tools';
   template: <string> require('./about.component.html'),
   directives: [...ROUTER_DIRECTIVES],
   providers: [ContentfulService],
-  styles: [<string> require('./about.component.scss')],
+  styles: [<string> require('./about.component.styl')],
   pipes: [MarkdownPipe]
 })
 export class About implements OnActivate {

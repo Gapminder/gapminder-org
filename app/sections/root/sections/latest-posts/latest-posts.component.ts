@@ -8,7 +8,7 @@ import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'latest-posts',
   template: <string> require('./latest-posts.html'),
-  styles: [<string> require('./latest-posts.css')],
+  styles: [<string> require('./latest-posts.styl')],
   pipes: [DatePipe, AsyncPipe]
 })
 export class LatestPostsComponent implements OnInit {

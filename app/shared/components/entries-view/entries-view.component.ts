@@ -2,7 +2,7 @@ import {Component} from 'angular2/core';
 import {Input} from 'angular2/core';
 import {OnInit} from 'angular2/core';
 import {VideoEntry} from './video.component';
-import {HtmlEntry} from './html.component.ts';
+import {HtmlEntry} from './html.component';
 import {ContentfulConfig} from '../../../app.constans';
 
 @Component({

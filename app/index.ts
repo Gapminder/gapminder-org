@@ -8,8 +8,6 @@ import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.ser
 import {appInjector} from './shared/tools/app-injector.tool';
 import {ContentfulImageDirective} from './shared/directives/contentful-image.directive';
 
-// global styles
-require('style!./app.scss');
 
 // contentful config
 Ng2ContentfulConfig.config = {
