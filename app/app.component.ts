@@ -1,12 +1,12 @@
-import {Component, ViewEncapsulation} from '../node_modules/angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from '../node_modules/angular2/router';
-import {Header} from './shared/components/header/header.component.ts';
-import {Footer} from './shared/components/footer/footer.component.ts';
-import {Root} from './sections/root/root.component.ts';
-import {Videos} from './sections/videos/videos.component.ts';
-import {Downloads} from './sections/downloads/components/downloads.component.ts';
-import {ContentfulConfig} from './app.constans.ts';
-import {About} from './sections/about/about.component.ts';
+import {Component, ViewEncapsulation} from 'angular2/core';
+import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Header} from './shared/components/header/header.component';
+import {Footer} from './shared/components/footer/footer.component';
+import {Root} from './sections/root/root.component';
+import {Videos} from './sections/videos/videos.component';
+import {Downloads} from './sections/downloads/components/downloads.component';
+import {ContentfulConfig} from './app.constans';
+import {About} from './sections/about/about.component';
 
 @Component({
   selector: 'gapminder-app',
@@ -41,49 +41,49 @@ import {About} from './sections/about/about.component.ts';
     path: '/about/:slug', component: About, name: 'AboutSubsection'
   },
   {
-    path: '/Contact/', component: About, name: 'Contact',
+    path: '/contact/', component: About, name: 'Contact',
     data: {
       contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
     }
   },
   {
-    path: '/Blog/', component: About, name: 'Blog',
+    path: '/blog/', component: About, name: 'Blog',
     data: {
       contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
     }
   },
   {
-    path: '/Donate/', component: About, name: 'Donate',
+    path: '/donate/', component: About, name: 'Donate',
     data: {
       contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
     }
   },
   {
-    path: '/Terms/', component: About, name: 'Terms',
+    path: '/terms/', component: About, name: 'Terms',
     data: {
       contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
     }
   },
   {
-    path: '/Media/', component: About, name: 'Media',
+    path: '/media/', component: About, name: 'Media',
     data: {
       contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
     }
   },
   {
-    path: '/Help/', component: About, name: 'Help',
+    path: '/help/', component: About, name: 'Help',
     data: {
       contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
     }
   },
   {
-    path: '/Labs/', component: About, name: 'Labs',
+    path: '/labs/', component: About, name: 'Labs',
     data: {
       contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
     }
   },
   {
-    path: '/Report/', component: About, name: 'Report',
+    path: '/report/', component: About, name: 'Report',
     data: {
       contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
     }

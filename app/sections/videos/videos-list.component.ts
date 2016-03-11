@@ -3,7 +3,7 @@ import {RouteData} from 'angular2/router';
 import {Injector} from 'angular2/core';
 import {OnActivate, ComponentInstruction} from 'angular2/router';
 import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
-import {ContentfulConfig} from '../../app.constans.ts';
+import {ContentfulConfig} from '../../app.constans';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {transformResponse} from '../../shared/tools/response.tools';
 

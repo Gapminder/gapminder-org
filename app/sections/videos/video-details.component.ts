@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 import {OnActivate, RouteData, RouteParams, ComponentInstruction} from 'angular2/router';
 import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
-import {ContentfulConfig} from '../../app.constans.ts';
+import {ContentfulConfig} from '../../app.constans';
 import {ContentfulTypes as ct} from 'ng2-contentful/dist/ng2-contentful';
 import {transformResponse} from '../../shared/tools/response.tools';
 import {EntriesView} from '../../shared/components/entries-view/entries-view.component';
