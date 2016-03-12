@@ -4,9 +4,10 @@ import {AppComponent} from './app.component';
 import {provide, ComponentRef, PLATFORM_DIRECTIVES} from 'angular2/core';
 import {Ng2ContentfulConfig} from 'ng2-contentful/dist/ng2-contentful';
 import {HTTP_PROVIDERS} from 'angular2/http';
-import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
 import {appInjector} from './shared/tools/app-injector.tool';
 import {ContentfulImageDirective} from './shared/directives/contentful-image.directive';
+import {ContenfulContent} from './shared/services/contentful-content.service';
+import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
 
 
 // contentful config
@@ -20,6 +21,7 @@ bootstrap(AppComponent, [
   ...ROUTER_PROVIDERS,
   ...HTTP_PROVIDERS,
   ContentfulService,
+  ContenfulContent,
   provide(LocationStrategy, {
     useClass: HashLocationStrategy
   }),

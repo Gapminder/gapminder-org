@@ -2,10 +2,12 @@ import {Directive, Input, OnInit, ElementRef} from 'angular2/core';
 import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
 
 @Directive({
-  selector: '[contentful-src-id]'
+  selector: '[contentful-src-id]',
+  providers: [ContentfulService]
 })
 export class ContentfulImageDirective implements OnInit {
-  @Input('contentful-src-id') contentfulAssetId: string;
+  @Input('contentful-src-id')
+  contentfulAssetId: string;
 
   constructor(private element: ElementRef,
               private _contentful: ContentfulService) {

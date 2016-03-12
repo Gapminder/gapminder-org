@@ -13,7 +13,7 @@ module.exports = {
       {test: /\.ts$/, loader: 'ts-loader', exclude: [/node_modules/]},
       {test: /\.html$/, loader: 'raw'},
       {test: /\.css$/, loader: 'raw'},
-      {test: /\.scss$/, loaders: ['raw', 'sass']}
+      {test: /\.styl$/, loader: 'to-string!css?-url!stylus'}
     ],
     postLoaders: [
       // instrument only testing sources with Istanbul

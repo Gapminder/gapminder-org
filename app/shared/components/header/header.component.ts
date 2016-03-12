@@ -1,8 +1,6 @@
-import {Component, View} from 'angular2/core';
-import {NgFor, NgIf} from 'angular2/common';
+import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
-
-import {Collapse, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import {Collapse, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 
 
 const listCharts = [
@@ -46,8 +44,6 @@ const listFacts = [
   template: <string> require('./header.html'),
   styles: [<string> require('./header.styl')],
   directives: [
-    NgFor,
-    NgIf,
     Collapse,
     DROPDOWN_DIRECTIVES,
     ROUTER_DIRECTIVES
@@ -56,7 +52,4 @@ const listFacts = [
 export class Header {
   private listCharts:Array<any> = listCharts;
   private listFacts:Array<any> = listFacts;
-
-  constructor() {
-  }
 }
