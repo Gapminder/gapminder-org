@@ -1,44 +1,28 @@
-import {Component} from 'angular2/core';
-import {OnActivate, RouteData, RouteParams, ComponentInstruction} from 'angular2/router';
-import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
-import {ContentfulConfig} from '../../app.constans';
-import {ContentfulTypes as ct} from 'ng2-contentful/dist/ng2-contentful';
-import {transformResponse} from '../../shared/tools/response.tools';
+import {Component, OnInit} from 'angular2/core';
+import {RouteParams} from 'angular2/router';
 import {EntriesView} from '../../shared/components/entries-view/entries-view.component';
+import {ContenfulContent} from '../../shared/services/contentful-content.service';
+import {NodePageContent} from '../../shared/structures/content-type.structures';
 
 @Component({
   template: <string> require('./video-details.component.html'),
   styles: [<string> require('./video-details.component.styl')],
   directives: [EntriesView]
 })
-export class VideoDetails implements OnActivate {
-  private content: any;
+export class VideoDetails implements OnInit {
+  private content: NodePageContent;
 
   constructor(private _params: RouteParams,
-              private _contentful: ContentfulService) {
+              private _contentfulContent: ContenfulContent) {
   }
 
-  routerOnActivate(to: ComponentInstruction, from: ComponentInstruction): any {
-    return new Promise(
-      (resolve) => {
-        let slug = this._params.get('slug');
-        this._contentful
-          .withLinksLevel(2)
-          .getEntryBySlug(
-            ContentfulConfig.CONTENTFUL_NODE_PAGE_TYPE_ID,
-            slug
-          )
-          .map(response => response.json())
-          .map(response => transformResponse<any>(response))
-          .subscribe(
-            response => {
-              if (response.length) {
-                this.content = response[0].fields;
-              }
-              resolve(true);
-            }
-          );
-      }
-    );
+  ngOnInit(): any {
+    this._contentfulContent.getNodePage(
+      this._params.get('slug')
+      )
+      .subscribe(
+        content => this.content = content
+      );
+    return undefined;
   }
 }

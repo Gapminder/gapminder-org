@@ -2,9 +2,9 @@
 
 <div class="entry-content">
   <div class="video-box"
-       *ngFor="#video of videos">
+       *ngFor="#video of videos | async">
     <a [routerLink]="['Details', {slug: video.fields.slug}]">
-      <img src="" alt="" bind-src="video.fields.thumbnail.fields.file.url">
+      <img [contentful-src-id]="video.fields.thumbnail.sys.id">
     </a>
     <div class="name">
       <a [routerLink]="['Details', {slug: video.fields.slug}]">
