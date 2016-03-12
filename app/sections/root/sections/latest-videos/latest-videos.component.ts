@@ -1,4 +1,5 @@
 import {Component, Input} from 'angular2/core';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {DatePipe, AsyncPipe} from 'angular2/common';
 import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
 import {transformResponse} from '../../../../shared/tools/response.tools';
@@ -9,6 +10,7 @@ import {Observable} from 'rxjs/Observable';
   selector: 'latest-videos',
   template: <string> require('./latest-videos.html'),
   styles: [<string> require('./latest-videos.styl')],
+  directives: [ROUTER_DIRECTIVES],
   pipes: [DatePipe, AsyncPipe]
 })
 export class LatestVideosComponent {
