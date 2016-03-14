@@ -4,12 +4,12 @@ import {bootstrap} from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
 import {AppComponent} from './app.component';
 import {provide, ComponentRef, PLATFORM_DIRECTIVES} from 'angular2/core';
-import {Ng2ContentfulConfig} from 'ng2-contentful/dist/ng2-contentful';
+import {Ng2ContentfulConfig} from 'ng2-contentful';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {appInjector} from './shared/tools/app-injector.tool';
 import {ContentfulImageDirective} from './shared/directives/contentful-image.directive';
 import {ContenfulContent} from './shared/services/contentful-content.service';
-import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
+import {ContentfulService} from 'ng2-contentful';
 
 declare var CONTENTFUL_ACCESS_TOKEN: string;
 declare var CONTENTFUL_SPACE_ID: string;

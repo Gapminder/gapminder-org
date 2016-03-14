@@ -1,4 +1,4 @@
-import {ContentfulTypes as ct} from 'ng2-contentful/dist/ng2-contentful';
+import {ContentfulCommon, ContentfulIterableResponse} from 'ng2-contentful';
 
 // this will be the part of ng2-contentful tools
 /**
@@ -6,8 +6,8 @@ import {ContentfulTypes as ct} from 'ng2-contentful/dist/ng2-contentful';
  * @param response
  * @returns {T[]}
  */
-export function transformResponse<T extends ct.Common<any>>
-(response: ct.IterableResponse<ct.Common<any>>): T[] {
+export function transformResponse<T extends ContentfulCommon<any>>
+(response: ContentfulIterableResponse<ContentfulCommon<any>>): T[] {
   // collect all includes
   let includes = {};
   for (let key in response.includes) {

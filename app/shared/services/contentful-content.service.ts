@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
+import {ContentfulService} from 'ng2-contentful';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 import {ContentfulConfig} from '../../app.constans';
@@ -16,7 +16,7 @@ import {NodePageContent} from '../structures/content-type.structures';
  */
 @Injectable()
 export class ContenfulContent {
-  constructor(private _contentful: ContentfulService) {
+  constructor(private contentful: ContentfulService) {
   }
 
   /**
@@ -44,11 +44,12 @@ export class ContenfulContent {
     return Observable.create(
       (observer: Observer<any>) => {
         this.contentful
-          .withLinksLevel(0)
+          .create()
           .searchEntries(
             ContentfulConfig.CONTENTFUL_NODE_PAGE_TYPE_ID,
             {param: 'fields.type', value: type}
           )
+          .commit()
           .map(response => <any>response.json())
           .subscribe(
             response => {
@@ -81,21 +82,16 @@ export class ContenfulContent {
     );
   }
 
-  /**
-   * this is only temporary, I'll change it in ng2-contentful library
-   * 2 will be default value ( in mostly cases it's sufficient )
-   * @returns {ContentfulService}
-   */
-  private get contentful(): ContentfulService {
-    return this._contentful.withLinksLevel(2);
-  }
-
   private getRawNodePageBySlug(slug: string): Observable<any> {
     return this.contentful
+      .create()
       .getEntryBySlug(
         ContentfulConfig.CONTENTFUL_NODE_PAGE_TYPE_ID,
         slug
-      ).map(response => response.json());
+      )
+      .include(2)
+      .commit()
+      .map(response => response.json());
   }
 
   private getSubmenuItemsFromResponse(response) {

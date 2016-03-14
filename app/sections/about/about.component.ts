@@ -1,6 +1,5 @@
 import {Component, OnInit} from 'angular2/core';
 import {RouteData, RouteParams} from 'angular2/router';
-import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
 import {MarkdownPipe} from '../../shared/pipes/markdown.pipe';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {ContenfulContent} from '../../shared/services/contentful-content.service';
@@ -12,7 +11,6 @@ import {NodePageContent} from '../../shared/structures/content-type.structures';
 @Component({
   template: <string> require('./about.component.html'),
   directives: [...ROUTER_DIRECTIVES],
-  providers: [ContentfulService],
   styles: [<string> require('./about.component.styl')],
   pipes: [MarkdownPipe]
 })
