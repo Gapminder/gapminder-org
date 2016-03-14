@@ -10,9 +10,8 @@ module.exports = {
   },
   module: {
     loaders: [
-      {test: /\.ts$/, loader: 'ts-loader', exclude: [/node_modules/]},
+      {test: /\.ts$/, loader: 'ts', exclude: [/node_modules\/(?!(ng2-.+))/]},
       {test: /\.html$/, loader: 'raw'},
-      {test: /\.css$/, loader: 'raw'},
       {test: /\.styl$/, loader: 'to-string!css?-url!stylus'}
     ],
     postLoaders: [
@@ -20,7 +19,7 @@ module.exports = {
       {
         test: /\.(js|ts)$/,
         include: root('../app'),
-        loader: 'istanbul-instrumenter-loader',
+        loader: 'istanbul-instrumenter',
         exclude: [
           /\.e2e\.ts$/,
           /node_modules/

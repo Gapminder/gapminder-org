@@ -27,17 +27,17 @@ before_script:
 - npm run serve &
 - sleep 3
 # update webdrived for karma tests
-- npm run update-webdriver
+#- npm run update-webdriver
 
 script:
 # run local karma tests
 - npm test
 # run protractor tests
-- npm run e2e
+#- npm run e2e
 # submit coverage report to coveralls
 - cat ./coverage/report-lcov/lcov.info | ./node_modules/.bin/coveralls --verbose
 # run karma tests at browser stack
-- npm run karma-sauce
+#- npm run karma-sauce
 # run karma tests at sauce labs
 #- npm run karma-sauce
 

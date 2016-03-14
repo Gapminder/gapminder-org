@@ -2,7 +2,7 @@ import {Component, View} from 'angular2/core';
 import {NgFor} from 'angular2/common';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
-import {Collapse, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import {Collapse, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 
 
 const menuFooter = [
