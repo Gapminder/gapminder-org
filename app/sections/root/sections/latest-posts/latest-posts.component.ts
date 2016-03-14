@@ -1,6 +1,6 @@
 import {Component, OnInit, Input} from 'angular2/core';
 import {DatePipe, AsyncPipe} from 'angular2/common';
-import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
+import {ContentfulService} from 'ng2-contentful';
 import {transformResponse} from '../../../../shared/tools/response.tools';
 import {ContentfulConfig} from '../../../../app.constans';
 import {Observable} from 'rxjs/Observable';
@@ -26,11 +26,12 @@ export class LatestPostsComponent implements OnInit {
 
   ngOnInit():any {
     this.posts = this._contentful
-      .withLinksLevel(2)
+      .create()
       .searchEntries(
         ContentfulConfig.CONTENTFUL_NODE_PAGE_TYPE_ID,
         {param: 'fields.type', value: 'blogpost'}
       )
+      .commit()
       .map(response => response.json())
       .map(response => transformResponse<any>(response));
   }

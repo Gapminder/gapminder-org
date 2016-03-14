@@ -1,7 +1,7 @@
 import {Component, Input} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {DatePipe, AsyncPipe} from 'angular2/common';
-import {ContentfulService} from 'ng2-contentful/dist/src/services/contentful.service';
+import {ContentfulService} from 'ng2-contentful';
 import {transformResponse} from '../../../../shared/tools/response.tools';
 import {ContentfulConfig} from '../../../../app.constans';
 import {Observable} from 'rxjs/Observable';
@@ -30,11 +30,12 @@ export class LatestVideosComponent {
 
   ngOnInit():any {
     this.videos = this._contentful
-      .withLinksLevel(2)
+      .create()
       .searchEntries(
         ContentfulConfig.CONTENTFUL_NODE_PAGE_TYPE_ID,
         {param: 'fields.type', value: 'video'}
       )
+      .commit()
       .map(response => response.json())
       .map(response => transformResponse<any>(response));
   }
