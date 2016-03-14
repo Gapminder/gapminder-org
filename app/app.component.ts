@@ -12,7 +12,11 @@ import {About} from './sections/about/about.component';
   selector: 'gapminder-app',
   encapsulation: ViewEncapsulation.None,
   directives: [Header, Footer, ...ROUTER_DIRECTIVES],
-  styles: [ <string> require('./main.styl')],
+  styles: [
+    <string> require('./main.styl'),
+    <string> require('./fonts.styl'),
+    <string> require('./variables.styl')
+  ],
   template: `
     <header></header>
      <div class="container">

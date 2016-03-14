@@ -24,19 +24,23 @@ const listFacts = [
   {
     name: 'Answers',
     href: '',
-    description: 'Wath Hans Rosling answer huge fact-questions in less than 90 sec.'
-  }, {
-    name: 'Massive Ignorance',
-    href: '',
-    description: 'Beware the shocking results from our global knowladge surveys'
+    description: 'Wath Hans Rosling answer huge fact-questions in less than 90 sec.',
+    img: '../../assets/img/ico_fact_01.svg'
   }, {
     name: 'Awards',
     href: '',
-    description: 'Explore a World in motion with animated statistics'
+    description: 'Explore a World in motion with animated statistics',
+    img: '../../assets/img/ico_fact_03.svg'
+  }, {
+    name: 'Massive Ignorance',
+    href: '',
+    description: 'Beware the shocking results from our global knowladge surveys',
+    img: '../../assets/img/ico_fact_02.svg'
   }, {
     name: 'Data',
     href: '',
-    description: 'Download tables with stats gathered form hundreds of sources'
+    description: 'Download tables with stats gathered form hundreds of sources',
+    img: '../../assets/img/ico_fact_04.svg'
   }
 ];
 

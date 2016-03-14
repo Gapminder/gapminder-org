@@ -24,23 +24,24 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item"><a href="#">Videos</a></li>
-              <li class="nav-item"><a href="#">Downloads</a></li>
-              <li class="nav-item"><a href="#">Teach</a></li>
+              <li class="nav-item"><a [routerLink]="['Videos', 'List']">Videos</a></li>
+              <li class="nav-item"><a href>Downloads</a></li>
+              <li class="nav-item"><a href>Teach</a></li>
               <li class="nav-item dropdown">
                 <a href>Facts</a>
                 <ul class="dropdown-menu fix-width" role="menu">
                   <li class="col-md-6 padding-0" *ngFor="#fast of listFacts">
                     <a class="dropdown-item" href="{{fast.href}}">
+                      <img class="frame-img" src="{{fast.img}}">
                       {{fast.name}}
                       <span>{{fast.description}}</span>
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item"><a href="#">News</a></li>
-              <li class="nav-item"><a href="#">About</a></li>
-              <li class="nav-item"><a href="#">Contact</a></li>
+              <li class="nav-item"><a href>News</a></li>
+              <li class="nav-item"><a [routerLink]="['About']">About</a></li>
+              <li class="nav-item"><a href>Contact</a></li>
             </ul>
           </nav>
           <nav class="visible-xs hidden-md-up">
@@ -60,8 +61,8 @@
                 </ul>
               </li>
               <li class="nav-item"><a [routerLink]="['Videos', 'List']">Videos</a></li>
-              <li class="nav-item"><a href="#">Downloads</a></li>
-              <li class="nav-item"><a href="#">Teach</a></li>
+              <li class="nav-item"><a href>Downloads</a></li>
+              <li class="nav-item"><a href>Teach</a></li>
               <li class="nav-item dropdown">
                 <a href>Facts</a>
                 <ul class="dropdown-menu fix-width" role="menu">
@@ -73,9 +74,9 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item"><a href="#">News</a></li>
-              <li class="nav-item"><a href="#">About</a></li>
-              <li class="nav-item"><a href="#">Contact</a></li>
+              <li class="nav-item"><a href>News</a></li>
+              <li class="nav-item"><a [routerLink]="['About']">About</a></li>
+              <li class="nav-item"><a href>Contact</a></li>
             </ul>
           </nav>
 

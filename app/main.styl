@@ -1,191 +1,153 @@
-@font-face {
-  font-family: 'Bariol Thin';
-  src: url('../../assets/fonts/bariol_thin-webfont.eot');
-  src: url('../../assets/fonts/bariol_thin-webfont.eot?#iefix') format('embedded-opentype'), url('../../assets/fonts/bariol_thin-webfont.woff2') format('woff2'), url('../../assets/fonts/bariol_thin-webfont.woff') format('woff'), url('../../assets/fonts/bariol_thin-webfont.ttf') format('truetype'), url('../../assets/fonts/bariol_thin-webfont.svg#bariolthin') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
+@import "./variables.styl"
 
-@font-face {
-  font-family: 'Bariol Thin Italic';
-  src: url('../../assets/fonts/bariol_thin_italic-webfont.eot');
-  src: url('../../assets/fonts/bariol_thin_italic-webfont.eot?#iefix') format('embedded-opentype'), url('../../assets/fonts/bariol_thin_italic-webfont.woff2') format('woff2'), url('../../assets/fonts/bariol_thin_italic-webfont.woff') format('woff'), url('../../assets/fonts/bariol_thin_italic-webfont.ttf') format('truetype'), url('../../assets/fonts/bariol_thin_italic-webfont.svg#bariolthin_italic') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
+body
+  background-color #fff
+  font-family 'Bariol Regular', sans-serif
+  color #231f20
+  margin 0
 
-@font-face {
-  font-family: 'Bariol Light';
-  src: url('../../assets/fonts/bariol_light-webfont.eot');
-  src: url('../../assets/fonts/bariol_light-webfont.eot?#iefix') format('embedded-opentype'), url('../../assets/fonts/bariol_light-webfont.woff2') format('woff2'), url('../../assets/fonts/bariol_light-webfont.woff') format('woff'), url('../../assets/fonts/bariol_light-webfont.ttf') format('truetype'), url('../../assets/fonts/bariol_light-webfont.svg#bariol_lightlight') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
+a, avisited
+  color inherit
+  text-decoration none
 
-@font-face {
-  font-family: 'Bariol Light Italic';
-  src: url('../../assets/fonts/bariol_light_italic-webfont.eot');
-  src: url('../../assets/fonts/bariol_light_italic-webfont.eot?#iefix') format('embedded-opentype'), url('../../assets/fonts/bariol_light_italic-webfont.woff2') format('woff2'), url('../../assets/fonts/bariol_light_italic-webfont.woff') format('woff'), url('../../assets/fonts/bariol_light_italic-webfont.ttf') format('truetype'), url('../../assets/fonts/bariol_light_italic-webfont.svg#bariollight_italic') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
+h1
+  font-size 50px
+  line-height 60px
 
-@font-face {
-  font-family: 'Bariol Regular';
-  src: url('../../assets/fonts/bariol_regular-webfont.eot');
-  src: url('../../assets/fonts/bariol_regular-webfont.eot?#iefix') format('embedded-opentype'), url('../../assets/fonts/bariol_regular-webfont.woff2') format('woff2'), url('../../assets/fonts/bariol_regular-webfont.woff') format('woff'), url('../../assets/fonts/bariol_regular-webfont.ttf') format('truetype'), url('../../assets/fonts/bariol_regular-webfont.svg#bariol_regularregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
+h2
+  font-size 31px
 
-@font-face {
-  font-family: 'Bariol Regular Italic';
-  src: url('../../assets/fonts/bariol_regular_italic-webfont.eot');
-  src: url('../../assets/fonts/bariol_regular_italic-webfont.eot?#iefix') format('embedded-opentype'), url('../../assets/fonts/bariol_regular_italic-webfont.woff2') format('woff2'), url('../../assets/fonts/bariol_regular_italic-webfont.woff') format('woff'), url('../../assets/fonts/bariol_regular_italic-webfont.ttf') format('truetype'), url('../../assets/fonts/bariol_regular_italic-webfont.svg#bariolregular_italic') format('svg');
-  font-weight: normal;
-  font-style: normal;
+h3
+  font-size 30px
+  line-height 1.1
 
-}
+h4
+  font-size 22px
 
-@font-face {
-  font-family: 'Bariol Bold';
-  src: url('../../assets/fonts/bariol_bold-webfont.eot');
-  src: url('../../assets/fonts/bariol_bold-webfont.eot?#iefix') format('embedded-opentype'), url('../../assets/fonts/bariol_bold-webfont.woff2') format('woff2'), url('../../assets/fonts/bariol_bold-webfont.woff') format('woff'), url('../../assets/fonts/bariol_bold-webfont.ttf') format('truetype'), url('../../assets/fonts/bariol_bold-webfont.svg#bariol_boldbold') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
+h5
+  font-size 18px
 
-@font-face {
-  font-family: 'Bariol Bold Italic';
-  src: url('../../assets/fonts/bariol_bold_italic-webfont.eot');
-  src: url('../../assets/fonts/bariol_bold_italic-webfont.eot?#iefix') format('embedded-opentype'), url('../../assets/fonts/bariol_bold_italic-webfont.woff2') format('woff2'), url('../../assets/fonts/bariol_bold_italic-webfont.woff') format('woff'), url('../../assets/fonts/bariol_bold_italic-webfont.ttf') format('truetype'), url('../../assets/fonts/bariol_bold_italic-webfont.svg#bariol_boldbold_italic') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
+h1, h2, h3, h4, h5, h6
+  font-family 'Bariol Regular', Helvetica, Arial, sans-serif
+  color color-dark
 
-body {
-  background-color: #fff;
-  font-family: 'Bariol Regular', sans-serif;
-  color: #231f20;
-  margin: 0;
-}
+.clearfix:after
+  content ""
+  display table
+  clear both
 
-a, a:visited {
-  color: inherit;
-  text-decoration: none;
-}
+img
+  max-width 100%
 
-h1 {
-  font-size: 50px;
-  line-height: 60px;
-}
+input
+  font-family 'Bariol Light', sans-serif
 
-h2 {
-  font-size: 31px;
-}
+ul
+  list-style none
+  margin 0
+  padding 0
 
-h3 {
-  font-size: 30px;
-  line-height: 1.1;
-}
+.entry-content
+  margin-bottom 25px
 
-h4 {
-  font-size: 22px;
-}
+.entry-content p
+  font-size 15px
+  font-family 'Bariol Regular', sans-serif
+  line-height 19px
 
-h5 {
-  font-size: 18px;
-}
+.entry-content p a
+  color #b04514
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Bariol Regular', Helvetica, Arial, sans-serif;
-  color: #222;
-  font-weight: 300;
-  margin: 0 0 20px;
-}
+.entry-content p ahover
+  text-decoration underline
 
-.clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
-}
+.content
+  overflow hidden
+  float left
+  width calc(100% - 320px)
+  margin-left 12px
+  margin-right 25px
+  min-height 700px
 
-img {
-  max-width: 100%;
-}
+#container
+  position relative
+  margin 5px auto 5px auto
+  width 100%
+  max-width 990px
+  padding-top 18px
+  padding-bottom 21px
+  clear both
 
-input {font-family: 'Bariol Light', sans-serif;}
+#primary
+  background #ecf4f4
+  width 280px
+  padding 10px 15px
+  box-sizing border-box
+  float right
+  color #6c6d6f
+  position relative
+  top 20px
 
-.entry-content {
-  margin-bottom: 25px;
-}
+.text-center
+  text-align center
 
-.entry-content p {
-  font-size: 15px;
-  font-family: 'Bariol Regular', sans-serif;
-  line-height: 19px;
-}
+.date-info
+  font-size 14px
+  color color-grey
+  text-transform uppercase
+  margin-top 10px
 
-.entry-content p a {
-  color: #b04514;
-}
+.post-title
+  color color-dark
+  font-size 24px
+  line-height 30px
 
-.entry-content p a:hover {
-  text-decoration: underline;
-}
+.post-p
+  font-size 16px
+  color color-grey
 
-.content {
-  overflow: hidden;
-  float: left;
-  width: calc(100% - 320px);
-  margin-left: 12px;
-  margin-right: 25px;
-  min-height: 700px;
-}
-
-#container {
-  position: relative;
-  margin: 5px auto 5px auto;
-  width: 100%;
-  max-width: 990px;
-  padding-top: 18px;
-  padding-bottom: 21px;
-  clear: both;
-}
-
-#primary {
-  background: #ecf4f4;
-  width: 280px;
-  padding: 10px 15px;
-  box-sizing: border-box;
-  float: right;
-  color: #6c6d6f;
-  position: relative;
-  top: 20px;
-}
-
+.post-head
+  position relative
+  color color-dark
+  font-size 38px
+  line-height 1.2
+  z-index 1
+  overflow hidden
+  margin 60px 0 40px
+  &:after
+    content ''
+    display inline-block
+    width 100%
+    height 1px
+    background #eff2f6
+    z-index -1
+    position relative
+    vertical-align middle
+    left 20px
+    margin 0 -100% 0 0
 
 /* btn */
-.btn-yellow {
-  color: #374551;
-  font-size: 18px;
-  line-height: 40px;
-  font-family: 'Bariol Bold', sans-serif;
-  background-color: #ffc300;
-  border: 1px solid #f1b902;
-  border-radius: 2px;
-  padding: 0 10px;
-  text-align: center;
-  min-width: 160px;
-}
-
+.btn-yellow
+  color color-dark
+  font-size 18px
+  line-height 40px
+  font-family 'Bariol Bold', sans-serif
+  background-color #ffc300
+  border 1px solid #f1b902
+  border-radius 2px
+  padding 0 10px
+  text-align center
+  min-width 160px
 
 /* form input (text or search) */
-.text {
-  background-color: #fff;
-  border-radius: 2px;
-  border: 1px solid #edf0f5;
-  font-size: 18px;
-  line-height: 20px;
-  padding: 10px 15px;
-}
+.text
+  background-color #fff
+  border-radius 2px
+  border 1px solid #edf0f5
+  font-size 18px
+  line-height 20px
+  padding 10px 15px
+
+/* indent */
+.margin-top-50
+  margin-top 50px

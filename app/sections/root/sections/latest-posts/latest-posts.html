@@ -1,15 +1,18 @@
 <section>
-  <h2>Latest Blog Posts</h2>
+  <h2 class="post-head">Latest Blog Posts</h2>
   <section class="posts-list">
-    <div *ngFor="#post of posts | async" class="post-item col-md-4">
-      <img src="{{post.fields.thumbnail.fields.file.url}}" alt="{{post.fields.title}}">
-      <div class="post-pub-date">{{toDate(post.fields.createdAt) | date}}</div>
-      <div class="post-title">{{post.fields.title}}</div>
-      <p>{{post.fields.description}}</p>
+    <div class="row">
+      <div *ngFor="#post of posts | async" class="post-item col-md-4">
+        <div class="post-wrap-img">
+          <img src="{{post.fields.thumbnail.fields.file.url}}" alt="{{post.fields.title}}">
+        </div>
+        <div class="date-info">{{toDate(post.fields.createdAt) | date}}</div>
+        <div class="post-title">{{post.fields.title}}</div>
+        <p class="post-p">{{post.fields.description}}</p>
+      </div>
     </div>
   </section>
-  <button class="btn btn-default">View All Posts >></button>
+  <div class="row text-center">
+    <button class="btn-yellow margin-top-50s">View All Posts &#187;</button>
+  </div>
 </section>
-
-
-
