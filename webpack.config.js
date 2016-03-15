@@ -36,15 +36,28 @@ const config = {
   },
 
   entry: {
-    angular2: [
-      // Angular 2 Deps
+    common: [
+      // Angular 2 Deps + common libs - I split it into separated entries but
+      // current version of webpack has problem with that
+      // due https://github.com/webpack/webpack/issues/1016
       'zone.js/dist/zone-microtask',
       'reflect-metadata',
       'rxjs',
       'angular2/platform/browser',
       'angular2/common',
-      'angular2/core'
+      'angular2/core',
+      'angular2/router',
+      // common
+      'moment',
+      'ng2-bootstrap',
+      'ng2-contentful'
     ],
+    // vendors: [
+    //   // 3rd libs
+    //   'moment',
+    //   'ng2-bootstrap',
+    //   'ng2-contentful'
+    // ],
     app: 'app'
   },
 
@@ -91,9 +104,8 @@ const config = {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(true),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'angular2',
-      minChunks: Infinity,
-      filename: 'angular2.js'
+      name: 'common',
+      minChunks: Infinity
     }),
     // static assets
     //new CopyWebpackPlugin([{from: 'demo/favicon.ico', to: 'favicon.ico'}]),

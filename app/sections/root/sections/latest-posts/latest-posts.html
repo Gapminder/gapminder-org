@@ -4,7 +4,8 @@
     <div class="row">
       <div *ngFor="#post of posts | async" class="post-item col-md-4">
         <div class="post-wrap-img">
-          <img src="{{post.fields.thumbnail.fields.file.url}}" alt="{{post.fields.title}}">
+          <img [contentful-src-id]="post.fields.thumbnail.sys.id"
+               alt="{{post.fields.title}}">
         </div>
         <div class="date-info">{{toDate(post.fields.createdAt) | date}}</div>
         <div class="post-title">{{post.fields.title}}</div>
