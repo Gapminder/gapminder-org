@@ -1,1 +1,33 @@
-<section>Gapminder overview placeholder</section>
+<section>
+  <div class="text-center margin-bottom-35 margin-top-35">
+    <div class="logo">
+      <img src="../../../../assets/img/logo-yellow.svg">
+    </div>
+    <h2 class="head">{{head}}</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <carousel [interval]="myInterval" [noWrap]="noWrapSlides">
+        <slide *ngFor="#slidez of slides; #index=index"
+               [active]="slidez.active">
+          <div class="col-md-7">
+            <div class="row">
+              <img class="wrap-img" [src]="slidez.image">
+              <div class="triangle"></div>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="block-description">
+              <div class="date-info">{{slidez.date}}</div>
+              <div class="title">{{slidez.title}}</div>
+              <p>{{slidez.description}}</p>
+              <a href class="more-info">{{slidez.more_info}}</a>
+            </div>
+          </div>
+        </slide>
+      </carousel>
+    </div>
+  </div>
+
+</section>

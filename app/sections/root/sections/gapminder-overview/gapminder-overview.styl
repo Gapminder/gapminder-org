@@ -1,0 +1,102 @@
+@import "../../../../variables.styl"
+
+.head
+  font-size 28px;
+  color color-dark
+
+.triangle
+  width 0
+  height 0
+  border-style solid
+  border-width 20px 20px 20px 0
+  border-color transparent color-blue transparent transparent
+  position absolute
+  right 0
+  top 90px
+  z-index 1
+
+.wrap-img
+  width 100%
+
+.block-description
+  text-align left
+  padding 80px 15px
+
+  p
+    margin 0
+    display block
+
+  .date-info
+    margin 0
+    font-size 18px
+
+  .title
+    font-size 34px
+    line-height 38px
+    margin 25px 0
+
+  .more-info
+    font-family 'Bariol Bold'
+    font-size 18px
+    margin-top 25px
+    display inline-block
+    color color-dark
+
+/* remove default style in bootstrap */
+.carousel-inner
+  background color-blue
+  height 440px
+
+.carousel-control
+  width 30px
+  color color-grey
+  opacity 1
+  text-shadow none
+  cursor pointer
+
+  &:focus,
+  &:hover
+    color inherit
+    opacity 1
+
+  &.left
+    background none
+    left -35px
+
+  &.right
+    background none
+    right -35px
+
+  .glyphicon-chevron-left,
+  .glyphicon-chevron-right
+    display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome;
+    font-size: 40px;
+    color color-grey
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+  .glyphicon-chevron-left
+
+    &:before
+      content "\f104"
+
+  .glyphicon-chevron-right
+
+    &:before
+      content "\f105"
+
+.carousel-indicators
+  bottom -40px
+
+  li
+    background color-grey
+    border none
+    width 12px
+    height 12px
+    margin 0 7px
+
+  .active
+    background color-yellow
+    margin 0 7px
