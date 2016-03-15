@@ -1,9 +1,9 @@
 import {Component, OnInit, Input} from 'angular2/core';
 import {DatePipe, AsyncPipe} from 'angular2/common';
-import {ContentfulConfig} from '../../../../app.constans';
 import {Observable} from 'rxjs/Observable';
-import {ContentfulService, ContentfulCommon, ContentfulIterableResponse} from 'ng2-contentful';
+import {ContentfulCommon} from 'ng2-contentful';
 import {NodePageContent} from '../../../../shared/structures/content-type.structures';
+import {ContenfulContent} from '../../../../shared/services/contentful-content.service';
 
 @Component({
   selector: 'latest-posts',
@@ -17,7 +17,7 @@ export class LatestPostsComponent implements OnInit {
 
   private posts: Observable<ContentfulCommon<NodePageContent>[]>;
 
-  constructor(private _contentful: ContentfulService) {
+  constructor(private _contentfulContent: ContenfulContent) {
   }
 
   private toDate(dateAsString): Date {
@@ -25,14 +25,6 @@ export class LatestPostsComponent implements OnInit {
   }
 
   ngOnInit(): any {
-    this.posts = this._contentful
-      .create()
-      .searchEntries(
-        ContentfulConfig.CONTENTFUL_NODE_PAGE_TYPE_ID,
-        {param: 'fields.type', value: 'blogpost'}
-      )
-      .limit(this.limit)
-      .commit<ContentfulIterableResponse<ContentfulCommon<NodePageContent>>>()
-      .map(response => response.items);
+    this.posts = this._contentfulContent.getLatestPosts(this.limit);
   }
 }
