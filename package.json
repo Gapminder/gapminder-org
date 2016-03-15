@@ -5,8 +5,8 @@
   "description": "gapminder.org angular2 client application",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/concurrent \"npm run watch:dev\" \"npm run serve\"",
-    "postinstall": "./node_modules/.bin/concurrent \"npm run install:typings\" \"npm run update-webdriver\"",
+    "start": "./node_modules/.bin/concurrently \"npm run watch:dev\" \"npm run serve\"",
+    "postinstall": "./node_modules/.bin/concurrently \"npm run install:typings\" \"npm run update-webdriver\"",
     "install:typings": "./node_modules/.bin/typings install",
     "update-webdriver": "./node_modules/.bin/webdriver-manager update",
     "deploy": "npm run build:prod && npm run publish:gh-pages",
@@ -33,7 +33,7 @@
     "es7-reflect-metadata": "1.6.0",
     "marked": "0.3.5",
     "ng2-bootstrap": "1.0.5",
-    "ng2-contentful": "0.0.7",
+    "ng2-contentful": "0.0.8",
     "rxjs": "5.0.0-beta.2",
     "zone.js": "0.5.15"
   },

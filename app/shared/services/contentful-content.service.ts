@@ -1,10 +1,10 @@
 import {Injectable} from 'angular2/core';
-import {ContentfulService} from 'ng2-contentful';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 import {ContentfulConfig} from '../../app.constans';
 import {transformResponse} from '../tools/response.tools';
 import {NodePageContent} from '../structures/content-type.structures';
+import {ContentfulService, ContentfulIterableResponse} from 'ng2-contentful';
 
 /**
  * ContentfulContent works as a replacement for the original ng2-contentful library.
@@ -49,8 +49,7 @@ export class ContenfulContent {
             ContentfulConfig.CONTENTFUL_NODE_PAGE_TYPE_ID,
             {param: 'fields.type', value: type}
           )
-          .commit()
-          .map(response => <any>response.json())
+          .commit<ContentfulIterableResponse<NodePageContent>>()
           .subscribe(
             response => {
               observer.next(response.items);
@@ -90,8 +89,7 @@ export class ContenfulContent {
         slug
       )
       .include(2)
-      .commit()
-      .map(response => response.json());
+      .commit();
   }
 
   private getSubmenuItemsFromResponse(response) {

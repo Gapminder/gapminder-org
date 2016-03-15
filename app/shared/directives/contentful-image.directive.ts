@@ -1,5 +1,5 @@
 import {Directive, Input, OnInit, ElementRef} from 'angular2/core';
-import {ContentfulService} from 'ng2-contentful';
+import {ContentfulService, ContentfulCommon, ContentfulAsset} from 'ng2-contentful';
 
 @Directive({
   selector: '[contentful-src-id]',
@@ -17,8 +17,7 @@ export class ContentfulImageDirective implements OnInit {
     this._contentful
       .create()
       .getAsset(this.contentfulAssetId)
-      .commit()
-      .map(response => response.json())
+      .commit<ContentfulCommon<ContentfulAsset>>()
       .subscribe(
         response => {
           this.element.nativeElement.src = response.fields.file.url;

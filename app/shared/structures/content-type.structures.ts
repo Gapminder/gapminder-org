@@ -6,6 +6,7 @@ export interface NodePageContent {
   slug: string;
   description?: string;
   relatedEntries?: NodePageContent[];
+  thumbnail: any; // will be changed to sys structure
 }
 
 export interface VideoContent {
