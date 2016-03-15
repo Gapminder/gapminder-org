@@ -1,10 +1,10 @@
 import {Component, Input} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {DatePipe, AsyncPipe} from 'angular2/common';
-import {ContentfulConfig} from '../../../../app.constans';
 import {Observable} from 'rxjs/Observable';
-import {ContentfulService, ContentfulIterableResponse, ContentfulCommon} from 'ng2-contentful';
+import {ContentfulCommon} from 'ng2-contentful';
 import {NodePageContent} from '../../../../shared/structures/content-type.structures';
+import {ContenfulContent} from '../../../../shared/services/contentful-content.service';
 
 @Component({
   selector: 'latest-videos',
@@ -19,7 +19,7 @@ export class LatestVideosComponent {
 
   private videos: Observable<ContentfulCommon<NodePageContent>[]>;
 
-  constructor(private _contentful: ContentfulService) {
+  constructor(private _contentfulContent: ContenfulContent) {
   }
 
   private toDate(dateAsString): Date {
@@ -30,14 +30,6 @@ export class LatestVideosComponent {
   }
 
   ngOnInit(): any {
-    this.videos = this._contentful
-      .create()
-      .searchEntries(
-        ContentfulConfig.CONTENTFUL_NODE_PAGE_TYPE_ID,
-        {param: 'fields.type', value: 'video'}
-      )
-      .limit(this.limit)
-      .commit<ContentfulIterableResponse<ContentfulCommon<NodePageContent>>>()
-      .map(response => response.items);
+    this.videos = this._contentfulContent.getLatestVideo(this.limit);
   }
 }

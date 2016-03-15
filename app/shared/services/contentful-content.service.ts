@@ -4,7 +4,8 @@ import {Observer} from 'rxjs/Observer';
 import {ContentfulConfig} from '../../app.constans';
 import {transformResponse} from '../tools/response.tools';
 import {NodePageContent} from '../structures/content-type.structures';
-import {ContentfulService, ContentfulIterableResponse} from 'ng2-contentful';
+import {ContentfulService, ContentfulRequest, SearchItem} from 'ng2-contentful';
+import {ContentfulNodePagesResponse, ContentfulNodePage} from '../structures/aliases.structures';
 
 /**
  * ContentfulContent works as a replacement for the original ng2-contentful library.
@@ -24,41 +25,44 @@ export class ContenfulContent {
    *  @param slug - slug of the current about content
    */
   getAboutPage(slug: string): Observable<{submenuItems: any[], content: NodePageContent}> {
-    return Observable.create(
-      (observer: Observer<{submenuItems: any[], content: NodePageContent}>) => {
-        this.getRawNodePageBySlug(slug)
-          .subscribe(
-            response => {
-              observer.next({
-                submenuItems: this.getSubmenuItemsFromResponse(response),
-                content: transformResponse<any>(response)[0]
-              });
-              observer.complete();
-            }
-          );
-      }
-    );
+    return this.getRawNodePageBySlug(slug)
+      .map(response => {
+        return {
+          submenuItems: this.getSubmenuItemsFromResponse(response),
+          content: transformResponse<any>(response)[0]
+        };
+      });
   }
 
-  getNodePagesByType(type: string): Observable<NodePageContent[]> {
-    return Observable.create(
-      (observer: Observer<any>) => {
-        this.contentful
-          .create()
-          .searchEntries(
-            ContentfulConfig.CONTENTFUL_NODE_PAGE_TYPE_ID,
-            {param: 'fields.type', value: type}
-          )
-          .commit<ContentfulIterableResponse<NodePageContent>>()
-          .subscribe(
-            response => {
-              observer.next(response.items);
-              observer.complete();
-            }
-          );
-      }
-    );
+  getLatestPosts(limit: number): Observable<ContentfulNodePage[]> {
+    return this.getLatestItems<ContentfulNodePagesResponse>(
+      this.getRawNodePagesByParams({
+        param: 'fields.type',
+        value: 'blogpost'
+      }), limit
+      )
+      .map(response => response.items);
+  }
 
+  getLatestVideo(limit: number) {
+    return this.getLatestItems<ContentfulNodePagesResponse>(
+      this.getRawNodePagesByParams({
+        param: 'fields.type',
+        value: 'video'
+      }), limit
+      )
+      .map(response => response.items);
+  }
+
+  getNodePagesByType(type: string): Observable<ContentfulNodePage[]> {
+    return this.contentful
+      .create()
+      .searchEntries(
+        ContentfulConfig.CONTENTFUL_NODE_PAGE_TYPE_ID,
+        {param: 'fields.type', value: type}
+      )
+      .commit<ContentfulNodePagesResponse>()
+      .map(response => response.items);
   }
 
   /**
@@ -67,18 +71,9 @@ export class ContenfulContent {
    * @returns {any}
    */
   getNodePage(slug: string): Observable<NodePageContent> {
-    return Observable.create(
-      (observer: Observer<any>) => {
-        this.getRawNodePageBySlug(slug)
-          .map(response => transformResponse<any>(response))
-          .subscribe(
-            response => {
-              observer.next(response[0].fields);
-              observer.complete();
-            }
-          );
-      }
-    );
+    return this.getRawNodePageBySlug(slug)
+      .map(response => transformResponse<ContentfulNodePage>(response))
+      .map(response => response[0].fields);
   }
 
   private getRawNodePageBySlug(slug: string): Observable<any> {
@@ -90,6 +85,27 @@ export class ContenfulContent {
       )
       .include(2)
       .commit();
+  }
+
+  private getLatestItems<T>(request: ContentfulRequest, limit: number
+    , order: string = 'sys.createdAt', include: number = 0): Observable<T> {
+    return request
+      .limit(limit)
+      .order(order)
+      .include(include)
+      .commit<T>();
+  }
+
+  /**
+   *
+   * @param searchItems
+   * @returns {ContentfulRequest}
+   */
+  private getRawNodePagesByParams(...searchItems: SearchItem[]): ContentfulRequest {
+    return this.contentful
+      .create()
+      .searchEntries(
+        ContentfulConfig.CONTENTFUL_NODE_PAGE_TYPE_ID, ...searchItems);
   }
 
   private getSubmenuItemsFromResponse(response) {
