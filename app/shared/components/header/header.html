@@ -2,7 +2,10 @@
   <div class="navbar navbar-fixed-top">
     <div class="container">
       <div class="row">
-        <div *ngIf="!isCollapsed">
+        <a [routerLink]="['Root']" class="logo" *ngIf="isOnRootView">
+          <img src="../../../assets/img/logo-yellow.svg">
+        </a>
+        <div *ngIf="!collapsed">
           <div class="navbar-header hidden-md-up">
             <div class="navbar-toggle navbar-toggler pull-right menu-mobile" (click)="isCollapsed = !isCollapsed"
                  [ngClass]="isCollapsed ? 'open' : '' ">
@@ -11,22 +14,22 @@
           </div>
           <nav class="hidden-xs hidden-xs-down">
             <ul class="nav navbar-nav">
-              <li class="nav-item">
+              <li>
 
                 <a href>Gapminder World</a>
                 <ul class="dropdown-menu diff" role="menu">
                   <li *ngFor="#chart of listCharts">
                     <a class="dropdown-item" href="{{chart.href}}">
-
+                      <img class="frame-img" src="{{chart.img}}">
                       {{chart.name}}
                       <span>{{chart.description}}</span>
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item"><a [routerLink]="['Videos', 'List']">Videos</a></li>
-              <li class="nav-item"><a href>Downloads</a></li>
-              <li class="nav-item"><a href>Teach</a></li>
+              <li><a [routerLink]="['Videos', 'List']">Videos</a></li>
+              <li><a href>Downloads</a></li>
+              <li><a href>Teach</a></li>
               <li class="nav-item dropdown">
                 <a href>Facts</a>
                 <ul class="dropdown-menu fix-width" role="menu">
@@ -39,56 +42,52 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item"><a href>News</a></li>
-              <li class="nav-item"><a [routerLink]="['About']">About</a></li>
-              <li class="nav-item"><a href>Contact</a></li>
+              <li><a href>News</a></li>
+              <li><a [routerLink]="['About']">About</a></li>
+              <li><a href>Contact</a></li>
             </ul>
           </nav>
           <nav class="visible-xs hidden-md-up">
             <ul class="nav nav-pills nav-stacked scrollable-menu" [collapse]="!isCollapsed"
                 (click)="isCollapsed = !isCollapsed; true">
-              <li class="nav-item">
-
-                <a href>Gapminder World</a>
-                <ul class="dropdown-menu diff" role="menu">
+              <li dropdown>
+                <a href dropdownToggle>Gapminder World</a>
+                <ul class="dropdown-menu mobile" role="menu" aria-labelledby="simple-dropdown">
                   <li *ngFor="#chart of listCharts">
                     <a class="dropdown-item" href="{{chart.href}}">
-
                       {{chart.name}}
-                      <span>{{chart.description}}</span>
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item"><a [routerLink]="['Videos', 'List']">Videos</a></li>
-              <li class="nav-item"><a href>Downloads</a></li>
-              <li class="nav-item"><a href>Teach</a></li>
-              <li class="nav-item dropdown">
-                <a href>Facts</a>
-                <ul class="dropdown-menu fix-width" role="menu">
+              <li><a [routerLink]="['Videos', 'List']">Videos</a></li>
+              <li><a href>Downloads</a></li>
+              <li><a href>Teach</a></li>
+              <li dropdown>
+                <a href dropdownToggle>Facts</a>
+                <ul class="dropdown-menu mobile" role="menu" aria-labelledby="simple-dropdown">
                   <li class="col-md-6 padding-0" *ngFor="#fast of listFacts">
                     <a class="dropdown-item" href="{{fast.href}}">
                       {{fast.name}}
-                      <span>{{fast.description}}</span>
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item"><a href>News</a></li>
-              <li class="nav-item"><a [routerLink]="['About']">About</a></li>
-              <li class="nav-item"><a href>Contact</a></li>
+              <li><a href>News</a></li>
+              <li><a [routerLink]="['About']">About</a></li>
+              <li><a href>Contact</a></li>
             </ul>
           </nav>
 
         </div>
-        <form class="search-form">
+        <!--TODO: separated component-->
+        <form class="search-form hidden-xs">
           <fieldset>
-            <button class="btn-search pull-right" (click)="isCollapsed = !isCollapsed">
-              <img *ngIf="!isCollapsed" src="../assets/img/ico-search.png">
-              <!--<img *ngIf="!isCollapsed" src="../assets/img/ico-search.svg">-->
-              <span *ngIf="isCollapsed">Cancel</span>
+            <button class="btn-search pull-right" (click)="collapsed = !collapsed">
+              <img *ngIf="!collapsed" src="../assets/img/ico-search.png">
+              <span *ngIf="collapsed">Cancel</span>
             </button>
-            <div [collapse]="!isCollapsed" class="wrap-input col-md-11">
+            <div [collapse]="!collapsed" class="wrap-input col-md-11">
               <input type="search" class="text" placeholder="Enter keywords ...">
               <button type="submit" class="submit">
                 <img src="../assets/img/ico-array-right.svg">
