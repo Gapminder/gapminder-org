@@ -1,18 +1,37 @@
-<h1>Videos</h1>
+<section class="margin-top-35">
+  <div class="col-md-9 margin-bottom-35">
+    <h2 class="post-head margin-top-0">Our Latest Videos</h2>
 
-<div class="entry-content">
-  <div class="video-box"
-       *ngFor="#video of videos | async">
-    <a [routerLink]="['Details', {slug: video.fields.slug}]">
-      <img [contentful-src-id]="video.fields.thumbnail.sys.id">
-    </a>
-    <div class="name">
-      <a [routerLink]="['Details', {slug: video.fields.slug}]">
-        {{ video.fields.title }}
-      </a>
+    <div class="videos-list">
+      <div class="row">
+        <div *ngFor="#video of videos | async" class="video-item col-md-6">
+          <a [routerLink]="['Details', {slug: video.fields.slug}]" class="video-wrap-img">
+            <span class="play"><i class="fa fa-play"></i></span>
+            <img [contentful-src-id]="video.fields.thumbnail.sys.id"
+                 alt="{{video.fields.title}}">
+          </a>
+          <!--<div class="date-info">{{toDate(video.fields.createdAt) | date}}</div>-->
+          <a [routerLink]="['Details', {slug: video.fields.slug}]" class="post-title">
+            {{video.fields.title}}
+          </a>
+          <p class="post-p">{{video.fields.description}}</p>
+        </div>
+      </div>
     </div>
-    <div class="desc">
-      {{ video.fields.description }}
+
+  </div>
+
+  <!--TODO-->
+  <div class="col-md-3">
+    <div id="primary" class="sidebar aside">
+      <div class="col-md-12">
+        <div class="row">
+          <h3 class="title pull-left">TEDTalks</h3>
+          <a href class="link-view-more pull-right">View All »</a>
+        </div>
+      </div>
+      <p>Hans Rosling's TEDTalks have been seen by millions. Tune in and see the talks from 2006 onwards:</p>
     </div>
   </div>
-</div>
+
+</section>

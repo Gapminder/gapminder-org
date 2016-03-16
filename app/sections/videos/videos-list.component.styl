@@ -1,22 +1,32 @@
-.video-box
-  position relative
-  padding-left 27%
-  margin-bottom 15px
-  min-height 130px
-  a
-    position absolute
-    top 0
-    left 0
-    width 25%
-  .desc
-    color #444445
-    font-size 14px
-    line-height 22px
-    font-weight 300
-    margin-top 8px
-    max-height 78px
-  .name a
-    color #58595b
-    font-size 23px
-    margin-bottom 5px
+@import "../../variables.styl"
 
+.video-wrap-img
+  border-radius 3px
+  overflow hidden
+  border 1px solid #dce3ec
+  position relative
+  display block
+  img
+    height 240px
+    width 100%
+  .play
+    width 50px
+    height 50px
+    opacity 0.7
+    border-radius 50%
+    border 1px solid color-dark
+    position absolute
+    top 40%
+    left 43%
+    z-index 2
+    background #f2fafc
+    .fa-play
+      color color-dark
+      font-size 24px
+      top 12px
+      left 17px
+      position absolute
+
+.title
+  font-size 28px
+  margin 0
