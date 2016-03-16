@@ -1,22 +1,24 @@
 import {Component} from 'angular2/core';
-import {NgIf, NgFor} from 'angular2/common';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {Collapse, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
-
+import {Root} from '../../../sections/root/root.component.ts';
 
 const listCharts = [
   {
     name: 'Bubbles Chart',
     href: 'tools/bubbles',
-    description: 'Explore a Wo rld the motion with animated statistics'
+    description: 'Explore a Wo rld the motion with animated statistics',
+    img: '../../assets/img/bubbles.svg'
   }, {
     name: 'Map Chart',
     href: 'tools/map',
-    description: 'Explore a World the motion with animated statistics'
+    description: 'Explore a World the motion with animated statistics',
+    img: '../../assets/img/mapa_icon.svg'
   }, {
     name: 'Mountain Charts',
     href: 'tools/mountain',
-    description: 'Explore a World the motion with animated statistics'
+    description: 'Explore a World the motion with animated statistics',
+    img: '../../assets/img/mountain.svg'
   }
 ];
 
@@ -25,7 +27,7 @@ const listFacts = [
     name: 'Answers',
     href: '',
     description: 'Wath Hans Rosling answer huge fact-questions in less than 90 sec.',
-    img: '../../assets/img/ico_fact_01.svg'
+    img: '../../assets/img/qw.svg'
   }, {
     name: 'Awards',
     href: '',
@@ -47,16 +49,23 @@ const listFacts = [
 @Component({
   selector: 'header',
   template: <string> require('./header.html'),
-  styles: [<string> require('./header.styl')],
-  directives: [
-    NgIf,
-    NgFor,
-    Collapse,
-    DROPDOWN_DIRECTIVES,
-    ROUTER_DIRECTIVES
-  ]
+  styles: [
+    <string> require('./header.styl')
+  ],
+  directives: [Collapse, DROPDOWN_DIRECTIVES, ROUTER_DIRECTIVES]
 })
+
 export class Header {
-  private listCharts:Array<any> = listCharts;
-  private listFacts:Array<any> = listFacts;
+  private listCharts: Array<any> = listCharts;
+  private listFacts: Array<any> = listFacts;
+  private isOnRootView: boolean;
+
+  constructor(router:Router) {
+
+    router.subscribe((url) => {
+      router.recognize(url).then((instruction) => {
+        this.isOnRootView = instruction.component.componentType === Root;
+      });
+    });
+  }
 }
