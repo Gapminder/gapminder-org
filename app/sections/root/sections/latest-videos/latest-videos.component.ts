@@ -1,5 +1,5 @@
-import {Component, Input} from 'angular2/core';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component, Input, OnChanges, OnInit} from 'angular2/core';
+import {RouterLink} from 'angular2/router';
 import {DatePipe, AsyncPipe} from 'angular2/common';
 import {Observable} from 'rxjs/Observable';
 import {ContenfulContent} from '../../../../shared/services/contentful-content.service';
@@ -9,13 +9,12 @@ import {ContentfulNodePage} from '../../../../shared/structures/aliases.structur
   selector: 'latest-videos',
   template: <string> require('./latest-videos.html'),
   styles: [<string> require('./latest-videos.styl')],
-  directives: [ROUTER_DIRECTIVES],
+  directives: [RouterLink],
   pipes: [DatePipe, AsyncPipe]
 })
-export class LatestVideosComponent {
+export class LatestVideosComponent implements OnInit {
   @Input()
   private limit: number = 3;
-
   private videos: Observable<ContentfulNodePage[]>;
 
   constructor(private _contentfulContent: ContenfulContent) {
