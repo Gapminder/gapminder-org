@@ -4,13 +4,14 @@ import {MarkdownPipe} from '../../shared/pipes/markdown.pipe';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {ContenfulContent} from '../../shared/services/contentful-content.service';
 import {NodePageContent} from '../../shared/structures/content-type.structures';
+import {Sidebar} from '../../shared/components/sidebar/sidebar.component.ts';
 
 /**
  *
  */
 @Component({
   template: <string> require('./about.component.html'),
-  directives: [...ROUTER_DIRECTIVES],
+  directives: [...ROUTER_DIRECTIVES, Sidebar],
   styles: [<string> require('./about.component.styl')],
   pipes: [MarkdownPipe]
 })
