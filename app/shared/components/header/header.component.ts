@@ -1,7 +1,8 @@
 import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
+import {RouterLink, Router} from 'angular2/router';
 import {Collapse, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 import {Root} from '../../../sections/root/root.component.ts';
+import {SearchComponent} from '../search/search.component.ts';
 
 const listCharts = [
   {
@@ -52,20 +53,24 @@ const listFacts = [
   styles: [
     <string> require('./header.styl')
   ],
-  directives: [Collapse, DROPDOWN_DIRECTIVES, ROUTER_DIRECTIVES]
+  directives: [Collapse, DROPDOWN_DIRECTIVES, RouterLink, SearchComponent]
 })
 
 export class Header {
   private listCharts: Array<any> = listCharts;
   private listFacts: Array<any> = listFacts;
   private isOnRootView: boolean;
+  private collapsed: boolean = true;
 
   constructor(router:Router) {
-
     router.subscribe((url) => {
       router.recognize(url).then((instruction) => {
         this.isOnRootView = instruction.component.componentType === Root;
       });
     });
+  }
+
+  toggle(collapsed) {
+    this.collapsed = collapsed;
   }
 }
