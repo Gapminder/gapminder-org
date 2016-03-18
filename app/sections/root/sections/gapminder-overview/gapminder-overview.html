@@ -3,31 +3,29 @@
     <div class="logo">
       <img src="../../../../assets/img/logo-yellow.svg">
     </div>
-    <h2 class="head">{{head}}</h2>
+    <h2 class="head">{{carouselConfig.head}}</h2>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <carousel [interval]="myInterval" [noWrap]="noWrapSlides">
-        <slide *ngFor="#slidez of slides; #index=index"
-               [active]="slidez.active">
+      <carousel [interval]="carouselConfig.interval" [noWrap]="carouselConfig.noWrap">
+        <slide *ngFor="#slide of slides | async; #index=index">
           <div class="col-md-7">
             <div class="row">
-              <img class="wrap-img" [src]="slidez.image">
+              <img class="wrap-img" [contentful-src-id]="slide.fields.thumbnail.sys.id">
               <div class="triangle"></div>
             </div>
           </div>
           <div class="col-md-5">
             <div class="block-description">
-              <div class="date-info">{{slidez.date}}</div>
-              <div class="title">{{slidez.title}}</div>
-              <p>{{slidez.description}}</p>
-              <a href class="more-info">{{slidez.more_info}}</a>
+              <div class="date-info">{{slide.fields.createdAt | toDate | date}}</div>
+              <div class="title">{{slide.fields.title}}</div>
+              <p>{{slide.fields.description}}</p>
+              <a href class="more-info">Read more »</a>
             </div>
           </div>
         </slide>
       </carousel>
     </div>
   </div>
-
 </section>

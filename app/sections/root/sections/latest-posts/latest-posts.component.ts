@@ -1,9 +1,8 @@
 import {Component, OnInit, Input} from 'angular2/core';
 import {DatePipe, AsyncPipe} from 'angular2/common';
 import {Observable} from 'rxjs/Observable';
-import {ContentfulCommon} from 'ng2-contentful';
-import {NodePageContent} from '../../../../shared/structures/content-type.structures';
 import {ContenfulContent} from '../../../../shared/services/contentful-content.service';
+import {ContentfulNodePage} from '../../../../shared/structures/aliases.structures';
 
 @Component({
   selector: 'latest-posts',
@@ -15,7 +14,7 @@ export class LatestPostsComponent implements OnInit {
   @Input()
   private limit: number = 3;
 
-  private posts: Observable<ContentfulCommon<NodePageContent>[]>;
+  private posts: Observable<ContentfulNodePage[]>;
 
   constructor(private _contentfulContent: ContenfulContent) {
   }

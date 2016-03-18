@@ -1,6 +1,5 @@
 import {Injectable} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
-import {Observer} from 'rxjs/Observer';
 import {ContentfulConfig} from '../../app.constans';
 import {transformResponse} from '../tools/response.tools';
 import {NodePageContent} from '../structures/content-type.structures';
@@ -41,6 +40,15 @@ export class ContenfulContent {
         value: 'blogpost'
       }), limit
       )
+      .map(response => response.items);
+  }
+
+  getOverviewPages(): Observable<ContentfulNodePage[]> {
+    return this.getRawNodePagesByParams({
+        param: 'fields.showInMainPageSlider',
+        value: '1'
+      })
+      .commit<ContentfulNodePagesResponse>()
       .map(response => response.items);
   }
 
