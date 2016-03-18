@@ -1,0 +1,14 @@
+<form class="search-form hidden-xs">
+  <fieldset>
+    <button class="btn-search pull-right" (click)="toggle()">
+      <img *ngIf="collapsed" src="../assets/img/ico-search.png">
+      <span *ngIf="!collapsed">Cancel</span>
+    </button>
+    <div [hidden]="collapsed" class="wrap-input col-md-11">
+      <input type="search" class="text" placeholder="Enter keywords ...">
+      <button type="submit" class="submit">
+        <img src="../assets/img/ico-array-right.svg">
+      </button>
+    </div>
+  </fieldset>
+</form>

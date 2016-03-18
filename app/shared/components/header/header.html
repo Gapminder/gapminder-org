@@ -2,10 +2,10 @@
   <div class="navbar navbar-fixed-top">
     <div class="container">
       <div class="row">
-        <a [routerLink]="['Root']" class="logo" *ngIf="isOnRootView">
+        <a [routerLink]="['Root']" class="logo" *ngIf="!isOnRootView">
           <img src="../../../assets/img/logo-yellow.svg">
         </a>
-        <div *ngIf="!collapsed">
+        <div *ngIf="collapsed">
           <div class="navbar-header hidden-md-up">
             <div class="navbar-toggle navbar-toggler pull-right menu-mobile" (click)="isCollapsed = !isCollapsed"
                  [ngClass]="isCollapsed ? 'open' : '' ">
@@ -80,21 +80,8 @@
           </nav>
 
         </div>
-        <!--TODO: separated component-->
-        <form class="search-form hidden-xs">
-          <fieldset>
-            <button class="btn-search pull-right" (click)="collapsed = !collapsed">
-              <img *ngIf="!collapsed" src="../assets/img/ico-search.png">
-              <span *ngIf="collapsed">Cancel</span>
-            </button>
-            <div [collapse]="!collapsed" class="wrap-input col-md-11">
-              <input type="search" class="text" placeholder="Enter keywords ...">
-              <button type="submit" class="submit">
-                <img src="../assets/img/ico-array-right.svg">
-              </button>
-            </div>
-          </fieldset>
-        </form>
+
+        <search (toggleSearchMenu)="toggle($event)" ></search>
 
       </div>
     </div>
