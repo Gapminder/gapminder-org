@@ -1,6 +1,10 @@
-import {Component, ViewEncapsulation} from 'angular2/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/common';
+import {Component, ViewEncapsulation, OnInit} from 'angular2/core';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES, AsyncPipe} from 'angular2/common';
 import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
+import {Observable} from 'rxjs/Observable';
+import {ContenfulContent} from '../../../../shared/services/contentful-content.service';
+import {ContentfulNodePage} from '../../../../shared/structures/aliases.structures';
+import {ToDate} from '../../../../shared/pipes/to-date.pipe';
 
 @Component({
   selector: 'gapminder-overview',
@@ -10,28 +14,21 @@ import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
   styles: [
     <string> require('./gapminder-overview.styl')
   ],
+  pipes: [AsyncPipe, ToDate]
 })
 
+export class GapminderOverviewComponent implements OnInit {
+  private slides: Observable<ContentfulNodePage[]>;
+  private carouselConfig = {
+    head: 'A Fact-Based Worldview',
+    interval: 5000,
+    noWrap: false
+  };
 
-export class GapminderOverviewComponent {
+  constructor(private _contentfulContent: ContenfulContent) {
+  }
 
-  private head: string = 'A Fact-Based Worldview';
-  private myInterval: number = 5000;
-  private noWrapSlides: boolean = false;
-  private slides: Array<any> = [
-    {
-      image: 'https://pbs.twimg.com/profile_images/116939798/Hans_Rosling_liten_400x400.jpg',
-      date: 'November 12, 2015',
-      title: 'How not to be ignorant about the World',
-      description: 'Hans Rosling and Ola Rosling demonstrates that you have a high statistical chance of being quite wrong about what you think you know. Learn how to get less ignorant.',
-      more_info: 'Watch the talk »'
-    },
-    {
-      image: 'http://www.gapminder.org/GapminderMedia/wp-uploads/dont_panic_splash3.jpg',
-      date: 'November 12, 2015',
-      title: 'How not to be ignorant about the World',
-      description: 'Hans Rosling and Ola Rosling demonstrates that you have a high statistical chance of being quite wrong about what you think you know. Learn how to get less ignorant.',
-      more_info: 'Watch the talk »'
-    }
-  ];
+  ngOnInit(): any {
+    this.slides = this._contentfulContent.getOverviewPages();
+  }
 }

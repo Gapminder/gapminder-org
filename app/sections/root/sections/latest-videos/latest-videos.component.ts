@@ -2,9 +2,8 @@ import {Component, Input} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {DatePipe, AsyncPipe} from 'angular2/common';
 import {Observable} from 'rxjs/Observable';
-import {ContentfulCommon} from 'ng2-contentful';
-import {NodePageContent} from '../../../../shared/structures/content-type.structures';
 import {ContenfulContent} from '../../../../shared/services/contentful-content.service';
+import {ContentfulNodePage} from '../../../../shared/structures/aliases.structures';
 
 @Component({
   selector: 'latest-videos',
@@ -17,7 +16,7 @@ export class LatestVideosComponent {
   @Input()
   private limit: number = 3;
 
-  private videos: Observable<ContentfulCommon<NodePageContent>[]>;
+  private videos: Observable<ContentfulNodePage[]>;
 
   constructor(private _contentfulContent: ContenfulContent) {
   }
