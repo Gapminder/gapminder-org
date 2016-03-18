@@ -54,12 +54,5 @@ describe('Component: Latest Posts', () => {
     it('should have default limit value equal to 3', () => {
       expect((<any>component).limit).toBe(3);
     });
-
-    it('should be able to convert string to the date object', () => {
-      expect((<any>component).toDate instanceof Function).toBeTruthy();
-      expect((<any>component).toDate('2016-02-29T14:26:46.815Z') instanceof Date).toBeTruthy();
-      expect((<any>component).toDate('')).toBe(undefined);
-      expect((<any>component).toDate(undefined)).toBe(undefined);
-    });
   });
 });

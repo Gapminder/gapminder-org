@@ -7,7 +7,7 @@
           <img [contentful-src-id]="post.fields.thumbnail.sys.id"
                alt="{{post.fields.title}}">
         </div>
-        <div class="date-info">{{ toDate(post.fields.createdAt) | date }}</div>
+        <div class="date-info">{{ post.fields.createdAt | toDate | date }}</div>
         <div class="post-title">{{post.fields.title}}</div>
         <p class="post-p">{{post.fields.description}}</p>
       </div>

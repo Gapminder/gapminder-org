@@ -4,13 +4,14 @@ import {AsyncPipe} from 'angular2/common';
 import {Observable} from 'rxjs/Observable';
 import {ContenfulContent} from '../../../../shared/services/contentful-content.service';
 import {ContentfulNodePage} from '../../../../shared/structures/aliases.structures';
+import {ToDate} from '../../../../shared/pipes/to-date.pipe';
 
 @Component({
   selector: 'latest-videos',
   template: <string> require('./latest-videos.html'),
   styles: [<string> require('./latest-videos.styl')],
   directives: [RouterLink],
-  pipes: [AsyncPipe]
+  pipes: [AsyncPipe, ToDate]
 })
 export class LatestVideosComponent implements OnInit {
   @Input()
@@ -18,12 +19,6 @@ export class LatestVideosComponent implements OnInit {
   private videos: Observable<ContentfulNodePage[]>;
 
   constructor(private _contentfulContent: ContenfulContent) {
-  }
-
-  private toDate(dateAsString): Date {
-    if (!!dateAsString) {
-      return new Date(dateAsString);
-    }
   }
 
   ngOnInit(): any {

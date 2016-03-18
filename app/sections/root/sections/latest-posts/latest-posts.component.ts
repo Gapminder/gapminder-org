@@ -3,12 +3,13 @@ import {AsyncPipe} from 'angular2/common';
 import {Observable} from 'rxjs/Observable';
 import {ContenfulContent} from '../../../../shared/services/contentful-content.service';
 import {ContentfulNodePage} from '../../../../shared/structures/aliases.structures';
+import {ToDate} from '../../../../shared/pipes/to-date.pipe';
 
 @Component({
   selector: 'latest-posts',
   template: <string> require('./latest-posts.html'),
   styles: [<string> require('./latest-posts.styl')],
-  pipes: [AsyncPipe]
+  pipes: [AsyncPipe, ToDate]
 })
 export class LatestPostsComponent implements OnInit {
   @Input()
@@ -16,12 +17,6 @@ export class LatestPostsComponent implements OnInit {
   private posts: Observable<ContentfulNodePage[]>;
 
   constructor(private _contentfulContent: ContenfulContent) {
-  }
-
-  private toDate(dateAsString): Date {
-    if (!!dateAsString) {
-      return new Date(dateAsString);
-    }
   }
 
   ngOnInit(): any {
