@@ -1,6 +1,6 @@
-import {Component, Input, OnChanges, OnInit} from 'angular2/core';
+import {Component, Input, OnInit} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
-import {DatePipe, AsyncPipe} from 'angular2/common';
+import {AsyncPipe} from 'angular2/common';
 import {Observable} from 'rxjs/Observable';
 import {ContenfulContent} from '../../../../shared/services/contentful-content.service';
 import {ContentfulNodePage} from '../../../../shared/structures/aliases.structures';
@@ -10,7 +10,7 @@ import {ContentfulNodePage} from '../../../../shared/structures/aliases.structur
   template: <string> require('./latest-videos.html'),
   styles: [<string> require('./latest-videos.styl')],
   directives: [RouterLink],
-  pipes: [DatePipe, AsyncPipe]
+  pipes: [AsyncPipe]
 })
 export class LatestVideosComponent implements OnInit {
   @Input()
@@ -21,10 +21,9 @@ export class LatestVideosComponent implements OnInit {
   }
 
   private toDate(dateAsString): Date {
-    if (!dateAsString) {
-      return new Date();
+    if (!!dateAsString) {
+      return new Date(dateAsString);
     }
-    return new Date(dateAsString);
   }
 
   ngOnInit(): any {

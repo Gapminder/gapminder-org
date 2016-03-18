@@ -18,16 +18,16 @@ describe('Component: Latest Posts', () => {
       TestComponentBuilder
     ]);
 
-    beforeEach(injectAsync([TestComponentBuilder], tcb => {
+    beforeEach(injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
       return tcb
         .createAsync(LatestPostsComponent)
         .then(f => fixture = f);
     }));
 
     it('should have proper amount of post items', done => {
-      const element = fixture.nativeElement;
       fixture.detectChanges();
-      expect(element.querySelectorAll('post-item').length).toBe(0);
+      const element = fixture.nativeElement;
+      expect(element.querySelectorAll('.post-item').length).toBe(1);
       done();
     });
 
@@ -58,6 +58,8 @@ describe('Component: Latest Posts', () => {
     it('should be able to convert string to the date object', () => {
       expect((<any>component).toDate instanceof Function).toBeTruthy();
       expect((<any>component).toDate('2016-02-29T14:26:46.815Z') instanceof Date).toBeTruthy();
+      expect((<any>component).toDate('')).toBe(undefined);
+      expect((<any>component).toDate(undefined)).toBe(undefined);
     });
   });
 });

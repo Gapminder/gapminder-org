@@ -48,17 +48,24 @@ export const TestContentfulNodePage: ContentfulNodePage = {
 
 };
 
-// TODO move it somewhere else
+// TODO move it somewhere else + refactor
 export class ContenfulContentMock {
+
   getLatestVideo(limit: number): Observable<ContentfulNodePage[]> {
     return new Observable(observer => {
-      observer.next([]);
+      observer.next([TestContentfulNodePage]);
     });
   }
 
   getLatestPosts(limit: number): Observable<ContentfulNodePage[]> {
     return new Observable(observer => {
-      observer.next([]);
+      observer.next([TestContentfulNodePage]);
+    });
+  }
+
+  getOverviewPages(): Observable<ContentfulNodePage[]> {
+    return new Observable(observer => {
+      observer.next([TestContentfulNodePage]);
     });
   }
 }
