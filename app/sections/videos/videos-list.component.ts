@@ -10,7 +10,7 @@ import {ContenfulContent} from '../../shared/services/contentful-content.service
   template: <string> require('./videos-list.component.html'),
   providers: [ContentfulService],
   styles: [<string> require('./videos-list.component.styl')],
-  directives: [ContentfulImageDirective, ...ROUTER_DIRECTIVES],
+  directives: [...ROUTER_DIRECTIVES],
   pipes: [AsyncPipe]
 })
 export class VideosList implements OnInit {

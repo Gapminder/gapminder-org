@@ -7,6 +7,7 @@ export interface NodePageContent {
   description?: string;
   relatedEntries?: NodePageContent[];
   thumbnail: any; // will be changed to sys structure
+  createdAt: string;
 }
 
 export interface VideoContent {
