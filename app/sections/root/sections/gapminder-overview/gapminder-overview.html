@@ -12,7 +12,13 @@
         <slide *ngFor="#slide of slides | async; #index=index">
           <div class="col-md-7">
             <div class="row">
-              <img class="wrap-img" [contentful-src-id]="slide.fields.thumbnail.sys.id">
+              <!-- contenful is not able to rescale and crop image  -->
+              <img class="wrap-img"
+                   [contentful-src-id]="slide.fields.thumbnail.sys.id"
+                   [width]="1000"
+                   [height]="800"
+                   [fit]="'crop'"
+              >
               <div class="triangle"></div>
             </div>
           </div>

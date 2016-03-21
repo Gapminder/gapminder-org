@@ -96,7 +96,7 @@ export class ContenfulContent {
   }
 
   private getLatestItems<T>(request: ContentfulRequest, limit: number
-    , order: string = 'sys.createdAt', include: number = 0): Observable<T> {
+    , order: string = '-sys.createdAt', include: number = 0): Observable<T> {
     return request
       .limit(limit)
       .order(order)

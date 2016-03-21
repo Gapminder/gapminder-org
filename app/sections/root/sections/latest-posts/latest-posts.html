@@ -5,6 +5,9 @@
       <div *ngFor="#post of posts | async" class="post-item col-md-4">
         <div class="post-wrap-img">
           <img [contentful-src-id]="post.fields.thumbnail.sys.id"
+               [width]="300"
+               [height]="240"
+               [fit]="'scale'"
                alt="{{post.fields.title}}">
         </div>
         <div class="date-info">{{ post.fields.createdAt | toDate | date }}</div>
