@@ -5,12 +5,13 @@ import {ContentfulImageDirective} from '../../shared/directives/contentful-image
 import {AsyncPipe} from 'angular2/common';
 import {Observable} from 'rxjs/Observable';
 import {ContenfulContent} from '../../shared/services/contentful-content.service';
+import {Sidebar} from '../../shared/components/sidebar/sidebar.component.ts';
 
 @Component({
   template: <string> require('./videos-list.component.html'),
   providers: [ContentfulService],
   styles: [<string> require('./videos-list.component.styl')],
-  directives: [...ROUTER_DIRECTIVES],
+  directives: [...ROUTER_DIRECTIVES, Sidebar],
   pipes: [AsyncPipe]
 })
 export class VideosList implements OnInit {

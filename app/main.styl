@@ -6,9 +6,12 @@ body
   color #231f20
   margin 0
 
-a, avisited
+a,
+avisited
   color inherit
   text-decoration none
+  &:hover
+    color color-yellow
 
 h1
   font-size 50px
@@ -65,32 +68,6 @@ ul
   &:hover
     text-decoration underline
 
-.content
-  overflow hidden
-  float left
-  width calc(100% - 320px)
-  margin-left 12px
-  margin-right 25px
-  min-height 700px
-
-#container
-  position relative
-  margin 5px auto 5px auto
-  width 100%
-  max-width 990px
-  padding-top 18px
-  padding-bottom 21px
-  clear both
-
-#primary
-  background #ecf4f4
-  width 100%
-  padding 10px 15px
-  box-sizing border-box
-  float right
-  color #6c6d6f
-  position relative
-  top 20px
 
 .text-center
   text-align center
@@ -133,6 +110,7 @@ ul
 .link-view-more
   color color-dark
   font-size 18px
+  display inline-block
   text-decoration underline
 
 /* btn */
@@ -160,6 +138,9 @@ ul
 /* indent */
 .margin-top-0
   margin-top 0
+
+.margin-top-15
+  margin-top 15px
 
 .margin-top-50
   margin-top 50px

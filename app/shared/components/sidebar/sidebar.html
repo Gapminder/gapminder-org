@@ -1,0 +1,44 @@
+<div class="sidebar">
+  <div class="col-md-12">
+    <div class="row">
+      <h3 class="title pull-left">TEDTalks</h3>
+      <a href class="link-view-more pull-right">View All »</a>
+    </div>
+  </div>
+  <p>Hans Rosling's TEDTalks have been seen by millions. Tune in and see the talks from 2006 onwards:</p>
+
+  <ul class="list-proposals">
+    <li *ngFor="#listProposal of listProposals">
+      <a href class="wrap-img">
+        <img src="{{listProposal.img}}">
+      </a>
+      <a href>{{listProposal.title}}</a>
+    </li>
+  </ul>
+
+  <p class="note">TED stands for Technology, Entertainment & Design and has arranged conferences since 1984. Their
+    annual
+    conferences bring together the world's most fascinating thinkers and doers, who are challenged to give the talk of
+    their lives (in 18 minutes).</p>
+  <a class="link-view-more margin-top-15">Terms of Use »</a>
+
+  <hr>
+
+  <h3 class="title">Donate</h3>
+  <p>Help us achieve a fact-based understanding of the world.</p>
+
+  <form>
+    <fieldset>
+      <input type="number" class="text col-md-12" placeholder="Enter an amount in US dollars ...">
+      <label class="margin-top-15">
+        <input type="checkbox">
+        Make this a monthly donation
+      </label>
+      <button class="btn-yellow margin-top-15">Donate Now</button>
+    </fieldset>
+  </form>
+  <p class="note">
+    Swish number:
+    <a href="tel:1233275575">123 327 55 75</a>
+  </p>
+</div>
