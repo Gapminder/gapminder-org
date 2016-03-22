@@ -68,6 +68,18 @@ export class ContenfulContentMock {
       observer.next([TestContentfulNodePage]);
     });
   }
+
+  getAboutPage(slug) {
+    return new Observable(observer => {
+      observer.next({
+        submenuItems: [{
+          slug: 'about-subsection-slug',
+          title: 'subsection title'
+        }],
+        content: TestContentfulNodePage
+      });
+    });
+  }
 }
 
 @Directive({
