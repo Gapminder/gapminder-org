@@ -6,6 +6,9 @@
         <a [routerLink]="['Videos', 'Details', {slug: video.fields.slug}]" class="video-wrap-img">
           <span class="play"><i class="fa fa-play"></i></span>
           <img [contentful-src-id]="video.fields.thumbnail.sys.id"
+               [width]="300"
+               [height]="240"
+               [fit]="'scale'"
                alt="{{video.fields.title}}">
         </a>
         <div class="date-info">{{ video.fields.createdAt | toDate | date }}</div>

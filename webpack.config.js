@@ -10,7 +10,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProduction = (process.env.NODE_ENV || 'development') === 'production';
-const devtool = process.env.NODE_ENV === 'test' ? 'inline-source-map' : 'source-map';
+const devtool = isProduction ? 'cheap-module-eval-source-map' : 'source-map';
 const dest = 'dist';
 const absDest = root(dest);
 const contentfulConfig = JSON.parse(
@@ -101,7 +101,8 @@ const config = {
   },
 
   plugins: [
-    new webpack.optimize.DedupePlugin(),
+    // faster without it and now we don't need this
+    //new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(true),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',

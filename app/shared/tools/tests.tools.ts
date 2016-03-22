@@ -76,6 +76,12 @@ export class ContenfulContentMock {
 export class ContentfulImageDirectiveMock {
   @Input('contentful-src-id')
   contentfulAssetId: string;
+  @Input()
+  private width: string;
+  @Input()
+  private height: string;
+  @Input()
+  private fit: string;
 
   constructor(private element: ElementRef) {
   }
