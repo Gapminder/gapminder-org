@@ -9,6 +9,7 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 import {appInjector} from './shared/tools/app-injector.tool';
 import {ContentfulImageDirective} from './shared/directives/contentful-image.directive';
 import {ContenfulContent} from './shared/services/contentful-content.service';
+import {TwitterService} from './shared/services/twitter.service';
 import {ContentfulService} from 'ng2-contentful';
 
 declare var CONTENTFUL_ACCESS_TOKEN: string;
@@ -26,6 +27,7 @@ bootstrap(AppComponent, [
   ...HTTP_PROVIDERS,
   ContentfulService,
   ContenfulContent,
+  TwitterService,
   provide(LocationStrategy, {
     useClass: HashLocationStrategy
   }),

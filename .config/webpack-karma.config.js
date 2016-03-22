@@ -1,6 +1,7 @@
 'use strict';
 const path = require('path');
 const cwd = process.cwd();
+const webpack = require('webpack');
 
 module.exports = {
   resolve: {
@@ -29,9 +30,18 @@ module.exports = {
     noParse: [
       /rtts_assert\/src\/rtts_assert/,
       /reflect-metadata/,
-      /zone\.js\/dist/
+      /zone\.js\/dist/,
+      /codebird/
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      TWITTER_CONSUMER_KEY: JSON.stringify('consumerKey'),
+      TWITTER_CONSUMER_SECRET: JSON.stringify('consumerSecret'),
+      TWITTER_ACCESS_TOKEN_KEY: JSON.stringify('accessTokenKey'),
+      TWITTER_ACCESS_TOKEN_SECRET: JSON.stringify('accessTokenSecret')
+    })
+  ],
   stats: {
     colors: true,
     reasons: true

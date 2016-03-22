@@ -6,6 +6,7 @@ import {RootRouter} from 'angular2/src/router/router';
 import {SpyLocation} from 'angular2/src/mock/location_mock';
 import {Observable} from 'rxjs/Observable';
 import {ContentfulNodePage} from '../structures/aliases.structures';
+import {TwitterService, Tweet, TwitterUser} from '../services/twitter.service';
 
 
 export function getBaseTestProviders() {
@@ -15,6 +16,9 @@ export function getBaseTestProviders() {
     }),
     provide(ContenfulContent, {
       useClass: ContenfulContentMock
+    }),
+    provide(TwitterService, {
+      useClass: TwitterServiceMock
     }),
     RouteRegistry,
     provide(Location, {useClass: SpyLocation}),
@@ -66,6 +70,52 @@ export class ContenfulContentMock {
   getOverviewPages(): Observable<ContentfulNodePage[]> {
     return new Observable(observer => {
       observer.next([TestContentfulNodePage]);
+    });
+  }
+}
+
+export class TwitterServiceMock {
+  create(): TwitterRequestMock {
+    return new TwitterRequestMock();
+  }
+}
+
+export class TwitterRequestMock {
+
+  author(name: string): TwitterRequestMock {
+    return this;
+  }
+
+  maxId(maxId: string): TwitterRequestMock {
+    return this;
+  }
+
+  sinceId(sinceId: string): TwitterRequestMock {
+    return this;
+  }
+
+  count(count: number): TwitterRequestMock {
+    return this;
+  }
+
+  getTweets(): Observable<Array<Tweet>> {
+    const twitterUser: TwitterUser = {
+      url: '',
+      name: '',
+      profile_image_url: '',
+      followers_count: 0
+    };
+
+    const tweet: Tweet = {
+      id: 0,
+      id_str: '',
+      text: '',
+      created_at: new Date().toISOString(),
+      user: twitterUser
+    };
+
+    return new Observable<Array<Tweet>>(observer => {
+      observer.next([tweet]);
     });
   }
 }
