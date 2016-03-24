@@ -17,6 +17,10 @@ const contentfulConfig = JSON.parse(
   fs.readFileSync('./contentful.json') //eslint-disable-line no-sync
 );
 
+const twitterConfig = JSON.parse(
+  fs.readFileSync('./twitter.json') //eslint-disable-line no-sync
+);
+
 const config = {
   devtool,
   debug: false,
@@ -96,7 +100,8 @@ const config = {
     noParse: [
       /rtts_assert\/src\/rtts_assert/,
       /reflect-metadata/,
-      /zone\.js\/dist/
+      /zone\.js\/dist/,
+      /codebird/
     ]
   },
 
@@ -115,7 +120,11 @@ const config = {
     new HtmlWebpackPlugin({template: 'app/index.html'}),
     new webpack.DefinePlugin({
       CONTENTFUL_ACCESS_TOKEN: JSON.stringify(contentfulConfig.accessToken),
-      CONTENTFUL_SPACE_ID: JSON.stringify(contentfulConfig.spaceId)
+      CONTENTFUL_SPACE_ID: JSON.stringify(contentfulConfig.spaceId),
+      TWITTER_CONSUMER_KEY: JSON.stringify(twitterConfig.consumerKey),
+      TWITTER_CONSUMER_SECRET: JSON.stringify(twitterConfig.consumerSecret),
+      TWITTER_ACCESS_TOKEN_KEY: JSON.stringify(twitterConfig.accessTokenKey),
+      TWITTER_ACCESS_TOKEN_SECRET: JSON.stringify(twitterConfig.accessTokenSecret)
     })
   ]
 };
