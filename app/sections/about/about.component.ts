@@ -32,9 +32,6 @@ export class About implements OnInit {
         response => {
           this.submenuItems = response.submenuItems;
           this.content = response.content;
-        },
-        error => {
-          console.log(error);
         }
       );
     return undefined;
