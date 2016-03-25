@@ -8,10 +8,10 @@ import {ContentfulConfig} from '../../../app.constans';
 @Component({
   selector: 'entries-view',
   template: `
-    <p *ngFor="#entry of entries">
+    <div *ngFor="#entry of entries">
       <video-entry *ngIf="entry.isVideo" [entry]="entry"></video-entry>
       <html-entry *ngIf="entry.isHtml" [entry]="entry"></html-entry>
-    </p>
+    </div>
   `,
   directives: [VideoEntry, HtmlEntry]
 })

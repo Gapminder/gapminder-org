@@ -10,7 +10,7 @@
             <img [contentful-src-id]="video.fields.thumbnail.sys.id"
                  alt="{{video.fields.title}}">
           </a>
-          <!--<div class="date-info">{{toDate(video.fields.createdAt) | date}}</div>-->
+          <div class="date-info">{{video.fields.createdAt | toDate | date}}</div>
           <a [routerLink]="['Details', {slug: video.fields.slug}]" class="post-title">
             {{video.fields.title}}
           </a>

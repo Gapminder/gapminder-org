@@ -4,7 +4,7 @@ import {Input} from 'angular2/core';
   selector: 'video-entry',
   template: `
     <iframe
-      width="560"
+      width="100%"
       height="315"
       src="{{ entry.fields.youtube }}"
       frameborder="0"
