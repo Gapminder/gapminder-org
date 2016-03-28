@@ -7,6 +7,8 @@ import {Videos} from './sections/videos/videos.component';
 import {Downloads} from './sections/downloads/components/downloads.component';
 import {ContentfulConfig} from './app.constans';
 import {About} from './sections/about/about.component';
+import {Blogs} from './sections/blogs/blogs.component';
+
 
 @Component({
   selector: 'gapminder-app',
@@ -51,9 +53,9 @@ import {About} from './sections/about/about.component';
     }
   },
   {
-    path: '/blog/', component: About, name: 'Blog',
+    path: '/blog/...', component: Blogs, name: 'Blogs',
     data: {
-      contentfulSlug: ContentfulConfig.CONTENTFUL_ABOUT_SLUG
+      contentfulSlug: ContentfulConfig.BLOGS_TYPE_NAME
     }
   },
   {
@@ -96,4 +98,5 @@ import {About} from './sections/about/about.component';
 ])
 export class AppComponent {
   type: string = 'app component';
+
 }

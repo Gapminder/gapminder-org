@@ -1,4 +1,5 @@
 import {Component, OnInit, Input} from 'angular2/core';
+import {RouterLink} from 'angular2/router';
 import {AsyncPipe} from 'angular2/common';
 import {Observable} from 'rxjs/Observable';
 import {ContenfulContent} from '../../../../shared/services/contentful-content.service';
@@ -9,6 +10,7 @@ import {ToDate} from '../../../../shared/pipes/to-date.pipe';
   selector: 'latest-posts',
   template: <string> require('./latest-posts.html'),
   styles: [<string> require('./latest-posts.styl')],
+  directives: [RouterLink],
   pipes: [AsyncPipe, ToDate]
 })
 export class LatestPostsComponent implements OnInit {
