@@ -3,20 +3,18 @@
   <section class="posts-list">
     <div class="row">
       <div *ngFor="#post of posts | async" class="post-item col-md-4">
-        <div class="post-wrap-img">
+        <a [routerLink]="['Blogs', 'Details', {slug: post.fields.slug}]" class="post-wrap-img">
           <img [contentful-src-id]="post.fields.thumbnail.sys.id"
-               [width]="300"
-               [height]="240"
                [fit]="'scale'"
                alt="{{post.fields.title}}">
-        </div>
+        </a>
         <div class="date-info">{{ post.fields.createdAt | toDate | date }}</div>
-        <div class="post-title">{{post.fields.title}}</div>
+        <a [routerLink]="['Blogs', 'Details', {slug: post.fields.slug}]" class="post-title">{{post.fields.title}}</a>
         <p class="post-p">{{post.fields.description}}</p>
       </div>
     </div>
   </section>
   <div class="row text-center">
-    <button class="btn-yellow margin-top-50s">View All Posts &#187;</button>
+    <button class="btn-yellow margin-top-50s" [routerLink]="['Blogs', 'List']">View All Posts &#187;</button>
   </div>
 </section>

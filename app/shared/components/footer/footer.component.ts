@@ -14,7 +14,8 @@ const menuFooter = [
     slug: 'Contact'
   }, {
     name: 'Blog',
-    slug: 'Blog'
+    slug: 'Blogs',
+    properties: 'List'
   }, {
     name: 'Donate',
     slug: 'Donate'
