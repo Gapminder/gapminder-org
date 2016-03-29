@@ -1,7 +1,7 @@
 @import "../../../../variables.styl"
 
 .head
-  font-size 28px;
+  font-size 28px
   color color-dark
 
 .triangle
@@ -34,6 +34,7 @@
     font-size 34px
     line-height 38px
     margin 25px 0
+    display block
 
   .more-info
     font-family 'Bariol Bold'
@@ -46,6 +47,31 @@
 .carousel-inner
   background color-blue
   height 440px
+  .item
+    &.carousel-item
+      opacity 0
+      -webkit-animation opacity 0.5s
+      animation opacity 0.5s
+    &.active
+      opacity 1
+
+@-webkit-keyframes opacity
+  0%
+    opacity 0
+  10%
+    opacity 0.1
+  40%
+    opacity 0.4
+  50%
+    opacity 0.5
+  70%
+    opacity 0.7
+  90%
+    opacity 0.9
+  100%
+    opacity 1
+
+
 
 .carousel-control
   width 30px
@@ -69,13 +95,13 @@
 
   .glyphicon-chevron-left,
   .glyphicon-chevron-right
-    display: inline-block;
-    font: normal normal normal 14px / 1 FontAwesome;
-    font-size: 40px;
+    display inline-block
+    font normal normal normal 14px / 1 FontAwesome
+    font-size 40px
     color color-grey
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    text-rendering auto
+    -webkit-font-smoothing antialiased
+    -moz-osx-font-smoothing grayscale
 
   .glyphicon-chevron-left
 

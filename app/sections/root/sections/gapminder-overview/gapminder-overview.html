@@ -17,17 +17,17 @@
                    [contentful-src-id]="slide.fields.thumbnail.sys.id"
                    [width]="1000"
                    [height]="800"
-                   [fit]="'crop'"
-              >
+                   [fit]="'crop'">
               <div class="triangle"></div>
             </div>
           </div>
           <div class="col-md-5">
             <div class="block-description">
               <div class="date-info">{{slide.fields.createdAt | toDate | date}}</div>
-              <div class="title">{{slide.fields.title}}</div>
+              <a [routerLink]="['Videos', 'Details', {slug: slide.fields.slug}]" class="title">{{slide.fields.title}}</a>
               <p>{{slide.fields.description}}</p>
-              <a href class="more-info">Read more »</a>
+              <!--TODO: remove 'Videos' -> do dynamic-->
+              <a [routerLink]="['Videos', 'Details', {slug: slide.fields.slug}]" class="more-info">Read more »</a>
             </div>
           </div>
         </slide>

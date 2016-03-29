@@ -5,12 +5,13 @@ import {Observable} from 'rxjs/Observable';
 import {ContenfulContent} from '../../../../shared/services/contentful-content.service';
 import {ContentfulNodePage} from '../../../../shared/structures/aliases.structures';
 import {ToDate} from '../../../../shared/pipes/to-date.pipe';
+import {RouterLink} from 'angular2/router';
 
 @Component({
   selector: 'gapminder-overview',
   encapsulation: ViewEncapsulation.None,
   template: <string> require('./gapminder-overview.html'),
-  directives: [CAROUSEL_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES],
+  directives: [CAROUSEL_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, RouterLink],
   styles: [
     <string> require('./gapminder-overview.styl')
   ],
