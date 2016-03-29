@@ -35,7 +35,7 @@ script:
 # run protractor tests
 #- npm run e2e
 # submit coverage report to coveralls
-- cat ./coverage/report-lcov/lcov.info | ./node_modules/.bin/coveralls --verbose
+#- cat ./coverage/report-lcov/lcov.info | ./node_modules/.bin/coveralls --verbose
 # run karma tests at browser stack
 #- npm run karma-sauce
 # run karma tests at sauce labs
@@ -44,13 +44,13 @@ script:
 after_success:
   - npm run deploy:$TRAVIS_BRANCH -- --token "$FIREBASE_TOKEN"
 
-addons:
-  # sauce labs tunel connector (read more https://docs.travis-ci.com/user/sauce-connect/ )
-  sauce_connect: true
-  firefox: "42.0"
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    # required by node-gyp to build some packages
-    packages:
-    - g++-4.8
+#addons:
+#  # sauce labs tunel connector (read more https://docs.travis-ci.com/user/sauce-connect/ )
+#  sauce_connect: true
+#  firefox: "42.0"
+#  apt:
+#    sources:
+#    - ubuntu-toolchain-r-test
+#    # required by node-gyp to build some packages
+#    packages:
+#    - g++-4.8

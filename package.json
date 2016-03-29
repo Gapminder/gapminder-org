@@ -44,6 +44,7 @@
     "lodash": "4.6.1"
   },
   "devDependencies": {
+    "codecov": "1.0.1",
     "compression-webpack-plugin": "0.2.0",
     "concurrently": "2.0.0",
     "conventional-changelog-cli": "1.1.1",
