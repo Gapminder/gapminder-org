@@ -14,74 +14,26 @@
           </div>
           <nav class="hidden-xs hidden-xs-down">
             <ul class="nav navbar-nav">
-              <li>
-
-                <a href>Gapminder World</a>
-                <ul class="dropdown-menu diff" role="menu">
-                  <li *ngFor="#chart of listCharts">
+              <li *ngFor="#child of structure.children">
+                <a [routerLink]="['DynamicContent', {contentType: child.fields.type}]">{{ child.fields.name }}</a>
+                <ul class="dropdown-menu diff"
+                    role="menu"
+                    *ngIf="child.fields.children">
+                  <!-- TODO -->
+                  <li *ngFor="#item of child.fields.children">
                     <a class="dropdown-item" href="{{chart.href}}">
                       <img class="frame-img" src="{{chart.img}}">
-                      {{chart.name}}
-                      <span>{{chart.description}}</span>
+                      {{item.name}}
+                      <span>{{item.description}}</span>
                     </a>
                   </li>
                 </ul>
               </li>
-              <li><a [routerLink]="['Videos', 'List']">Videos</a></li>
-              <li><a href>Downloads</a></li>
-              <li><a href>Teach</a></li>
-              <li class="nav-item dropdown">
-                <a href>Facts</a>
-                <ul class="dropdown-menu fix-width" role="menu">
-                  <li class="col-md-6 padding-0" *ngFor="#fast of listFacts">
-                    <a class="dropdown-item" href="{{fast.href}}">
-                      <img class="frame-img" src="{{fast.img}}">
-                      {{fast.name}}
-                      <span>{{fast.description}}</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li><a href>News</a></li>
-              <li><a [routerLink]="['About']">About</a></li>
-              <li><a href>Contact</a></li>
             </ul>
           </nav>
-          <nav class="visible-xs hidden-md-up">
-            <ul class="nav nav-pills nav-stacked scrollable-menu" [collapse]="!isCollapsed"
-                (click)="isCollapsed = !isCollapsed; true">
-              <li dropdown>
-                <a href dropdownToggle>Gapminder World</a>
-                <ul class="dropdown-menu mobile" role="menu" aria-labelledby="simple-dropdown">
-                  <li *ngFor="#chart of listCharts">
-                    <a class="dropdown-item" href="{{chart.href}}">
-                      {{chart.name}}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li><a [routerLink]="['Videos', 'List']">Videos</a></li>
-              <li><a href>Downloads</a></li>
-              <li><a href>Teach</a></li>
-              <li dropdown>
-                <a href dropdownToggle>Facts</a>
-                <ul class="dropdown-menu mobile" role="menu" aria-labelledby="simple-dropdown">
-                  <li class="col-md-6 padding-0" *ngFor="#fast of listFacts">
-                    <a class="dropdown-item" href="{{fast.href}}">
-                      {{fast.name}}
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li><a href>News</a></li>
-              <li><a [routerLink]="['About']">About</a></li>
-              <li><a href>Contact</a></li>
-            </ul>
-          </nav>
-
         </div>
 
-        <search (toggleSearchMenu)="toggle($event)" ></search>
+        <search (toggleSearchMenu)="toggle($event)"></search>
 
       </div>
     </div>

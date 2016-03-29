@@ -1,7 +1,6 @@
 import {Component, OnInit, Injector} from 'angular2/core';
 import {RouteData, ROUTER_DIRECTIVES} from 'angular2/router';
 import {ContentfulService} from 'ng2-contentful';
-import {ContentfulImageDirective} from '../../shared/directives/contentful-image.directive';
 import {AsyncPipe} from 'angular2/common';
 import {Observable} from 'rxjs/Observable';
 import {ContenfulContent} from '../../shared/services/contentful-content.service';

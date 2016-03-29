@@ -1,5 +1,6 @@
 
 
+import {ContentfulCommon} from 'ng2-contentful/ng-contentful-types';
 export interface NodePageContent {
   title: string;
   type: string;
@@ -24,4 +25,11 @@ export interface HtmlContent {
 
 export interface ImageContent {
   title: string;
+}
+
+export interface PageStructureContent {
+  active: boolean;
+  name: string;
+  type: string;
+  children: Array<ContentfulCommon<PageStructureContent>>;
 }
