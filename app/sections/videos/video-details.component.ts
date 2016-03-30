@@ -5,11 +5,12 @@ import {ContenfulContent} from '../../shared/services/contentful-content.service
 import {NodePageContent} from '../../shared/structures/content-type.structures';
 import {Sidebar} from '../../shared/components/sidebar/sidebar.component.ts';
 import {ToDate} from '../../shared/pipes/to-date.pipe';
+import {LineSocial} from '../../shared/components/line-social/line-social.component';
 
 @Component({
   template: <string> require('./video-details.component.html'),
   styles: [ <string> require('./video-details.component.styl')],
-  directives: [EntriesView, Sidebar],
+  directives: [EntriesView, Sidebar, LineSocial],
   pipes: [ToDate]
 })
 export class VideoDetails implements OnInit {
