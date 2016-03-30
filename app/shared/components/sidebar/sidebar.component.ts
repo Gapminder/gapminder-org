@@ -1,5 +1,7 @@
 import {Component} from 'angular2/core';
+import {DonateSection} from './donate/donate.component';
 
+// TODO: remove static
 const listProposals = [
   {
     img: 'http://www.gapminder.org/GapminderMedia/wp-uploads/ted2006.jpg',
@@ -28,7 +30,8 @@ const listProposals = [
   template: <string> require('./sidebar.html'),
   styles: [
     <string> require('./sidebar.styl')
-  ]
+  ],
+  directives: [DonateSection]
 })
 
 export class Sidebar {
