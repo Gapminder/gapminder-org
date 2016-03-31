@@ -2,7 +2,7 @@
   <h2 class="post-head">Latest Blog Posts</h2>
   <section class="posts-list">
     <div class="row">
-      <div *ngFor="#post of posts | async" class="post-item col-md-4">
+      <div *ngFor="#post of posts | async" class="blog-item col-md-4 col-xs-12 col-sm-6">
         <a href="" class="post-wrap-img">
           <img [contentful-src-id]="post.fields.thumbnail.sys.id"
                [fit]="'scale'"

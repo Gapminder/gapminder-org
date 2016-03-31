@@ -27,7 +27,7 @@ describe('Component: Latest Posts', () => {
     it('should have proper amount of post items', done => {
       fixture.detectChanges();
       const element = fixture.nativeElement;
-      expect(element.querySelectorAll('.post-item').length).toBe(1);
+      expect(element.querySelectorAll('.blog-item').length).toBe(1);
       done();
     });
 

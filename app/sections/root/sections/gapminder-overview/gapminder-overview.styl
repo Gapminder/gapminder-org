@@ -14,13 +14,20 @@
   right 0
   top 90px
   z-index 1
+  @media small
+    display none
 
 .wrap-img
   width 100%
+  @media small
+    max-height 250px
 
 .block-description
   text-align left
   padding 80px 15px
+  @media mediumSmall
+    padding 15px
+
 
   p
     margin 0
@@ -35,6 +42,8 @@
     line-height 38px
     margin 25px 0
     display block
+    @media mediumSmall
+      margin 10px 0
 
   .more-info
     font-family 'Bariol Bold'
@@ -47,6 +56,12 @@
 .carousel-inner
   background color-blue
   height 440px
+  @media medium
+    height 270px
+  @media small
+    height auto
+
+
   .item
     &.carousel-item
       opacity 0
@@ -79,6 +94,8 @@
   opacity 1
   text-shadow none
   cursor pointer
+  @media small
+    display none
 
   &:focus,
   &:hover
