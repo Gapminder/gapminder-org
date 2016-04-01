@@ -21,10 +21,13 @@
                     *ngIf="child.fields.children">
                   <!-- TODO -->
                   <li *ngFor="#item of child.fields.children">
-                    <a class="dropdown-item" href="{{chart.href}}">
-                      <img class="frame-img" src="{{chart.img}}">
-                      {{item.name}}
-                      <span>{{item.description}}</span>
+                    <a class="dropdown-item" href>
+                      <img
+                        *ngIf="item.fields.thumbnail.sys.id"
+                        [contentful-src-id]="item.fields.thumbnail.sys.id"
+                        class="frame-img">
+                      {{item.fields.name}}
+                      <span>{{item.fields.description}}</span>
                     </a>
                   </li>
                 </ul>

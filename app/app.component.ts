@@ -3,7 +3,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {Header} from './shared/components/header/header.component';
 import {Footer} from './shared/components/footer/footer.component';
 import {Root} from './sections/root/root.component';
-import {DynamicContent} from './shared/components/dynamic-content/dynamic-content.component.ts';
+import {DynamicContent} from './shared/components/dynamic-content/dynamic-content.component';
 import {DynamicComponentDetails} from './shared/components/dynamic-content/dynamic-content-details.component';
 
 

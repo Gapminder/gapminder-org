@@ -1,13 +1,17 @@
-import {Component} from 'angular2/core';
-import {CanActivate, ComponentInstruction, Router, OnActivate, RouterLink} from 'angular2/router';
+import {Component, ViewEncapsulation} from 'angular2/core';
+import {CanActivate, ComponentInstruction, OnActivate, RouterLink} from 'angular2/router';
 import {Observable} from 'rxjs/Observable';
 import {ContenfulContent} from '../../services/contentful-content.service';
 import {ToDate} from '../../pipes/to-date.pipe';
-import {checkContentType} from './tools';
+import {checkContentType, DynamicContentRouteParams} from './tools';
 
 @Component({
   template: <string> require('./dynamic-content.component.html'),
   directives: [RouterLink],
+  styles: [
+    <string> require('./dynamic-content.component.styl')
+  ],
+  encapsulation: ViewEncapsulation.None,
   pipes: [ToDate]
 })
 @CanActivate(checkContentType)
@@ -18,13 +22,10 @@ export class DynamicContent implements OnActivate {
   constructor(private _contentfulContent: ContenfulContent) {
   }
 
-  routerOnActivate(next: ComponentInstruction, prev: ComponentInstruction): any {
-    /* tslint:disable:no-string-literal */
-    this.contentType = next.params['contentType'];
-    /* tslint:enable:no-string-literal */
+  routerOnActivate(next: ComponentInstruction, prev: ComponentInstruction): void {
+    this.contentType = (<DynamicContentRouteParams>next.params).contentType;
     this.items = this._contentfulContent.getNodePagesByType(
       this.contentType
     );
-    return undefined;
   }
 }

@@ -10,7 +10,7 @@ export class PageStructure {
   private _structure: PageStructureContent;
   private _flat_structure: Array<PageStructureContent> = [];
 
-  buildFromContentful(structure: PageStructureContent) {
+  buildFromContentful(structure: PageStructureContent): void {
     this._structure = structure;
     this._flat_structure = this.createFlattenStructure(this._structure);
   }
@@ -19,12 +19,12 @@ export class PageStructure {
     return this._structure;
   }
 
-  hasSectionType(type: string) {
-    return this._flat_structure.find(item => item.type === type);
+  hasSectionType(type: string): boolean {
+    return this._flat_structure.find(item => item.type === type) !== undefined;
   }
 
-  private createFlattenStructure(item: PageStructureContent) {
-    let flatStructure: Array<any> = [];
+  private createFlattenStructure(item: PageStructureContent): Array<PageStructureContent> {
+    let flatStructure: Array<PageStructureContent> = [];
     if (item.children && item.children.length) {
       for (let child of item.children) {
         flatStructure = flatStructure.concat(this.createFlattenStructure(child.fields));

@@ -32,6 +32,7 @@ function main(structure: PageStructure) {
     ContentfulService,
     ContenfulContent,
     TwitterService,
+    // use provided PageStructure instance through factory
     provide(PageStructure, {
       useFactory: () => structure
     }),
@@ -43,12 +44,17 @@ function main(structure: PageStructure) {
     })
   ]).then(
     (appRef: ComponentRef) => {
+      // workaround to get usable injector
+      // probably it'l be removed in stable version
       appInjector(appRef.injector);
     }
   );
 }
 
-
+/*
+To build the page with the dynamic structure we need to fetch all
+node tree before we'll bootstrap our application.
+ */
 let injector: Injector = Injector.resolveAndCreate([
   ContentfulService, PageStructure, ...HTTP_PROVIDERS
 ]);
@@ -57,13 +63,14 @@ let structure: PageStructure = injector.get(PageStructure);
 contentfulService
   .create()
   // trick to fetch includes sub-nodes
+  // TODO move it to the ContentfulCOntent service
   .searchEntries('pageTree', {
     param: 'sys.id',
     value: '3f1HYiL4oMSkcOeoWAc4wM'
   })
   .include(3)
   .commit<any>()
-  .map(response => transformResponse<ContentfulPageStructure>(response)[0])
+  .map(response => transformResponse<ContentfulPageStructure>(response, 2)[0])
   .subscribe(
     response => {
       structure.buildFromContentful(response.fields);

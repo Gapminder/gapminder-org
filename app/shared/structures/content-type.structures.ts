@@ -32,4 +32,5 @@ export interface PageStructureContent {
   name: string;
   type: string;
   children: Array<ContentfulCommon<PageStructureContent>>;
+  customCss: string;
 }
