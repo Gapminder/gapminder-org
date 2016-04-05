@@ -3,11 +3,11 @@ import {appInjector} from '../../tools/app-injector.tool';
 import {PageStructure} from '../../services/page-structure.service';
 
 export interface DynamicContentRouteParams {
-  contentType: string;
+  contentType?: string;
 }
 
 export interface DynamicContentDetailRouteParams {
-  contentSlug: string;
+  contentSlug?: string;
 }
 
 export function checkContentType(next: ComponentInstruction) {
