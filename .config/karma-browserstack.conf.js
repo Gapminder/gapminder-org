@@ -1,8 +1,8 @@
 'use strict';
 const webpackConfig = require('./webpack-karma.config');
 
-module.exports = function (config) {
-  var customLaunchers = {
+module.exports = config => {
+  const customLaunchers = {
     'BS_CHROME': {
       base: 'BrowserStack',
       browser: 'chrome',
@@ -161,7 +161,7 @@ module.exports = function (config) {
 
     browserStack: {
     },
-    customLaunchers: customLaunchers,
+    customLaunchers,
     browsers: Object.keys(customLaunchers),
     reporters: ['spec'],
     singleRun: true
