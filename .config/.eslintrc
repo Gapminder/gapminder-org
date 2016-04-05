@@ -4,6 +4,7 @@
     "jasmine":true
   },
   "rules": {
+    "no-warning-comments": "off",
     "quote-props": 0,
     "key-spacing": 0,
     "object-curly-spacing": 0,

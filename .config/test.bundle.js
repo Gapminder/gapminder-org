@@ -1,3 +1,4 @@
+'use strict';
 // @AngularClass
 /*
  * When testing with webpack and ES6, we have to do some extra
@@ -12,13 +13,15 @@ Error.stackTraceLimit = Infinity;
 
 require('core-js');
 
-require('zone.js/dist/zone-microtask.js');
+require('zone.js/dist/zone.js');
 require('zone.js/dist/long-stack-trace-zone.js');
 require('zone.js/dist/jasmine-patch.js');
 
-
+/*eslint-disable vars-on-top, no-var */
 var testing = require('angular2/testing');
 var browser = require('angular2/platform/testing/browser');
+
+/*eslint-enable vars-on-top, no-var */
 
 testing.setBaseTestProviders(
   browser.TEST_BROWSER_PLATFORM_PROVIDERS,
@@ -26,16 +29,19 @@ testing.setBaseTestProviders(
 
 Object.assign(global, testing);
 
+/*eslint-disable prefer-arrow-callback, func-names */
 // fix for PhantomJS Intl
 if (!global.Intl) {
   require.ensure([
     'intl',
     'intl/locale-data/jsonp/en.js'
-  ], function(require) {
+  ], function (require) {
     require('intl');
     require('intl/locale-data/jsonp/en.js');
   });
 }
+
+/*eslint-enable prefer-arrow-callback, func-names */
 
 /*
  Ok, this is kinda crazy. We can use the the context method on
@@ -46,7 +52,11 @@ if (!global.Intl) {
  any file that ends with spec.js and get its path. By passing in true
  we say do this recursively
  */
+
+/*eslint-disable vars-on-top, no-var */
 var testContext = require.context('../app', true, /\.spec\.ts/);
+
+/*eslint-enable vars-on-top, no-var */
 
 // get all the files, for each file, call the context function
 // that will require the file and load it up here. Context will
@@ -55,6 +65,6 @@ function requireAll(requireContext) {
   return requireContext.keys().map(requireContext);
 }
 
-var modules = requireAll(testContext);
+requireAll(testContext);
 // requires and returns all modules that match
 

@@ -50,6 +50,6 @@ module.exports = {
   debug: false
 };
 
-function root(p) {
-  return path.join(__dirname, p);
+function root(location) {
+  return path.join(__dirname, location);
 }
