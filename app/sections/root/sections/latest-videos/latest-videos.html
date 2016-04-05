@@ -2,7 +2,7 @@
   <h2 class="post-head">Latest Videos</h2>
   <section class="videos-list">
     <div class="row">
-      <div *ngFor="#video of videos | async" class="video-item col-md-4">
+      <div *ngFor="#video of videos | async" class="video-item col-md-4  col-xs-12 col-sm-6">
         <a href class="video-wrap-img">
           <span class="play"><i class="fa fa-play"></i></span>
           <img [contentful-src-id]="video.fields.thumbnail.sys.id"
