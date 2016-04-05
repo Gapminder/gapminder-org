@@ -4,12 +4,6 @@
   </h1>
 
   <div id="about-help-nav">
-    <a *ngFor="#menuItem of submenuItems"
-       [routerLink]="['AboutSubsection', {slug: menuItem.slug }]">
-      <span>
-        {{ menuItem.title }}
-      </span>
-    </a>
   </div>
 
   <div class="entry-content entry">
