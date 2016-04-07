@@ -12,8 +12,6 @@ import {ContenfulContent} from './shared/services/contentful-content.service';
 import {TwitterService} from './shared/services/twitter.service';
 import {ContentfulService} from 'ng2-contentful';
 import {PageStructure} from './shared/services/page-structure.service';
-import {transformResponse} from './shared/tools/response.tools';
-import {ContentfulPageStructure} from './shared/structures/aliases.structures';
 
 declare var CONTENTFUL_ACCESS_TOKEN: string;
 declare var CONTENTFUL_SPACE_ID: string;
@@ -56,27 +54,9 @@ To build the page with the dynamic structure we need to fetch all
 node tree before we'll bootstrap our application.
  */
 let injector: Injector = Injector.resolveAndCreate([
-  ContentfulService, PageStructure, ...HTTP_PROVIDERS
+  ContenfulContent, ContentfulService, ...HTTP_PROVIDERS
 ]);
-let contentfulService: ContentfulService = injector.get(ContentfulService);
-let structure: PageStructure = injector.get(PageStructure);
-contentfulService
-  .create()
-  // trick to fetch includes sub-nodes
-  // TODO move it to the ContentfulCOntent service
-  .searchEntries('pageTree', {
-    param: 'sys.id',
-    value: '3f1HYiL4oMSkcOeoWAc4wM'
-  })
-  .include(3)
-  .commit<any>()
-  .map(response => transformResponse<ContentfulPageStructure>(response, 2)[0])
-  .subscribe(
-    response => {
-      structure.buildFromContentful(response.fields);
-      main(structure);
-    }
-  );
 
-
+let contentfulContent: ContenfulContent = injector.get(ContenfulContent);
+contentfulContent.getPageTree('3f1HYiL4oMSkcOeoWAc4wM').subscribe(main);
 
