@@ -33,6 +33,12 @@
       <div class="row">
 
         <ul class="menu-footer">
+            <li *ngFor="#child of children | async">
+              <a [routerLink]="['DynamicContent', {contentType: child.fields.type}]">
+                {{ child.fields.name }}
+              </a>
+            </li>
+
           <!--<li *ngFor="#item of menuFooter">-->
             <!--<a *ngIf="!item.properties" class="dropdown-item" [routerLink]="[item.slug]">{{item.name}}</a>-->
             <!--<a *ngIf="item.properties" class="dropdown-item" [routerLink]="[item.slug, item.properties]">{{item.name}}</a>-->

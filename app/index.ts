@@ -12,6 +12,7 @@ import {ContenfulContent} from './shared/services/contentful-content.service';
 import {TwitterService} from './shared/services/twitter.service';
 import {ContentfulService} from 'ng2-contentful';
 import {PageStructure} from './shared/services/page-structure.service';
+import {ContentfulConfig} from './app.constans';
 
 declare var CONTENTFUL_ACCESS_TOKEN: string;
 declare var CONTENTFUL_SPACE_ID: string;
@@ -58,5 +59,5 @@ let injector: Injector = Injector.resolveAndCreate([
 ]);
 
 let contentfulContent: ContenfulContent = injector.get(ContenfulContent);
-contentfulContent.getPageTree('3f1HYiL4oMSkcOeoWAc4wM').subscribe(main);
+contentfulContent.getPageTree(ContentfulConfig.CONTENTFUL_PAGE_TREE_ROOT_ID).subscribe(main);
 

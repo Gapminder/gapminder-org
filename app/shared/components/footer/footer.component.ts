@@ -1,57 +1,32 @@
-import {Component} from 'angular2/core';
-import {NgFor} from 'angular2/common';
-import {ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component, OnInit} from 'angular2/core';
+import {RouterLink} from 'angular2/router';
 
-import {Collapse, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
-
-
-const menuFooter = [
-  {
-    name: 'About',
-    slug: 'About'
-  }, {
-    name: 'Contact',
-    slug: 'Contact'
-  }, {
-    name: 'Blog',
-    slug: 'Blogs',
-    properties: 'List'
-  }, {
-    name: 'Donate',
-    slug: 'Donate'
-  }, {
-    name: 'Terms',
-    slug: 'Terms'
-  }, {
-    name: 'Media',
-    slug: 'Media'
-  }, {
-    name: 'Help',
-    slug: 'Help'
-  }, {
-    name: 'Labs',
-    slug: 'Labs'
-  }, {
-    name: 'Report problem',
-    slug: 'Report'
-  }
-];
+import {Observable} from 'rxjs/Observable';
+import {ContenfulContent} from '../../services/contentful-content.service';
+import {AsyncPipe} from "angular2/common";
+import {ContentfulConfig} from "../../../app.constans";
+import {ContentfulPageStructure} from "../../structures/aliases.structures";
 
 @Component({
   selector: 'footer',
   template: <string> require('./footer.html'),
-  directives: [
-    NgFor,
-    Collapse,
-    DROPDOWN_DIRECTIVES,
-    ROUTER_DIRECTIVES
-  ],
-  styles: [<string> require('./footer.styl')]
+  directives: [RouterLink],
+  styles: [<string> require('./footer.styl')],
+  pipes: [AsyncPipe]
 
 })
-export class Footer {
-  private menuFooter:Array<any> = menuFooter;
 
-  constructor() {
+export class Footer implements OnInit {
+  private children: Observable<ContentfulPageStructure[]>;
+
+  constructor(private _contentfulContent: ContenfulContent) {
+  }
+
+  ngOnInit(): void {
+
+    this.children = this._contentfulContent
+      .getPageTree(ContentfulConfig.CONTENTFUL_PAGE_TREE_FOOTER_ID)
+      .map(response => response.structure.children);
+
   }
 }
