@@ -4,7 +4,8 @@ import {ContentfulConfig} from '../../app.constans';
 import {transformResponse} from '../tools/response.tools';
 import {NodePageContent} from '../structures/content-type.structures';
 import {ContentfulService, ContentfulRequest, SearchItem} from 'ng2-contentful';
-import {ContentfulNodePagesResponse, ContentfulNodePage} from '../structures/aliases.structures';
+import {ContentfulNodePagesResponse, ContentfulNodePage, ContentfulPageStructure} from '../structures/aliases.structures';
+import {PageStructure} from './page-structure.service';
 
 /**
  * ContentfulContent works as a replacement for the original ng2-contentful library.
@@ -82,6 +83,23 @@ export class ContenfulContent {
     return this.getRawNodePageBySlug(slug)
       .map(response => transformResponse<ContentfulNodePage>(response))
       .map(response => response[0].fields);
+  }
+
+  getPageTree(sysId: string): Observable<PageStructure> {
+    return this.contentful
+      .create()
+      .searchEntries('pageTree', {
+        param: 'sys.id',
+        value: sysId
+      })
+      .include(3)
+      .commit<any>()
+      .map(response => transformResponse<ContentfulPageStructure>(response, 2)[0])
+      .map((response: any) => {
+        const structure = new PageStructure();
+        structure.buildFromContentful(response.fields);
+        return structure;
+      })
   }
 
   private getRawNodePageBySlug(slug: string): Observable<any> {
