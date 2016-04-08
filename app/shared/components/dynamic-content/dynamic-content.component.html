@@ -5,7 +5,7 @@
 
     <div class="dynamic-list">
       <div class="row">
-        <div *ngFor="#item of items | async" class="dynamic-item col-md-6">
+        <div *ngFor="#item of items | async" class="dynamic-item col-md-6 col-sm-6">
           <a [routerLink]="['DynamicContentDetails', {contentType: contentType, contentSlug: item.fields.slug}]"
             class="dynamic-wrap-img">
             <!--<span class="play"><i class="fa fa-play"></i></span>-->
