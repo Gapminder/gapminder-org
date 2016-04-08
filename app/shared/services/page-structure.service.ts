@@ -19,8 +19,8 @@ export class PageStructure {
     return this._structure;
   }
 
-  hasSectionType(type: string): boolean {
-    return this._flat_structure.find(item => item.type === type) !== undefined;
+  getSectionType(type: string): PageStructureContent {
+    return this._flat_structure.find(item => item.type === type);
   }
 
   private createFlattenStructure(item: PageStructureContent): Array<PageStructureContent> {
