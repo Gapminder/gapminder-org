@@ -6,7 +6,7 @@ import {Input} from 'angular2/core';
     <iframe
       width="100%"
       height="315"
-      src="{{ entry.fields.youtube }}"
+      src="{{ entry.fields.youtube || entry.fields.vimeo }}"
       frameborder="0"
       allowfullscreen="">
     </iframe>
