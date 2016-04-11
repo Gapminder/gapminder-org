@@ -23,7 +23,7 @@
                   <li *ngFor="#item of child.fields.children">
                     <a class="dropdown-item" href>
                       <img
-                        *ngIf="item.fields.thumbnail.sys.id"
+                        *ngIf="item.fields.thumbnail"
                         [contentful-src-id]="item.fields.thumbnail.sys.id"
                         class="frame-img">
                       {{item.fields.name}}
