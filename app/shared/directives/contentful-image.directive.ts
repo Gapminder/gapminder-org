@@ -21,7 +21,7 @@ export class ContentfulImageDirective implements OnInit {
               private _contentful: ContentfulService) {
   }
 
-  ngOnInit(): any {
+  ngOnInit(): void {
     this._contentful
       .create()
       .getAsset(this.contentfulAssetId)
@@ -32,7 +32,6 @@ export class ContentfulImageDirective implements OnInit {
             this.imageUrl(response.fields.file.url);
         }
       );
-    return undefined;
   }
 
   private imageUrl(url: string): string {
