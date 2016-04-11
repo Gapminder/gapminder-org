@@ -1,5 +1,21 @@
 <div class="sidebar">
-  <div class="col-md-12">
+  <div *ngIf="relatedItems">
+    <h3 class="title">Related</h3>
+
+    <ul class="list-proposals">
+      <li *ngFor="#item of relatedItems">
+        <a [routerLink]="['DynamicContentDetails', {contentType: contentType, contentSlug: item.fields.slug}]">
+        <span class="wrap-img">
+          <img [contentful-src-id]="item.fields.thumbnail.sys.id"
+               alt="{{item.fields.title}}">
+        </span>
+          {{item.fields.title}}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!--<div class="col-md-12">
     <div class="row">
       <h3 class="title pull-left">TEDTalks</h3>
       <a href class="link-view-more pull-right">View All »</a>
@@ -20,7 +36,7 @@
     annual
     conferences bring together the world's most fascinating thinkers and doers, who are challenged to give the talk of
     their lives (in 18 minutes).</p>
-  <a class="link-view-more margin-top-15">Terms of Use »</a>
+  <a class="link-view-more margin-top-15">Terms of Use »</a>-->
 
   <hr>
 

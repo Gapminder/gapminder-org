@@ -28,6 +28,7 @@ export interface ImageContent {
 }
 
 export interface PageStructureContent {
+  description: string;
   active: boolean;
   name: string;
   type: string;

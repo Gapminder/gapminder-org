@@ -2,14 +2,19 @@ import {Component} from 'angular2/core';
 import {Input} from 'angular2/core';
 @Component({
   selector: 'video-entry',
+  styles: [
+    <string> require('./video-entry.styl')
+  ],
   template: `
-    <iframe
-      width="100%"
-      height="315"
-      src="{{ entry.fields.youtube || entry.fields.vimeo }}"
-      frameborder="0"
-      allowfullscreen="">
-    </iframe>
+    <div class="video-wrapper">
+      <iframe
+        src="{{ entry.fields.youtube || entry.fields.vimeo }}"
+        frameborder="0" 
+        webkitallowfullscreen="" 
+        mozallowfullscreen="" 
+        allowfullscreen="">
+      </iframe>
+    </div>
   `
 })
 export class VideoEntry {
