@@ -29,13 +29,21 @@ p
     width 100%
 
 .list-proposals
+  display inline-block
+  width 100%
 
   li
     margin 10px 0
-    float left
+    display inline-block
+    vertical-align top
     width 48%
     &:nth-child(2n)
       float right
+
+    .wrap-img
+      display block
+      text-align center
+      margin-bottom 10px
 
     a
       font-size 16px
