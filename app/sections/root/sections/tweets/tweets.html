@@ -5,7 +5,7 @@
       <button [disabled]="disabled" class="prev" (click)="previousTweet()"><i class="fa fa-angle-left"></i></button>
       <div class="col-md-3 col-sm-4 text-center">
         <div class="twitter-user-info">
-          <img class="wrap-avatar" [src]="currentTweet.user.profile_image_url">
+          <img class="wrap-avatar" [src]="currentTweet.user.profile_image_url_https">
           <div>{{currentTweet.user.name}}</div>
           <span>
             {{currentTweet.user.followers_count}}
