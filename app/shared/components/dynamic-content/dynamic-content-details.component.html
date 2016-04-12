@@ -6,8 +6,15 @@
   <div class="entry-content">
     <entries-view [entries]="content.entries"></entries-view>
   </div>
-
+  <!-- TODO: move in separate component -->
+  <ul>
+    <li *ngFor="#tag of content.tags">
+      {{tag}}
+    </li>
+  </ul>
+  <line-social></line-social>
 </div>
-<div class="col-md-4 pull-right margin-top-35"  *ngIf="content">
+
+<div class="col-md-4 pull-right margin-top-35" *ngIf="content">
   <sidebar [relatedItems]="content.relatedEntries" [contentType]="contentType"></sidebar>
 </div>

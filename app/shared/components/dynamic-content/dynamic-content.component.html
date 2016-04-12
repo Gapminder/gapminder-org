@@ -1,11 +1,17 @@
 <section class="margin-top-35">
   <div class="col-md-8 margin-bottom-35">
-    <h2 class="post-head margin-top-0">{{descriptionTitle}}</h2>
+    <h2 class="post-head margin-top-0">
+      <div class="wrap-ico-title">
+        <img *ngIf="fields.thumbnail" [contentful-src-id]="fields.thumbnail.sys.id"
+             alt="{{fields.name}}">
+      </div>
+      {{title}}
+    </h2>
 
     <div class="dynamic-list">
       <div class="row">
         <div *ngFor="#item of items | async" class="dynamic-item col-md-6 col-sm-6">
-          <a [routerLink]="['DynamicContentDetails', {contentType: contentType, contentSlug: item.fields.slug}]"
+          <a *ngIf="item.fields.thumbnail" [routerLink]="['DynamicContentDetails', {contentType: contentType, contentSlug: item.fields.slug}]"
             class="dynamic-wrap-img">
             <!--<span class="play"><i class="fa fa-play"></i></span>-->
             <img [contentful-src-id]="item.fields.thumbnail.sys.id"

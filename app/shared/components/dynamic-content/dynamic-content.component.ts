@@ -6,7 +6,9 @@ import {ToDate} from '../../pipes/to-date.pipe';
 import {checkContentType, DynamicContentRouteParams, encapsulateCss, DynamicContentRouteData} from './tools';
 import {DomSharedStylesHost} from 'angular2/src/platform/dom/shared_styles_host';
 import {Sidebar} from '../sidebar/sidebar.component';
-import {PageStructure} from "../../services/page-structure.service";
+import {PageStructure} from '../../services/page-structure.service';
+import {PageStructureContent} from '../../structures/content-type.structures';
+import {ContentfulCommon} from "ng2-contentful/ng-contentful-types";
 
 @Component({
   template: <string> require('./dynamic-content.component.html'),
@@ -23,7 +25,8 @@ export class DynamicContent implements OnActivate {
   private items: Observable<any>;
   private contentType: string;
   private id: string;
-  private descriptionTitle: string;
+  private title: string;
+  private fields: PageStructureContent;
 
   constructor(private _hostStyles: DomSharedStylesHost,
               private _contentfulContent: ContenfulContent,
@@ -40,20 +43,26 @@ export class DynamicContent implements OnActivate {
         encapsulateCss(params.customCss, `#${this.contentType}`)
       ]);
     }
-
-    let structureChildrens = this.pageStructure.structure.children;
     this.contentType = (next.params as DynamicContentRouteParams).contentType;
 
-    for (let structureChildren of structureChildrens) {
-      let fields = structureChildren.fields;
-      if (fields.type === this.contentType) {
-        this.descriptionTitle = fields.description;
-      }
+    const child = this.findChildByContentType(this.contentType);
+    if (child) {
+      this.fields = child.fields;
+      this.title = this.fields.description;
     }
 
     this.items = this._contentfulContent.getNodePagesByType(
       this.contentType
     );
 
+  }
+
+  private findChildByContentType(type: string): ContentfulCommon<PageStructureContent> {
+    for (let child of this.pageStructure.structure.children) {
+      if (child.fields.type === type) {
+        return child;
+      }
+    }
+    return null;
   }
 }

@@ -44,6 +44,8 @@ const config = {
       // Angular 2 Deps + common libs - I split it into separated entries but
       // current version of webpack has problem with that
       // due https://github.com/webpack/webpack/issues/1016
+      'es6-shim',
+      'es6-promise',
       'zone.js',
       'reflect-metadata',
       'rxjs',
