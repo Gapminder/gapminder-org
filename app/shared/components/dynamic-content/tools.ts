@@ -21,15 +21,22 @@ export function checkContentType(next: ComponentInstruction) {
   let injector = appInjector();
   let pageStructure: PageStructure = injector.get(PageStructure);
   let router: Router = injector.get(Router);
-  let sectionType = pageStructure
-    .getSectionType((<DynamicContentRouteParams>next.params).contentType);
+
+  const contentType: string = (next.params as DynamicContentRouteParams).contentType;
+  const contentSlug: string = (next.params as DynamicContentDetailRouteParams).contentSlug;
+
+  if (contentType && contentSlug) {
+    return true;
+  }
+
+  let sectionType = pageStructure.getSectionType(contentType);
   if (sectionType) {
     (<DynamicContentRouteData> next['routeData'].data).customCss = sectionType.customCss;
     return true;
-  } else {
-    router.navigate(['Root']);
-    return false;
   }
+
+  router.navigate(['Root']);
+  return false;
 }
 
 export function encapsulateCss(css: string, prefix: string): string {

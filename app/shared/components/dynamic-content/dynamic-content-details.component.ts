@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation} from 'angular2/core';
-import {CanActivate, OnActivate, ComponentInstruction} from 'angular2/router';
+import {CanActivate, OnActivate, ComponentInstruction, Router} from 'angular2/router';
 import {checkContentType, DynamicContentDetailRouteParams, DynamicContentRouteParams} from './tools';
 import {NodePageContent} from '../../structures/content-type.structures';
 import {ContenfulContent} from '../../services/contentful-content.service';
@@ -22,7 +22,7 @@ export class DynamicComponentDetails implements OnActivate {
   private content: NodePageContent;
   private contentType: string;
 
-  constructor(private _contentfulContent: ContenfulContent) {
+  constructor(private _contentfulContent: ContenfulContent, private _router: Router) {
   }
 
   routerOnActivate(next: ComponentInstruction, prev: ComponentInstruction): void {
@@ -30,7 +30,12 @@ export class DynamicComponentDetails implements OnActivate {
     this._contentfulContent
       .getNodePage((next.params as DynamicContentDetailRouteParams).contentSlug)
       .subscribe(
-        content => this.content = content
+        content => {
+          if (!content) {
+            this._router.navigate(['Root']);
+          }
+          this.content = content
+        }
       );
   }
 }
