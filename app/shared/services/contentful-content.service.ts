@@ -6,6 +6,7 @@ import {NodePageContent} from '../structures/content-type.structures';
 import {ContentfulService, ContentfulRequest, SearchItem} from 'ng2-contentful';
 import {ContentfulNodePagesResponse, ContentfulNodePage, ContentfulPageStructure} from '../structures/aliases.structures';
 import {PageStructure} from './page-structure.service';
+import * as _ from 'lodash';
 
 /**
  * ContentfulContent works as a replacement for the original ng2-contentful library.
@@ -82,7 +83,7 @@ export class ContenfulContent {
   getNodePage(slug: string): Observable<NodePageContent> {
     return this.getRawNodePageBySlug(slug)
       .map(response => transformResponse<ContentfulNodePage>(response))
-      .map(response => response[0].fields);
+      .map(response => _.get(response, '[0].fields', null));
   }
 
   getPageTree(sysId: string): Observable<PageStructure> {

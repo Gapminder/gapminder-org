@@ -34,8 +34,8 @@
 
         <ul class="menu-footer">
             <li *ngFor="#child of children | async">
-              <a [routerLink]="['DynamicContent', {contentType: child.fields.type}]">
-                {{ child.fields.name }}
+              <a [routerLink]="['DynamicContentDetails', {contentType: child.fields.type, contentSlug: child.fields.slug}]">
+                {{ child.fields.title }}
               </a>
             </li>
 
