@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {CanActivate, OnActivate, ComponentInstruction, Router} from 'angular2/router';
 import {checkContentType, DynamicContentDetailRouteParams, DynamicContentRouteParams} from './tools';
 import {NodePageContent} from '../../structures/content-type.structures';
@@ -14,7 +14,6 @@ import {LineSocial} from '../line-social/line-social.component';
   styles: [
     <string> require('./dynamic-content-details.component.styl')
   ],
-  encapsulation: ViewEncapsulation.None,
   pipes: [ToDate]
 })
 @CanActivate(checkContentType)
