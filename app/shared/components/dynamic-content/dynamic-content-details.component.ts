@@ -6,10 +6,11 @@ import {ContenfulContent} from '../../services/contentful-content.service';
 import {ToDate} from '../../pipes/to-date.pipe';
 import {EntriesView} from '../entries-view/entries-view.component';
 import {Sidebar} from '../sidebar/sidebar.component';
+import {LineSocial} from '../line-social/line-social.component';
 
 @Component({
   template: <string> require('./dynamic-content-details.component.html'),
-  directives: [EntriesView, Sidebar],
+  directives: [EntriesView, Sidebar, LineSocial],
   styles: [
     <string> require('./dynamic-content-details.component.styl')
   ],
