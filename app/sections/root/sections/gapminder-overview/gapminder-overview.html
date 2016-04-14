@@ -24,10 +24,11 @@
           <div class="col-xs-12 col-sm-6 col-md-5">
             <div class="block-description">
               <div class="date-info">{{slide.fields.createdAt | toDate | date}}</div>
-              <a href class="title">{{slide.fields.title}}</a>
+              <a [routerLink]="['DynamicContentDetails', {contentType: slide.fields.type, contentSlug: slide.fields.slug}]"
+                class="title">{{slide.fields.title}}</a>
               <p>{{slide.fields.description}}</p>
-              <!--TODO: remove 'Videos' -> do dynamic-->
-              <a href class="more-info">Read more »</a>
+              <a [routerLink]="['DynamicContentDetails', {contentType: slide.fields.type, contentSlug: slide.fields.slug}]"
+                class="more-info">Read more »</a>
             </div>
           </div>
         </slide>

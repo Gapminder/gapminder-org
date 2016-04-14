@@ -31,17 +31,19 @@ describe('Component: Latest Posts', () => {
       done();
     });
 
-    it('should have subsection title', () => {
+    it('should have subsection title', done => {
+      fixture.detectChanges();
       expect(fixture.nativeElement.querySelectorAll('.post-head').length).toBe(1);
+      done();
     });
 
     // it('should have button link', () => {
     //   expect(fixture.nativeElement.querySelectorAll('.row > button').length).toBe(1);
     // });
 
-    it('button link should navigate to posts', () => {
-      // this one will fail now
-    });
+    // it('button link should navigate to posts', () => {
+    //   this one will fail now
+    // });
   });
 
   describe('Component', () => {
