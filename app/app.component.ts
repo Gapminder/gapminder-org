@@ -1,5 +1,5 @@
-import {Component, ViewEncapsulation} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {Component, ViewEncapsulation, OnInit} from 'angular2/core';
+import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {Header} from './shared/components/header/header.component';
 import {Footer} from './shared/components/footer/footer.component';
 import {Root} from './sections/root/root.component';
@@ -35,7 +35,15 @@ import {DynamicComponentDetails} from './shared/components/dynamic-content/dynam
   },
   {path: '/**', redirectTo: ['Root']}
 ])
-export class AppComponent {
+export class AppComponent implements OnInit {
   type: string = 'app component';
 
+  constructor(private _router: Router) {
+  }
+
+  ngOnInit(): void {
+    this._router.subscribe(() => {
+      window.scrollTo(0, 0);
+    });
+  }
 }
