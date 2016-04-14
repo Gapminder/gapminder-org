@@ -1,5 +1,9 @@
 @import "./variables.styl"
 
+html,
+body
+  height 100%
+
 body
   background-color #fff
   font-family 'Bariol Regular', sans-serif
@@ -68,6 +72,26 @@ ul
 
     &:hover
       text-decoration underline
+
+.page-wrap
+  min-height 100%
+  margin-bottom -340px
+  @media medium
+    margin-bottom -380px
+  @media small
+    margin-bottom -480px
+
+  &:after
+    content ""
+    display block
+
+#footer,
+.page-wrap:after
+  height 340px
+  @media medium
+    height 380px
+  @media small
+    height 480px
 
 
 .text-center
