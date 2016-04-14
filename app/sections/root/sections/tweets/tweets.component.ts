@@ -3,6 +3,7 @@ import {CORE_DIRECTIVES} from 'angular2/common';
 import {TwitterService, Tweet, TwitterRequest} from '../../../../shared/services/twitter.service';
 import * as _ from 'lodash';
 import {ToDate} from '../../../../shared/pipes/to-date.pipe';
+import {formatTwitterFollowersAmount} from '../../../../shared/components/dynamic-content/tools';
 
 @Component({
   selector: 'tweets',
@@ -29,6 +30,7 @@ export class TweetsComponent implements OnInit {
   private tweets: Array<Tweet> = [];
   private currentTweet: Tweet;
   private disabled: boolean = false;
+  private count: string;
 
   constructor(private twitter: TwitterService) {
   }
@@ -46,6 +48,7 @@ export class TweetsComponent implements OnInit {
     const foundTweet: Tweet = _.find(this.tweets, (tweet: Tweet) => tweet.id < this.currentTweet.id);
     this.consumeTweets(TweetsComponent.PREVIOUS_TWEETS, foundTweet);
   }
+
 
   private consumeTweets(direction?: string, foundTweet?: Tweet): void {
     if (foundTweet) {
@@ -76,6 +79,7 @@ export class TweetsComponent implements OnInit {
 
   private processTweets(tweets): void {
     this.currentTweet = _.head(TweetsComponent.sortTweets(tweets)) || this.currentTweet;
+    this.count = formatTwitterFollowersAmount(this.currentTweet.user.followers_count);
     this.tweets = TweetsComponent.sortTweets(this.tweets ? this.tweets.concat(tweets) : tweets);
   }
 

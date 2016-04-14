@@ -3,7 +3,7 @@
   <section class="videos-list">
     <div class="row">
       <div *ngFor="#video of videos | async" class="video-item col-md-4  col-xs-12 col-sm-6">
-        <a href class="video-wrap-img">
+        <a [routerLink]="['DynamicContentDetails', {contentType: video.fields.type, contentSlug: video.fields.slug}]" class="video-wrap-img">
           <span class="play"><i class="fa fa-play"></i></span>
           <img [contentful-src-id]="video.fields.thumbnail.sys.id"
                [width]="300"
@@ -12,9 +12,10 @@
                alt="{{video.fields.title}}">
         </a>
         <div class="date-info">{{ video.fields.createdAt | toDate | date }}</div>
-        <!--<a [routerLink]="['Videos', 'Details', {slug: video.fields.slug}]" class="post-title">-->
-          <!--{{video.fields.title}}-->
-        <!--</a>-->
+        <a [routerLink]="['DynamicContentDetails', {contentType: video.fields.type, contentSlug: video.fields.slug}]"
+           class="post-title">
+          {{video.fields.title}}
+        </a>
         <p class="post-p">{{video.fields.description}}</p>
       </div>
     </div>
