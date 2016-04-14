@@ -17,11 +17,13 @@ import {DynamicComponentDetails} from './shared/components/dynamic-content/dynam
     <string> require('./variables.styl')
   ],
   template: `
+  <div class="page-wrap">
     <header></header>
      <div class="container">
         <router-outlet></router-outlet>
      </div>
-    <footer></footer>
+  </div>   
+  <footer id="footer"></footer>
   `
 })
 // TODO: remove hardcode (component: About)
