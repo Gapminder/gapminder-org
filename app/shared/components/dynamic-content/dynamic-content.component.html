@@ -7,7 +7,9 @@
       </div>
       {{title}}
     </h2>
-
+    <div *ngif="fields.body" class="margin-bottom-35">
+      <p>{{fields.body}}</p>
+    </div>
     <div class="dynamic-list">
       <div class="row">
         <div *ngFor="#item of items | async" class="dynamic-item col-md-6 col-sm-6">
