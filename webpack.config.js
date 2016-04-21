@@ -47,16 +47,16 @@ const config = {
       'es6-shim',
       'es6-promise',
       'zone.js',
-      'reflect-metadata',
+      'es7-reflect-metadata',
       'rxjs',
-      'angular2/platform/browser',
-      'angular2/common',
-      'angular2/core',
-      'angular2/router',
+      '@angular/platform-browser',
+      '@angular/common',
+      '@angular/core',
+      '@angular/router',
       // common
       'moment',
       'ng2-bootstrap',
-      'ng2-contentful'
+      'ng2-contentful/src'
     ],
     // vendors: [
     //   // 3rd libs
@@ -123,6 +123,7 @@ const config = {
     new webpack.DefinePlugin({
       CONTENTFUL_ACCESS_TOKEN: JSON.stringify(contentfulConfig.accessToken),
       CONTENTFUL_SPACE_ID: JSON.stringify(contentfulConfig.spaceId),
+      CONTENTFUL_HOST: JSON.stringify(contentfulConfig.host),
       TWITTER_CONSUMER_KEY: JSON.stringify(twitterConfig.consumerKey),
       TWITTER_CONSUMER_SECRET: JSON.stringify(twitterConfig.consumerSecret),
       TWITTER_ACCESS_TOKEN_KEY: JSON.stringify(twitterConfig.accessTokenKey),

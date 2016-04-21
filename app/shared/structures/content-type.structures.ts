@@ -1,7 +1,6 @@
-
-
-import {ContentfulCommon} from 'ng2-contentful/ng-contentful-types';
+import {ContentfulCommon} from 'ng2-contentful/src/ng-contentful-types';
 export interface NodePageContent {
+  parent?: any;
   title: string;
   type: string;
   slug: string;
@@ -9,6 +8,7 @@ export interface NodePageContent {
   relatedEntries?: NodePageContent[];
   thumbnail: any; // will be changed to sys structure
   createdAt: string;
+  url?: string;
 }
 
 export interface VideoContent {
@@ -34,4 +34,17 @@ export interface PageStructureContent {
   type: string;
   children: Array<ContentfulCommon<PageStructureContent>>;
   customCss: string;
+}
+
+export interface Menu {
+  fields: any;
+  entries: Menu[];
+  name: string;
+  submenus: Menu[];
+  entryPoint: Menu[];
+}
+
+export interface TagPage {
+  name: string;
+  slug: string;
 }

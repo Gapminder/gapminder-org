@@ -1,50 +1,68 @@
-import {Component, ViewEncapsulation, OnInit} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, Router} from 'angular2/router';
-import {Header} from './shared/components/header/header.component';
-import {Footer} from './shared/components/footer/footer.component';
-import {Root} from './sections/root/root.component';
-import {DynamicContent} from './shared/components/dynamic-content/dynamic-content.component';
-import {DynamicComponentDetails} from './shared/components/dynamic-content/dynamic-content-details.component';
-
+import {Component, ViewEncapsulation, OnInit, Inject} from '@angular/core';
+import {RouteConfig, ROUTER_DIRECTIVES, Router} from '@angular/router-deprecated';
+import {HeaderComponent} from './shared/components/header/header.component';
+import {FooterComponent} from './shared/components/footer/footer.component';
+import {RootComponent} from './sections/root/root.component';
+import RoutesGatewayComponent from './shared/components/dynamic-content/routes-gateway.component';
+import {RoutesGatewayService} from './shared/services/routes-gateway.service';
+import {BreadcrumbsComponent} from './shared/components/breadcrumbs/breadcrumbs.component';
+import {Angulartics2GoogleAnalytics} from 'angulartics2/src/providers/angulartics2-google-analytics';
+import {Angulartics2} from 'angulartics2/index';
+import {TagComponent} from './shared/components/tags/tag.component';
+import {BreadcrumbsService} from './shared/components/breadcrumbs/breadcrumbs.service';
 
 @Component({
-  selector: 'gapminder-app',
+  selector: 'gm-app',
   encapsulation: ViewEncapsulation.None,
-  directives: [Header, Footer, ...ROUTER_DIRECTIVES],
+  providers: [Angulartics2GoogleAnalytics],
+  directives: [HeaderComponent, FooterComponent, ...ROUTER_DIRECTIVES, BreadcrumbsComponent],
   styles: [
-    <string> require('./main.styl'),
-    <string> require('./fonts.styl'),
-    <string> require('./variables.styl')
+    require('./main.styl') as string,
+    require('./fonts.styl') as string,
+    require('./variables.styl') as string
   ],
   template: `
-  <div class="page-wrap">
-    <header></header>
-     <div class="container">
+  <div class='page-wrap'>
+    <gm-header></gm-header>
+     <div class='container'>
+      <gm-breadcrumbs></gm-breadcrumbs>
         <router-outlet></router-outlet>
      </div>
   </div>   
-  <footer id="footer"></footer>
+  <gm-footer id='footer'></gm-footer>
   `
 })
-// TODO: remove hardcode (component: About)
 @RouteConfig([
-  {path: '/', component: Root, name: 'Root', useAsDefault: true},
-  {path: '/:contentType', component: DynamicContent, name: 'DynamicContent'},
-  {
-    path: '/:contentType/:contentSlug',
-    component: DynamicComponentDetails,
-    name: 'DynamicContentDetails'
-  },
-  {path: '/**', redirectTo: ['Root']}
+  {path: '/', component: RootComponent, name: 'Root', useAsDefault: true},
+  {path: '/tag/:tag', component: TagComponent, name: 'TagComponent'},
+  {path: '/**', component: RoutesGatewayComponent}
 ])
 export class AppComponent implements OnInit {
-  type: string = 'app component';
+  public type: string = 'app component';
 
-  constructor(private _router: Router) {
+  private router: Router;
+  private routesGatewayService: RoutesGatewayService;
+  private angulartics2: Angulartics2;
+  private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics;
+  private breadcrumbsService: BreadcrumbsService;
+
+  public constructor(@Inject(Router) router: Router,
+                     @Inject(Angulartics2) angulartics2: Angulartics2,
+                     @Inject(Angulartics2GoogleAnalytics) angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+                     @Inject(RoutesGatewayService) routesGatewayService: RoutesGatewayService,
+                     @Inject(BreadcrumbsService) breadcrumbsService: BreadcrumbsService) {
+    this.router = router;
+    this.routesGatewayService = routesGatewayService;
+    this.angulartics2 = angulartics2;
+    this.angulartics2GoogleAnalytics = angulartics2GoogleAnalytics;
+    this.breadcrumbsService = breadcrumbsService;
   }
 
-  ngOnInit(): void {
-    this._router.subscribe(() => {
+  public ngOnInit(): void {
+    this.routesGatewayService.setConstructorOfRouterComponentInstance(this.constructor);
+
+    this.router.subscribe(() => {
+      this.breadcrumbsService.breadcrumbs$.next({url: '/', name: 'Home'});
       window.scrollTo(0, 0);
     });
   }

@@ -20,9 +20,12 @@
   <div class="container">
     <div class="col-md-3">
       <div class="row">
-        <a [routerLink]="['Root']">
+        <a [routerLink]="['Root']"
+           angulartics2On="click"
+           angularticsEvent="go to Home">
           <img src="../assets/img/logo.svg">
         </a>
+        <!--TODO: add page/link-->
         <ul class="menu-footer-small">
           <li><a href="">Gapminder World</a></li>
           <li><a href="">For Teachers</a></li>
@@ -33,12 +36,11 @@
       <div class="row">
 
         <ul class="menu-footer">
-          <li *ngFor="#child of children | async">
-            <a *ngIf="!child.fields.slug" [routerLink]="['DynamicContent', {contentType: child.fields.type}]">
-              {{ child.fields.name }}
-            </a>
-            <a *ngIf="child.fields.slug" [routerLink]="['DynamicContentDetails', {contentType: child.fields.type, contentSlug: child.fields.slug}]">
-              {{ child.fields.title }}
+          <li *ngFor="let item of menu">
+            <a [routerLink]="[routesGatewayService.getRouteName(item.fields.entryPoint.fields.slug)]"
+               angulartics2On="click"
+               angularticsEvent="{{ item.fields.name }}">
+              {{ item.fields.name }}
             </a>
           </li>
         </ul>
@@ -49,23 +51,23 @@
       <div class="row">
         <ul class="social">
           <li>
-            <a href="https://twitter.com/Gapminder">
+            <a href="https://twitter.com/Gapminder" target="_blank">
               <i class="fa fa-twitter-square"></i>
 
             </a>
           </li>
           <li>
-            <a href="https://www.facebook.com/gapminder.org">
+            <a href="https://www.facebook.com/gapminder.org" target="_blank">
               <i class="fa fa-facebook-square"></i>
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="" target="_blank">
               <i class="fa fa-youtube-square"></i>
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="" target="_blank">
               <i class="fa fa-google-plus-square"></i>
             </a>
           </li>

@@ -7,11 +7,11 @@
   </div>
 
   <div class="entry-content entry">
-    <p *ngFor="#entry of content.fields.entries"
-       [innerHTML]="entry.fields.content | markdown"></p>
+    <p *ngFor="let entry of content.fields.entries"
+       [innerHTML]="entry.fields.content | gmMarkdown"></p>
   </div>
 </div>
 
 <div class="col-md-4">
-  <sidebar></sidebar>
+  <gm-sidebar></gm-sidebar>
 </div>

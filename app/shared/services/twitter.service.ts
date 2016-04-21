@@ -1,6 +1,8 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import * as _ from 'lodash';
+import {bindCallback} from 'rxjs/observable/bindCallback';
+import 'rxjs/add/operator/map';
 
 declare const TWITTER_CONSUMER_KEY: string;
 declare const TWITTER_CONSUMER_SECRET: string;
@@ -14,42 +16,42 @@ cb.setToken(TWITTER_ACCESS_TOKEN_KEY, TWITTER_ACCESS_TOKEN_SECRET);
 
 @Injectable()
 export class TwitterService {
-  create(): TwitterRequest {
+  public create(): TwitterRequest {
     return new TwitterRequest();
   }
 }
 
 export class TwitterRequest {
-  private params:any = {};
+  private params: any = {};
 
-  author(name: string): TwitterRequest {
+  public author(name: string): TwitterRequest {
     this.params.screen_name = name;
     return this;
   }
 
-  maxId(maxId: string): TwitterRequest {
+  public maxId(maxId: string): TwitterRequest {
     if (maxId) {
       this.params.max_id = maxId;
     }
     return this;
   }
 
-  sinceId(sinceId: string): TwitterRequest {
+  public sinceId(sinceId: string): TwitterRequest {
     if (sinceId) {
       this.params.since_id = sinceId;
     }
     return this;
   }
 
-  count(count: number): TwitterRequest {
+  public count(count: number): TwitterRequest {
     this.params.count = count || 10;
     return this;
   }
 
-  getTweets(): Observable<Array<Tweet>> {
-    const tweetsWrapper: (string, any) => Observable<any> = Observable.bindCallback(cb.__call.bind(cb));
+  public getTweets(): Observable<Array<Tweet>> {
+    const tweetsWrapper: (author: string, params: any) => Observable<any> = bindCallback(cb.__call.bind(cb));
     return tweetsWrapper('statuses_userTimeline', this.params)
-      .map((response:any) => _.head(response));
+      .map((response: any) => _.head(response));
   }
 }
 
@@ -61,7 +63,7 @@ export interface Tweet {
   user: TwitterUser;
 }
 
-export class TwitterUser {
+export interface TwitterUser {
   url: string;
   name: string;
   profile_image_url: string;

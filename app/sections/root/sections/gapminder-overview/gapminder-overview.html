@@ -9,12 +9,12 @@
   <div class="row">
     <div class="col-md-12">
       <carousel [interval]="carouselConfig.interval" [noWrap]="carouselConfig.noWrap">
-        <slide *ngFor="#slide of slides | async; #index=index">
+        <slide *ngFor="let slide of slides; let index=index">
           <div class="col-xs-12 col-sm-6 col-md-7">
             <div class="row">
               <!-- contenful is not able to rescale and crop image  -->
               <img class="wrap-img"
-                   [contentful-src-id]="slide.fields.thumbnail.sys.id"
+                   [gmContentfulSrcId]="slide.fields.thumbnail.sys.id"
                    [width]="1000"
                    [height]="800"
                    [fit]="'crop'">
@@ -23,12 +23,18 @@
           </div>
           <div class="col-xs-12 col-sm-6 col-md-5">
             <div class="block-description">
-              <div class="date-info">{{slide.fields.createdAt | toDate | date}}</div>
-              <a [routerLink]="['DynamicContentDetails', {contentType: slide.fields.type, contentSlug: slide.fields.slug}]"
-                class="title">{{slide.fields.title}}</a>
+              <div class="date-info">{{slide.fields.createdAt | gmToDate | date}}</div>
+              <a *ngIf="!slide.fields.url" class="title">{{slide.fields.title}}</a>
+              <a *ngIf="slide.fields.url" [routerLink]="[slide.fields.url]"
+                 angulartics2On="click"
+                 angularticsEvent="{{slide.fields.title}}"
+                 class="title">{{slide.fields.title}}</a>
               <p>{{slide.fields.description}}</p>
-              <a [routerLink]="['DynamicContentDetails', {contentType: slide.fields.type, contentSlug: slide.fields.slug}]"
-                class="more-info">Read more »</a>
+              <a *ngIf="!slide.fields.url" class="more-info">Read more »</a>
+              <a *ngIf="slide.fields.url" [routerLink]="[slide.fields.url]"
+                 angulartics2On="click"
+                 angularticsEvent="{{slide.fields.title}}"
+                 class="more-info">Read more »</a>
             </div>
           </div>
         </slide>
