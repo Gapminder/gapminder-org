@@ -5,6 +5,8 @@ import {Footer} from './shared/components/footer/footer.component';
 import {Root} from './sections/root/root.component';
 import {DynamicContent} from './shared/components/dynamic-content/dynamic-content.component';
 import {DynamicComponentDetails} from './shared/components/dynamic-content/dynamic-content-details.component';
+import RoutesGateway from "./routes-gateway.component";
+import RoutesGatewayService from "../routes-gateway.service";
 
 
 @Component({
@@ -35,15 +37,16 @@ import {DynamicComponentDetails} from './shared/components/dynamic-content/dynam
     component: DynamicComponentDetails,
     name: 'DynamicContentDetails'
   },
-  {path: '/**', redirectTo: ['Root']}
+  {path: '/**', component: RoutesGateway}
 ])
 export class AppComponent implements OnInit {
   type: string = 'app component';
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private routesGatewayService: RoutesGatewayService) {
   }
 
   ngOnInit(): void {
+    this.routesGatewayService.rootConstructor = this.constructor;
     this._router.subscribe(() => {
       window.scrollTo(0, 0);
     });

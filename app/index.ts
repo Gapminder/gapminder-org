@@ -13,6 +13,8 @@ import {TwitterService} from './shared/services/twitter.service';
 import {ContentfulService} from 'ng2-contentful';
 import {PageStructure} from './shared/services/page-structure.service';
 import {ContentfulConfig} from './app.constans';
+import DynamicRouteConfigurator from "./dynamic-route-configurator.service";
+import RoutesGatewayService from "../routes-gateway.service";
 
 declare var CONTENTFUL_ACCESS_TOKEN: string;
 declare var CONTENTFUL_SPACE_ID: string;
@@ -28,6 +30,8 @@ function main(structure: PageStructure) {
   bootstrap(AppComponent, [
     ...ROUTER_PROVIDERS,
     ...HTTP_PROVIDERS,
+    RoutesGatewayService,
+    DynamicRouteConfigurator,
     ContentfulService,
     ContenfulContent,
     TwitterService,
