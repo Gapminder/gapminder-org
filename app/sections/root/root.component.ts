@@ -1,15 +1,13 @@
-
-import {Component} from 'angular2/core';
+import {Component, Inject} from '@angular/core';
 import {LatestPostsComponent} from './sections/latest-posts/latest-posts.component';
 import {GapminderOverviewComponent} from './sections/gapminder-overview/gapminder-overview.component';
 import {LatestVideosComponent} from './sections/latest-videos/latest-videos.component';
 import {TweetsComponent} from './sections/tweets/tweets.component';
+import {RoutesGatewayService} from '../../shared/services/routes-gateway.service';
 
 @Component({
-  template: <string> require('./root.component.html'),
-  styles: [
-    <string> require('./root.component.styl')
-  ],
+  template: require('./root.component.html') as string,
+  styles: [require('./root.component.styl') as string],
   directives: [
     GapminderOverviewComponent,
     LatestVideosComponent,
@@ -17,4 +15,6 @@ import {TweetsComponent} from './sections/tweets/tweets.component';
     TweetsComponent
   ]
 })
-export class Root {}
+export class RootComponent {
+
+}

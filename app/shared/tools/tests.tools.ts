@@ -1,29 +1,43 @@
-import {PLATFORM_DIRECTIVES, provide, Directive, ElementRef, Input} from 'angular2/core';
+import {PLATFORM_DIRECTIVES, provide, Directive, ElementRef, Input, Inject} from '@angular/core';
 import {ContenfulContent} from '../services/contentful-content.service';
 import {AppComponent} from '../../app.component';
-import {ROUTER_PRIMARY_COMPONENT, Router, RouteRegistry, Location} from 'angular2/router';
-import {RootRouter} from 'angular2/src/router/router';
-import {SpyLocation} from 'angular2/src/mock/location_mock';
+import {ROUTER_PRIMARY_COMPONENT, Router, RouteRegistry, RouteDefinition} from '@angular/router-deprecated';
+import {Location} from '@angular/common';
+import {ROUTER_FAKE_PROVIDERS} from '@angular/router/testing';
+import {SpyLocation} from '@angular/common/testing';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/observable/bindCallback';
+import 'rxjs/add/operator/map';
 import {ContentfulNodePage} from '../structures/aliases.structures';
 import {TwitterService, Tweet, TwitterUser} from '../services/twitter.service';
+import {RoutesGatewayService} from '../services/routes-gateway.service';
+import {Angulartics2} from 'angulartics2/index';
+import {Angulartics2GoogleAnalytics} from 'angulartics2/src/providers/angulartics2-google-analytics';
+import {BreadcrumbsService} from '../components/breadcrumbs/breadcrumbs.service';
+import DynamicRouteConfigurator from '../services/dynamic-route-configurator.service';
 
-
-export function getBaseTestProviders() {
+export function getBaseTestProviders(): any[] {
   return [
     provide(PLATFORM_DIRECTIVES, {
       useValue: ContentfulImageDirectiveMock, multi: true
     }),
+    provide(RoutesGatewayService, {
+      useClass: RoutesGatewayServiceMock
+    }),
+    DynamicRouteConfigurator,
+    BreadcrumbsService,
     provide(ContenfulContent, {
       useClass: ContenfulContentMock
     }),
     provide(TwitterService, {
       useClass: TwitterServiceMock
     }),
+    Angulartics2,
+    Angulartics2GoogleAnalytics,
     RouteRegistry,
     provide(Location, {useClass: SpyLocation}),
-    provide(Router, {useClass: RootRouter}),
-    provide(ROUTER_PRIMARY_COMPONENT, {useValue: AppComponent}),
+    provide(Router, {useValue: ROUTER_FAKE_PROVIDERS}),
+    provide(ROUTER_PRIMARY_COMPONENT, {useValue: AppComponent})
   ];
 }
 
@@ -55,26 +69,36 @@ export const TestContentfulNodePage: ContentfulNodePage = {
 // TODO move it somewhere else + refactor
 export class ContenfulContentMock {
 
-  getLatestVideo(limit: number): Observable<ContentfulNodePage[]> {
-    return new Observable(observer => {
+  // noinspection TsLint
+  public getLatestVideo(limit: number): Observable<ContentfulNodePage[]> {
+    return new Observable((observer: any) => {
       observer.next([TestContentfulNodePage]);
     });
   }
 
-  getLatestPosts(limit: number): Observable<ContentfulNodePage[]> {
-    return new Observable(observer => {
+  // noinspection TsLint
+  public getLatestPosts(limit: number): Observable<ContentfulNodePage[]> {
+    return new Observable((observer: any) => {
       observer.next([TestContentfulNodePage]);
     });
   }
 
-  getOverviewPages(): Observable<ContentfulNodePage[]> {
-    return new Observable(observer => {
+  // noinspection TsLint
+  public getParentOf(id: string): Observable<ContentfulNodePage[]> {
+    return new Observable((observer: any) => {
       observer.next([TestContentfulNodePage]);
     });
   }
 
-  getAboutPage(slug) {
-    return new Observable(observer => {
+  public getOverviewPages(): Observable<ContentfulNodePage[]> {
+    return new Observable((observer: any) => {
+      observer.next([TestContentfulNodePage]);
+    });
+  }
+
+  // noinspection TsLint
+  public getAboutPage(slug: string): Observable<any> {
+    return new Observable((observer: any) => {
       observer.next({
         submenuItems: [{
           slug: 'about-subsection-slug',
@@ -87,30 +111,34 @@ export class ContenfulContentMock {
 }
 
 export class TwitterServiceMock {
-  create(): TwitterRequestMock {
+  public create(): TwitterRequestMock {
     return new TwitterRequestMock();
   }
 }
 
 export class TwitterRequestMock {
 
-  author(name: string): TwitterRequestMock {
+  // noinspection TsLint
+  public author(name: string): TwitterRequestMock {
     return this;
   }
 
-  maxId(maxId: string): TwitterRequestMock {
+  // noinspection TsLint
+  public maxId(maxId: string): TwitterRequestMock {
     return this;
   }
 
-  sinceId(sinceId: string): TwitterRequestMock {
+  // noinspection TsLint
+  public sinceId(sinceId: string): TwitterRequestMock {
     return this;
   }
 
-  count(count: number): TwitterRequestMock {
+  // noinspection TsLint
+  public count(count: number): TwitterRequestMock {
     return this;
   }
 
-  getTweets(): Observable<Array<Tweet>> {
+  public getTweets(): Observable<Array<Tweet>> {
     const twitterUser: TwitterUser = {
       url: '',
       name: '',
@@ -126,25 +154,71 @@ export class TwitterRequestMock {
       user: twitterUser
     };
 
-    return new Observable<Array<Tweet>>(observer => {
+    return new Observable<Array<Tweet>>((observer: any) => {
       observer.next([tweet]);
     });
   }
 }
 
+export class RoutesGatewayServiceMock {
+
+  // noinspection TsLint
+  public addRoute(path: string, data?: Object): string {
+    return 'AYmxvZy9nYXBtaW5kZXItYmxvZy1wb3N0';
+  }
+
+  // noinspection TsLint
+  public getAnnotations(component: any): Observable<RouteDefinition[]> {
+    const annotations: RouteDefinition = {
+      path: 'videos',
+      name: 'AdmlkZW9z'
+    };
+    return new Observable((observer: any) => {
+      observer.next([annotations]);
+    });
+  }
+
+  // noinspection TsLint
+  public getSlugParent(id: any, cb: any): any {
+    return 'blog';
+  }
+
+  // noinspection TsLint
+  public getRouteName(path: string): string {
+    return undefined;
+  }
+
+  // noinspection TsLint
+  public getRouteDefinitions(component: any): RouteDefinition[] {
+    return undefined;
+  }
+
+}
+
 @Directive({
-  selector: '[contentful-src-id]',
+  selector: '[gmContentfulSrcId]'
 })
 export class ContentfulImageDirectiveMock {
-  @Input('contentful-src-id')
-  contentfulAssetId: string;
+
+  // noinspection TsLint
+  @Input()
+  private gmContentfulSrcId: string;
+
+  // noinspection TsLint
   @Input()
   private width: string;
+
+  // noinspection TsLint
   @Input()
   private height: string;
+
+  // noinspection TsLint
   @Input()
   private fit: string;
 
-  constructor(private element: ElementRef) {
+  private element: ElementRef;
+
+  public constructor(@Inject(ElementRef) element: ElementRef) {
+    this.element = element;
   }
 }

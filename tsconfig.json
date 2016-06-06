@@ -13,11 +13,7 @@
     "outDir": "dist",
     "allowJs": true
   },
-  "exclude": [
-    "dist",
-    "node_modules"
-  ],
   "files": [
-    "app/index.ts"
-  ]
+    "typings/browser.d.ts"
+   ]
 }

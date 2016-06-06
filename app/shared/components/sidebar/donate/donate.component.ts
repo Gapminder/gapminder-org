@@ -1,13 +1,9 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 
 @Component({
-  selector: 'donate-section',
-  template: <string> require('./donate.html'),
-  styles: [
-    <string> require('./donate.styl')
-  ]
+  selector: 'gm-donate-section',
+  template: require('./donate.html') as string,
+  styles: [require('./donate.styl') as string]
 })
-
-export class DonateSection {
-
+export class DonateComponent {
 }

@@ -1,10 +1,7 @@
-import {Component} from 'angular2/core';
-import {Input} from 'angular2/core';
+import {Component, Input} from '@angular/core';
 @Component({
-  selector: 'embedded-entry',
-  styles: [
-    <string> require('./video-entry.styl')
-  ],
+  selector: 'gm-embedded-entry',
+  styles: [require('./video-entry.styl')],
   template: `
     <div class="video-wrapper">
       <iframe
@@ -17,6 +14,8 @@ import {Input} from 'angular2/core';
     </div>
   `
 })
-export class EmbeddedEntry {
-  @Input() private entry;
+export class EmbeddedEntryComponent {
+  // noinspection TsLint
+  @Input() 
+  private entry;
 }

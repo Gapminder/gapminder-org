@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="col-md-9 col-sm-8 twitter-description">
-        <div class="date-info">{{currentTweet.created_at | toDate | date}}</div>
+        <div class="date-info">{{currentTweet.created_at | gmToDate | date}}</div>
         <p>{{currentTweet.text}}</p>
         <a href="{{currentTweet.user.url}}" class="more">{{currentTweet.user.url}}</a>
       </div>

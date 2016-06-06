@@ -2,24 +2,21 @@ import {
   it,
   beforeEachProviders,
   beforeEach,
-  injectAsync,
-  TestComponentBuilder,
-  ComponentFixture
-} from 'angular2/testing';
-
-import {Root} from './root.component';
+  injectAsync
+} from '@angular/core/testing';
+import {TestComponentBuilder, ComponentFixture} from '@angular/compiler/testing';
+import {RootComponent} from './root.component';
 import {getBaseTestProviders} from '../../shared/tools/tests.tools';
-
 
 describe('Component: Root', () => {
 
   beforeEachProviders(() => [
     ...getBaseTestProviders(),
-    Root
+    RootComponent
   ]);
 
   describe('View', () => {
-    let fixture: ComponentFixture;
+    let fixture: ComponentFixture<any>;
 
     beforeEachProviders(() => [
       TestComponentBuilder
@@ -27,17 +24,17 @@ describe('Component: Root', () => {
 
     beforeEach(injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
       return tcb
-        .createAsync(Root)
-        .then(f => fixture = f);
+        .createAsync(RootComponent)
+        .then((f: ComponentFixture<any>) => fixture = f);
     }));
 
-    it('should have all subsections', done => {
+    it('should have all subsections', (done: () => void) => {
       fixture.detectChanges();
       const element = fixture.nativeElement;
-      expect(element.querySelectorAll('gapminder-overview').length).toBe(1);
-      expect(element.querySelectorAll('latest-posts').length).toBe(1);
-      expect(element.querySelectorAll('latest-videos').length).toBe(1);
-      expect(element.querySelectorAll('tweets').length).toBe(1);
+      expect(element.querySelectorAll('gm-gapminder-overview').length).toBe(1);
+      expect(element.querySelectorAll('gm-latest-posts').length).toBe(1);
+      expect(element.querySelectorAll('gm-latest-videos').length).toBe(1);
+      expect(element.querySelectorAll('gm-tweets').length).toBe(1);
       done();
     });
   });

@@ -1,20 +1,19 @@
-import {Component, EventEmitter, Output} from 'angular2/core';
-import {Collapse} from 'ng2-bootstrap';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {CollapseDirective} from 'ng2-bootstrap';
 
 @Component({
-  selector: 'search',
-  template: <string> require('./search.html'),
-  styles: [
-    <string> require('./search.styl')
-  ],
-  directives: [Collapse]
+  selector: 'gm-search',
+  template: require('./search.html') as string,
+  styles: [require('./search.styl') as string],
+  directives: [CollapseDirective]
 })
-
 export class SearchComponent {
-  private collapsed: boolean = true;
-  @Output() toggleSearchMenu: EventEmitter<boolean> = new EventEmitter();
+  @Output()
+  private toggleSearchMenu: EventEmitter<boolean> = new EventEmitter();
 
-  toggle() {
+  private collapsed: boolean = true;
+
+  public toggle(): void {
     this.collapsed = !this.collapsed;
     this.toggleSearchMenu.emit(this.collapsed);
   }

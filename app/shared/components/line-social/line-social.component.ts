@@ -1,13 +1,9 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 
 @Component({
-  selector: 'line-social',
-  template: <string> require('./line-social.html'),
-  styles: [
-    <string> require('./line-social.styl')
-  ]
+  selector: 'gm-line-social',
+  template: require('./line-social.html') as string,
+  styles: [require('./line-social.styl') as string]
 })
-
-export class LineSocial {
-
+export class LineSocialComponent {
 }

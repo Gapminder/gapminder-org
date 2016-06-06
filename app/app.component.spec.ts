@@ -2,10 +2,10 @@ import {
   it,
   inject,
   beforeEachProviders
-} from 'angular2/testing';
+} from '@angular/core/testing';
 
 import {AppComponent} from './app.component';
-import {getBaseTestProviders} from "./shared/tools/tests.tools";
+import {getBaseTestProviders} from './shared/tools/tests.tools';
 
 describe('App', () => {
   beforeEachProviders(() => [...getBaseTestProviders(), AppComponent]);

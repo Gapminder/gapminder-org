@@ -2,17 +2,22 @@
   <h2 class="post-head">Latest Videos</h2>
   <section class="videos-list">
     <div class="row">
-      <div *ngFor="#video of videos | async" class="video-item col-md-4  col-xs-12 col-sm-6">
-        <a [routerLink]="['DynamicContentDetails', {contentType: video.fields.type, contentSlug: video.fields.slug}]" class="video-wrap-img">
+      <div *ngFor="let video of videos" class="video-item col-md-4  col-xs-12 col-sm-6">
+        <a *ngIf="video.fields.url" [routerLink]="[video.fields.url]"
+           angulartics2On="click"
+           angularticsEvent="{{video.fields.title}}"
+           class="video-wrap-img">
           <span class="play"><i class="fa fa-play"></i></span>
-          <img [contentful-src-id]="video.fields.thumbnail.sys.id"
+          <img [gmContentfulSrcId]="video.fields.thumbnail.sys.id"
                [width]="300"
                [height]="240"
                [fit]="'scale'"
                alt="{{video.fields.title}}">
         </a>
-        <div class="date-info">{{ video.fields.createdAt | toDate | date }}</div>
-        <a [routerLink]="['DynamicContentDetails', {contentType: video.fields.type, contentSlug: video.fields.slug}]"
+        <div class="date-info">{{ video.fields.createdAt | gmToDate | date }}</div>
+        <a *ngIf="video.fields.url" [routerLink]="[video.fields.url]"
+           angulartics2On="click"
+           angularticsEvent="{{video.fields.title}}"
            class="post-title">
           {{video.fields.title}}
         </a>
@@ -21,6 +26,10 @@
     </div>
   </section>
   <div class="row text-center">
-    <button [routerLink]="['DynamicContent', {contentType: 'video'}]" class="btn-yellow  margin-top-50">View All Videos &#187;</button>
+    <button *ngIf="routesGatewayService.getRouteName(parentSlug)"
+            [routerLink]="[routesGatewayService.getRouteName(parentSlug)]"
+            angulartics2On="click"
+            angularticsEvent="'go to' + {{parentName}}"
+            class="btn-yellow  margin-top-50">View All Videos &#187;</button>
   </div>
 </section>

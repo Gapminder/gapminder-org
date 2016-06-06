@@ -3,12 +3,14 @@
     <h3 class="title">Related</h3>
 
     <ul class="list-proposals">
-      <li *ngFor="#item of relatedItems">
-        <a [routerLink]="['DynamicContentDetails', {contentType: contentType, contentSlug: item.fields.slug}]">
-        <span class="wrap-img">
-          <img [contentful-src-id]="item.fields.thumbnail.sys.id"
-               alt="{{item.fields.title}}">
-        </span>
+      <li *ngFor="let item of relatedItems">
+          <a *ngIf="item.fields.url" [routerLink]="[item.fields.url]"
+             angulartics2On="click"
+             angularticsEvent="{{item.fields.title}}">
+          <span class="wrap-img">
+            <img *ngIf="item.fields.thumbnail" [gmContentfulSrcId]="item.fields.thumbnail.sys.id"
+                 alt="{{item.fields.title}}">
+          </span>
           {{item.fields.title}}
         </a>
       </li>
@@ -24,7 +26,7 @@
   <p>Hans Rosling's TEDTalks have been seen by millions. Tune in and see the talks from 2006 onwards:</p>
 
   <ul class="list-proposals">
-    <li *ngFor="#listProposal of listProposals">
+    <li *ngFor="let listProposal of listProposals">
       <a href class="wrap-img">
         <img src="{{listProposal.img}}">
       </a>
@@ -40,5 +42,5 @@
 
   <hr>
 
-  <donate-section></donate-section>
+  <gm-donate-section></gm-donate-section>
 </div>

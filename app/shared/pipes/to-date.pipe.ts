@@ -1,13 +1,12 @@
-import {Pipe} from 'angular2/core';
-import {PipeTransform} from 'angular2/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-  name: 'toDate'
+  name: 'gmToDate'
 })
-export class ToDate implements PipeTransform {
-  transform(value: string, args: any[]): any {
+export class ToDatePipe implements PipeTransform {
+  public transform(value: string): any {
     if (value) {
-      //TODO add check for invalid date
+      // TODO add check for invalid date
       return new Date(value);
     }
     return undefined;

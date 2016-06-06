@@ -1,4 +1,5 @@
-import {ContentfulCommon, ContentfulIterableResponse} from 'ng2-contentful';
+import {ContentfulCommon} from 'ng2-contentful/src';
+import {ContentfulNodePagesResponse} from '../structures/aliases.structures';
 
 // this will be the part of ng2-contentful tools
 /**
@@ -7,8 +8,7 @@ import {ContentfulCommon, ContentfulIterableResponse} from 'ng2-contentful';
  * @param depth
  * @returns {T[]}
  */
-export function transformResponse<T extends ContentfulCommon<any>>
-(response: ContentfulIterableResponse<ContentfulCommon<any>>, depth: number = 1): T[] {
+export function transformResponse<T extends ContentfulCommon<any>>(response: ContentfulNodePagesResponse, depth: number = 1): T[] {
   let currentDepth = 0;
 
   // collect all includes
@@ -72,7 +72,7 @@ export function transformResponse<T extends ContentfulCommon<any>>
     return replacedItems;
   }
 
-  function replaceInItems(items: Array<ContentfulCommon<any>>) {
+  function replaceInItems(items: Array<ContentfulCommon<any>>): void {
     currentDepth++;
     let replacedItems: Array<any> = [];
     for (let item of items) {
@@ -85,5 +85,5 @@ export function transformResponse<T extends ContentfulCommon<any>>
 
   replaceInItems(response.items);
 
-  return <T[]> response.items;
+  return response.items as T[];
 }

@@ -1,40 +1,46 @@
-/// <reference path="../typings/browser.d.ts"/>
-
-import {bootstrap} from 'angular2/platform/browser';
-import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2/router';
+import {bootstrap} from '@angular/platform-browser-dynamic';
+import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {Angulartics2GoogleAnalytics} from 'angulartics2/src/providers/angulartics2-google-analytics';
 import {AppComponent} from './app.component';
-import {provide, ComponentRef, PLATFORM_DIRECTIVES, Injector} from 'angular2/core';
-import {Ng2ContentfulConfig} from 'ng2-contentful';
-import {HTTP_PROVIDERS} from 'angular2/http';
+import {provide, ComponentRef, PLATFORM_DIRECTIVES} from '@angular/core';
+import {Ng2ContentfulConfig} from 'ng2-contentful/src/index';
+import {HTTP_PROVIDERS} from '@angular/http';
 import {appInjector} from './shared/tools/app-injector.tool';
 import {ContentfulImageDirective} from './shared/directives/contentful-image.directive';
 import {ContenfulContent} from './shared/services/contentful-content.service';
 import {TwitterService} from './shared/services/twitter.service';
-import {ContentfulService} from 'ng2-contentful';
-import {PageStructure} from './shared/services/page-structure.service';
-import {ContentfulConfig} from './app.constans';
+import {ContentfulService} from 'ng2-contentful/src/index';
+import DynamicRouteConfigurator from './shared/services/dynamic-route-configurator.service';
+import {RoutesGatewayService} from './shared/services/routes-gateway.service';
+import {Angulartics2} from 'angulartics2/index';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
+import {BreadcrumbsService} from './shared/components/breadcrumbs/breadcrumbs.service';
 
 declare var CONTENTFUL_ACCESS_TOKEN: string;
 declare var CONTENTFUL_SPACE_ID: string;
+declare var CONTENTFUL_HOST: string;
 
 // contentful config
 Ng2ContentfulConfig.config = {
   accessToken: CONTENTFUL_ACCESS_TOKEN,
-  space: CONTENTFUL_SPACE_ID
+  space: CONTENTFUL_SPACE_ID,
+  host: CONTENTFUL_HOST
 };
 
-function main(structure: PageStructure) {
 // run app and get ref to global DI
   bootstrap(AppComponent, [
     ...ROUTER_PROVIDERS,
     ...HTTP_PROVIDERS,
+    Angulartics2,
+    DynamicRouteConfigurator,
     ContentfulService,
     ContenfulContent,
     TwitterService,
-    // use provided PageStructure instance through factory
-    provide(PageStructure, {
-      useFactory: () => structure
-    }),
+    BreadcrumbsService,
+    RoutesGatewayService,
+    Angulartics2GoogleAnalytics,
     provide(LocationStrategy, {
       useClass: HashLocationStrategy
     }),
@@ -42,22 +48,9 @@ function main(structure: PageStructure) {
       useValue: ContentfulImageDirective, multi: true
     })
   ]).then(
-    (appRef: ComponentRef) => {
+    (appRef: ComponentRef<any>) => {
       // workaround to get usable injector
       // probably it'l be removed in stable version
       appInjector(appRef.injector);
     }
   );
-}
-
-/*
-To build the page with the dynamic structure we need to fetch all
-node tree before we'll bootstrap our application.
- */
-let injector: Injector = Injector.resolveAndCreate([
-  ContenfulContent, ContentfulService, ...HTTP_PROVIDERS
-]);
-
-let contentfulContent: ContenfulContent = injector.get(ContenfulContent);
-contentfulContent.getPageTree(ContentfulConfig.CONTENTFUL_PAGE_TREE_ROOT_ID).subscribe(main);
-

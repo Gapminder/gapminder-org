@@ -1,32 +1,41 @@
-import {Component, OnInit} from 'angular2/core';
-import {RouterLink} from 'angular2/router';
-
-import {Observable} from 'rxjs/Observable';
+import {Component, OnInit, Inject} from '@angular/core';
+import {RouterLink} from '@angular/router-deprecated';
 import {ContenfulContent} from '../../services/contentful-content.service';
-import {AsyncPipe} from 'angular2/common';
-import {ContentfulConfig} from '../../../app.constans';
-import {ContentfulPageStructure} from '../../structures/aliases.structures';
+import {AsyncPipe} from '@angular/common';
+import {Menu} from '../../structures/content-type.structures';
+import {RoutesGatewayService} from '../../services/routes-gateway.service';
+import {Angulartics2On} from 'angulartics2/index';
+import {ContentfulMenu} from '../../structures/aliases.structures';
 
 @Component({
-  selector: 'footer',
-  template: <string> require('./footer.html'),
-  directives: [RouterLink],
-  styles: [<string> require('./footer.styl')],
+  selector: 'gm-footer',
+  template: require('./footer.html') as string,
+  directives: [RouterLink, Angulartics2On],
+  styles: [require('./footer.styl') as string],
   pipes: [AsyncPipe]
-
 })
+export class FooterComponent implements OnInit {
+  private menuType: string = 'footerMenu';
+  private menu: Menu[];
+  private contentfulContentService: ContenfulContent;
+  private routesGatewayService: RoutesGatewayService;
 
-export class Footer implements OnInit {
-  private children: Observable<ContentfulPageStructure[]>;
-
-  constructor(private _contentfulContent: ContenfulContent) {
+  public constructor(@Inject(ContenfulContent) contentfulContentService: ContenfulContent,
+                     @Inject(RoutesGatewayService) routesGatewayService: RoutesGatewayService) {
+    this.contentfulContentService = contentfulContentService;
+    this.routesGatewayService = routesGatewayService;
   }
 
-  ngOnInit(): void {
-
-    this.children = this._contentfulContent
-      .getPageTree(ContentfulConfig.CONTENTFUL_PAGE_TREE_FOOTER_ID)
-      .map(response => response.structure.children);
-
+  public ngOnInit(): void {
+    this.contentfulContentService
+      .getMenu(this.menuType)
+      .subscribe((response: ContentfulMenu[]) => {
+        this.menu = response[0].fields.entries;
+        for (let item of this.menu) {
+          if (item.fields.entryPoint) {
+            this.routesGatewayService.addRoute(item.fields.entryPoint.fields.slug, {name: item.fields.entryPoint.fields.title});
+          }
+        }
+      });
   }
 }

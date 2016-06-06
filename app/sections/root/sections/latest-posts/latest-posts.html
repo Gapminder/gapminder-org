@@ -2,21 +2,30 @@
   <h2 class="post-head">Latest Blog Posts</h2>
   <section class="posts-list">
     <div class="row">
-      <div *ngFor="#post of posts | async" class="blog-item col-md-4 col-xs-12 col-sm-6">
-        <a [routerLink]="['DynamicContentDetails', {contentType: post.fields.type, contentSlug: post.fields.slug}]"
+      <div *ngFor="let post of posts" class="blog-item col-md-4 col-xs-12 col-sm-6">
+        <a *ngIf="post.fields.url" [routerLink]="[post.fields.url]"
+           angulartics2On="click"
+           angularticsEvent="{{post.fields.title}}"
            class="post-wrap-img">
-          <img [contentful-src-id]="post.fields.thumbnail.sys.id"
+          <img [gmContentfulSrcId]="post.fields.thumbnail.sys.id"
                [fit]="'scale'"
                alt="{{post.fields.title}}">
         </a>
-        <div class="date-info">{{ post.fields.createdAt | toDate | date }}</div>
-        <a [routerLink]="['DynamicContentDetails', {contentType: post.fields.type, contentSlug: post.fields.slug}]"
-           class="post-title">{{post.fields.title}}</a>
+        <div class="date-info">{{ post.fields.createdAt | gmToDate | date }}</div>
+        <a *ngIf="post.fields.url" [routerLink]="[post.fields.url]"
+           angulartics2On="click"
+           angularticsEvent="{{post.fields.title}}"
+           class="post-title">{{post.fields.title}}
+        </a>
         <p class="post-p">{{post.fields.description}}</p>
       </div>
     </div>
   </section>
   <div class="row text-center">
-    <button class="btn-yellow margin-top-50s" [routerLink]="['DynamicContent', {contentType: 'blogpost'}]">View All Posts &#187;</button>
+    <button *ngIf="routesGatewayService.getRouteName(parentSlug)" [routerLink]="[routesGatewayService.getRouteName(parentSlug)]"
+            angulartics2On="click"
+            angularticsEvent="{{parentName}}"
+            class="btn-yellow  margin-top-50">View All Posts &#187;</button>
+
   </div>
 </section>

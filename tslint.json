@@ -1,3 +1,9 @@
 {
-  "extends": "tslint-config-valorsoft"
+  "extends": "tslint-config-valorsoft",
+  "rulesDirectory": "node_modules/codelyzer",
+  "rules": {
+    "directive-selector-prefix": [true, "gm"],
+    "component-selector-prefix": [true, "gm"],
+    "pipe-naming": [true, "camelCase", "gm"]
+  }
 }

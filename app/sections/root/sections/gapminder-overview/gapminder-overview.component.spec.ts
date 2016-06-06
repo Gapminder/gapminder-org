@@ -1,7 +1,12 @@
 
 import {
-  it, beforeEachProviders, beforeEach, TestComponentBuilder, ComponentFixture, injectAsync, inject
-} from 'angular2/testing';
+  it,
+  beforeEachProviders,
+  beforeEach,
+  injectAsync
+} from '@angular/core/testing';
+import {TestComponentBuilder, ComponentFixture} from '@angular/compiler/testing';
+
 import {getBaseTestProviders, TestContentfulNodePage} from '../../../../shared/tools/tests.tools';
 import {GapminderOverviewComponent} from './gapminder-overview.component';
 
@@ -13,7 +18,7 @@ describe('Component: Gapminder Overview', () => {
   ]);
 
   describe('View', () => {
-    let fixture: ComponentFixture;
+    let fixture: ComponentFixture<any>;
 
     beforeEachProviders(() => [
       TestComponentBuilder
@@ -22,10 +27,10 @@ describe('Component: Gapminder Overview', () => {
     beforeEach(injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
       return tcb
         .createAsync(GapminderOverviewComponent)
-        .then(f => fixture = f);
+        .then((f: ComponentFixture<any>) => fixture = f);
     }));
 
-    it('should have proper slide title', done => {
+    it('should have proper slide title', (done: () => void) => {
       fixture.detectChanges();
       const element = fixture.nativeElement;
       expect(element.querySelector('.title').textContent).toBe(
