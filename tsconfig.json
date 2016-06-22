@@ -4,7 +4,7 @@
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
-    "sourceMap": true,
+    "sourceMap": false,
     "removeComments": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -14,6 +14,6 @@
     "allowJs": true
   },
   "files": [
-    "typings/browser.d.ts"
+    "typings/index.d.ts"
    ]
 }

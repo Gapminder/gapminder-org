@@ -13,7 +13,8 @@ module.exports = {
     loaders: [
       {test: /\.ts$/, loader: 'ts', exclude: [/node_modules\/(?!(ng2-.+))/]},
       {test: /\.html$/, loader: 'raw'},
-      {test: /\.styl$/, loader: 'to-string!css?-url!stylus'}
+      {test: /\.styl$/, loader: 'to-string!css?-url!stylus'},
+      {test: /\.css$/, loader: 'to-string!css?-url'}
     ],
     postLoaders: [
       // instrument only testing sources with Istanbul

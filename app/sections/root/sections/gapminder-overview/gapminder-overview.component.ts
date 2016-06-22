@@ -1,13 +1,9 @@
 import {Component, ViewEncapsulation, OnInit, Inject} from '@angular/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, AsyncPipe} from '@angular/common';
 import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
-import {Observable} from 'rxjs/Observable';
-import {ContenfulContent} from '../../../../shared/services/contentful-content.service';
-import {ContentfulNodePage} from '../../../../shared/structures/aliases.structures';
-import {ToDatePipe} from '../../../../shared/pipes/to-date.pipe';
 import {RouterLink} from '@angular/router-deprecated';
-import {RoutesGatewayService} from '../../../../shared/services/routes-gateway.service';
 import {Angulartics2On} from 'angulartics2/index';
+import {RoutesGatewayService, ContentfulNodePage, ContenfulContent, ToDatePipe} from 'ng2-contentful-blog';
 
 @Component({
   selector: 'gm-gapminder-overview',
@@ -23,12 +19,13 @@ export class GapminderOverviewComponent implements OnInit {
   private contentfulContentService: ContenfulContent;
   private routesGatewayService: RoutesGatewayService;
 
-  // noinspection TsLint
+  /* tslint:disable:no-unused-variable */
   private carouselConfig: CarouselConfig = {
     head: 'A Fact-Based Worldview',
     interval: 5000,
     noWrap: false
   };
+  /* tslint:enable:no-unused-variable */
 
   public constructor(@Inject(ContenfulContent) contentfulContentService: ContenfulContent,
                      @Inject(RoutesGatewayService) routesGatewayService: RoutesGatewayService) {

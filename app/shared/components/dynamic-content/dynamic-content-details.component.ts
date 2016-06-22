@@ -1,17 +1,18 @@
 import {Component, Inject} from '@angular/core';
 import {OnActivate, ComponentInstruction, Router, RouterLink, CanReuse} from '@angular/router-deprecated';
-import {NodePageContent} from '../../structures/content-type.structures';
-import {ContenfulContent} from '../../services/contentful-content.service';
-import {ToDatePipe} from '../../pipes/to-date.pipe';
-import {EntriesViewComponent} from '../entries-view/entries-view.component';
 import {SidebarComponent} from '../sidebar/sidebar.component';
 import {LineSocialComponent} from '../line-social/line-social.component';
-import {ContentfulNodePage} from '../../structures/aliases.structures';
-import {RoutesGatewayService} from '../../services/routes-gateway.service';
-import {appInjector} from '../../tools/app-injector.tool';
 import {Angulartics2On} from 'angulartics2/index';
-import {TagsComponent} from '../tags/list-tags.component';
-import {BreadcrumbsService} from '../breadcrumbs/breadcrumbs.service';
+import {
+  BreadcrumbsService,
+  ContenfulContent,
+  RoutesGatewayService,
+  TagsComponent,
+  EntriesViewComponent,
+  NodePageContent,
+  ContentfulNodePage,
+  ToDatePipe
+} from 'ng2-contentful-blog';
 
 @Component({
   template: require('./dynamic-content-details.component.html') as string,
@@ -30,14 +31,13 @@ export class DynamicContentDetailsComponent implements OnActivate, CanReuse {
   private breadcrumbsService: BreadcrumbsService;
 
   public constructor(@Inject(Router) router: Router,
+                     @Inject(RoutesGatewayService) routesGatewayService: RoutesGatewayService,
                      @Inject(ContenfulContent) contentfulContentService: ContenfulContent,
                      @Inject(BreadcrumbsService) breadcrumbsService: BreadcrumbsService) {
     this.router = router;
+    this.routesGatewayService = routesGatewayService;
     this.contentfulContentService = contentfulContentService;
     this.breadcrumbsService = breadcrumbsService;
-
-    // FIXME: Workaround for now - should be injected in a proper way not using the injector explicitly
-    this.routesGatewayService = appInjector().get(RoutesGatewayService);
   }
 
   public routerOnActivate(next: ComponentInstruction): any {
@@ -67,7 +67,7 @@ export class DynamicContentDetailsComponent implements OnActivate, CanReuse {
   }
 
   // noinspection TsLint
-  public routerCanReuse(next: ComponentInstruction, prev: ComponentInstruction): boolean {
+  public routerCanReuse(): boolean {
     return false;
   }
 }

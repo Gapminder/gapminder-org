@@ -1,10 +1,7 @@
 import {Component, Input, OnInit, Inject} from '@angular/core';
 import {RouterLink} from '@angular/router-deprecated';
-import {Observable} from 'rxjs/Observable';
-import {ContenfulContent} from '../../../../shared/services/contentful-content.service';
-import {ContentfulNodePage} from '../../../../shared/structures/aliases.structures';
-import {ToDatePipe} from '../../../../shared/pipes/to-date.pipe';
-import {RoutesGatewayService} from '../../../../shared/services/routes-gateway.service';
+import {ContenfulContent, ContentfulNodePage, ToDatePipe, RoutesGatewayService} from 'ng2-contentful-blog';
+
 import {Angulartics2On} from 'angulartics2/index';
 
 @Component({

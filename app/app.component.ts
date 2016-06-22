@@ -3,13 +3,15 @@ import {RouteConfig, ROUTER_DIRECTIVES, Router} from '@angular/router-deprecated
 import {HeaderComponent} from './shared/components/header/header.component';
 import {FooterComponent} from './shared/components/footer/footer.component';
 import {RootComponent} from './sections/root/root.component';
-import RoutesGatewayComponent from './shared/components/dynamic-content/routes-gateway.component';
-import {RoutesGatewayService} from './shared/services/routes-gateway.service';
-import {BreadcrumbsComponent} from './shared/components/breadcrumbs/breadcrumbs.component';
 import {Angulartics2GoogleAnalytics} from 'angulartics2/src/providers/angulartics2-google-analytics';
 import {Angulartics2} from 'angulartics2/index';
-import {TagComponent} from './shared/components/tags/tag.component';
-import {BreadcrumbsService} from './shared/components/breadcrumbs/breadcrumbs.service';
+import {
+  RoutesGatewayComponent,
+  BreadcrumbsService,
+  RoutesGatewayService,
+  BreadcrumbsComponent,
+  TagComponent
+} from 'ng2-contentful-blog';
 
 @Component({
   selector: 'gm-app',

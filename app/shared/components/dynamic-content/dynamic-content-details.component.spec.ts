@@ -1,5 +1,5 @@
 import {
-  it, beforeEachProviders, beforeEach, injectAsync, inject
+  it, beforeEachProviders, beforeEach, inject, async
 } from '@angular/core/testing';
 import {TestComponentBuilder, ComponentFixture} from '@angular/compiler/testing';
 
@@ -20,11 +20,11 @@ describe('Component: Dynamic Content Details', () => {
       TestComponentBuilder
     ]);
 
-    beforeEach(injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+    beforeEach(async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
       return tcb
         .createAsync(DynamicContentDetailsComponent)
         .then((f: ComponentFixture<any>) => fixture = f);
-    }));
+    })));
 
     xit('should have proper amount of dynamic items', (done: () => void) => {
       fixture.detectChanges();

@@ -1,16 +1,14 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit, Inject} from '@angular/core';
 import {RouterLink} from '@angular/router-deprecated';
-import {ContenfulContent} from '../../services/contentful-content.service';
 import {AsyncPipe} from '@angular/common';
-import {Menu} from '../../structures/content-type.structures';
-import {RoutesGatewayService} from '../../services/routes-gateway.service';
+import {ContenfulContent, RoutesGatewayService, Menu, ContentfulMenu, FooterMenuComponent} from 'ng2-contentful-blog';
 import {Angulartics2On} from 'angulartics2/index';
-import {ContentfulMenu} from '../../structures/aliases.structures';
 
 @Component({
   selector: 'gm-footer',
+  encapsulation: ViewEncapsulation.None,
   template: require('./footer.html') as string,
-  directives: [RouterLink, Angulartics2On],
+  directives: [RouterLink, Angulartics2On, FooterMenuComponent],
   styles: [require('./footer.styl') as string],
   pipes: [AsyncPipe]
 })

@@ -1,12 +1,14 @@
 import {Component, OnInit, Input, Inject} from '@angular/core';
 import {RouterLink} from '@angular/router-deprecated';
 import {AsyncPipe} from '@angular/common';
-import {ContenfulContent} from '../../../../shared/services/contentful-content.service';
-import {ContentfulNodePage} from '../../../../shared/structures/aliases.structures';
-import {ToDatePipe} from '../../../../shared/pipes/to-date.pipe';
-import {RoutesGatewayService} from '../../../../shared/services/routes-gateway.service';
 import {Angulartics2GoogleAnalytics} from 'angulartics2/src/providers/angulartics2-google-analytics';
 import {Angulartics2On} from 'angulartics2/index';
+import {
+  ToDatePipe,
+  ContentfulNodePage,
+  ContenfulContent,
+  RoutesGatewayService
+} from 'ng2-contentful-blog';
 
 @Component({
   selector: 'gm-latest-posts',

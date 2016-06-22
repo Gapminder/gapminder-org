@@ -1,5 +1,5 @@
 import {
-  it, beforeEachProviders, beforeEach, injectAsync, inject
+  it, beforeEachProviders, beforeEach, async, inject
 } from '@angular/core/testing';
 import {TestComponentBuilder, ComponentFixture} from '@angular/compiler/testing';
 import {getBaseTestProviders} from '../../../../shared/tools/tests.tools';
@@ -19,11 +19,11 @@ describe('Component: Latest Posts', () => {
       TestComponentBuilder
     ]);
 
-    beforeEach(injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+    beforeEach(async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
       return tcb
         .createAsync(LatestPostsComponent)
         .then((f: ComponentFixture<any>) => fixture = f);
-    }));
+    })));
 
     it('should have proper amount of post items', (done: () => void) => {
       fixture.detectChanges();

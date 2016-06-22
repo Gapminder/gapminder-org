@@ -1,5 +1,4 @@
 import {PLATFORM_DIRECTIVES, provide, Directive, ElementRef, Input, Inject} from '@angular/core';
-import {ContenfulContent} from '../services/contentful-content.service';
 import {AppComponent} from '../../app.component';
 import {ROUTER_PRIMARY_COMPONENT, Router, RouteRegistry, RouteDefinition} from '@angular/router-deprecated';
 import {Location} from '@angular/common';
@@ -8,13 +7,16 @@ import {SpyLocation} from '@angular/common/testing';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/observable/bindCallback';
 import 'rxjs/add/operator/map';
-import {ContentfulNodePage} from '../structures/aliases.structures';
 import {TwitterService, Tweet, TwitterUser} from '../services/twitter.service';
-import {RoutesGatewayService} from '../services/routes-gateway.service';
 import {Angulartics2} from 'angulartics2/index';
 import {Angulartics2GoogleAnalytics} from 'angulartics2/src/providers/angulartics2-google-analytics';
-import {BreadcrumbsService} from '../components/breadcrumbs/breadcrumbs.service';
-import DynamicRouteConfigurator from '../services/dynamic-route-configurator.service';
+import {
+  BreadcrumbsService,
+  RoutesGatewayService,
+  DynamicRouteConfigurator,
+  ContentfulNodePage,
+  ContenfulContent
+} from 'ng2-contentful-blog';
 
 export function getBaseTestProviders(): any[] {
   return [
@@ -68,22 +70,19 @@ export const TestContentfulNodePage: ContentfulNodePage = {
 
 // TODO move it somewhere else + refactor
 export class ContenfulContentMock {
-
-  // noinspection TsLint
+  /* tslint:disable:no-unused-variable */
   public getLatestVideo(limit: number): Observable<ContentfulNodePage[]> {
     return new Observable((observer: any) => {
       observer.next([TestContentfulNodePage]);
     });
   }
 
-  // noinspection TsLint
   public getLatestPosts(limit: number): Observable<ContentfulNodePage[]> {
     return new Observable((observer: any) => {
       observer.next([TestContentfulNodePage]);
     });
   }
 
-  // noinspection TsLint
   public getParentOf(id: string): Observable<ContentfulNodePage[]> {
     return new Observable((observer: any) => {
       observer.next([TestContentfulNodePage]);
@@ -96,7 +95,6 @@ export class ContenfulContentMock {
     });
   }
 
-  // noinspection TsLint
   public getAboutPage(slug: string): Observable<any> {
     return new Observable((observer: any) => {
       observer.next({
@@ -108,6 +106,8 @@ export class ContenfulContentMock {
       });
     });
   }
+
+  /* tslint:enable:no-unused-variable */
 }
 
 export class TwitterServiceMock {
@@ -118,25 +118,24 @@ export class TwitterServiceMock {
 
 export class TwitterRequestMock {
 
-  // noinspection TsLint
+  /* tslint:disable:no-unused-variable */
   public author(name: string): TwitterRequestMock {
     return this;
   }
 
-  // noinspection TsLint
   public maxId(maxId: string): TwitterRequestMock {
     return this;
   }
 
-  // noinspection TsLint
   public sinceId(sinceId: string): TwitterRequestMock {
     return this;
   }
 
-  // noinspection TsLint
   public count(count: number): TwitterRequestMock {
     return this;
   }
+
+  /* tslint:enable:no-unused-variable */
 
   public getTweets(): Observable<Array<Tweet>> {
     const twitterUser: TwitterUser = {
@@ -162,12 +161,11 @@ export class TwitterRequestMock {
 
 export class RoutesGatewayServiceMock {
 
-  // noinspection TsLint
+  /* tslint:disable:no-unused-variable */
   public addRoute(path: string, data?: Object): string {
     return 'AYmxvZy9nYXBtaW5kZXItYmxvZy1wb3N0';
   }
 
-  // noinspection TsLint
   public getAnnotations(component: any): Observable<RouteDefinition[]> {
     const annotations: RouteDefinition = {
       path: 'videos',
@@ -178,20 +176,19 @@ export class RoutesGatewayServiceMock {
     });
   }
 
-  // noinspection TsLint
   public getSlugParent(id: any, cb: any): any {
     return 'blog';
   }
 
-  // noinspection TsLint
   public getRouteName(path: string): string {
     return undefined;
   }
 
-  // noinspection TsLint
   public getRouteDefinitions(component: any): RouteDefinition[] {
     return undefined;
   }
+
+  /* tslint:enable:no-unused-variable */
 
 }
 
@@ -199,22 +196,19 @@ export class RoutesGatewayServiceMock {
   selector: '[gmContentfulSrcId]'
 })
 export class ContentfulImageDirectiveMock {
-
-  // noinspection TsLint
+  /* tslint:disable:no-unused-variable */
   @Input()
   private gmContentfulSrcId: string;
 
-  // noinspection TsLint
   @Input()
   private width: string;
 
-  // noinspection TsLint
   @Input()
   private height: string;
 
-  // noinspection TsLint
   @Input()
   private fit: string;
+  /* tslint:enable:no-unused-variable */
 
   private element: ElementRef;
 
