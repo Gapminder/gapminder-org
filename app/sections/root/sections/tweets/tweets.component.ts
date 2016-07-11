@@ -1,9 +1,10 @@
 import {Component, Input, OnInit, Inject} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 import {TwitterService, Tweet, TwitterRequest} from '../../../../shared/services/twitter.service';
-import * as _ from 'lodash';
-import {ToDatePipe} from '../../../../shared/pipes/to-date.pipe';
 import {formatTwitterFollowersAmount} from '../../../../shared/components/dynamic-content/tools';
+import {ToDatePipe} from 'ng2-contentful-blog';
+
+import * as _ from 'lodash';
 
 @Component({
   selector: 'gm-tweets',
@@ -19,12 +20,13 @@ export class TweetsComponent implements OnInit {
   @Input()
   private author: string;
 
-  // noinspection TsLint
+  /* tslint:disable:no-unused-variable */
   private infFollow: FollowerInfo = {
     link: 'https://twitter.com/hansrosling',
     title: 'Follow Hans',
     count: 'Followers'
   };
+  /* tslint:enable:no-unused-variable */
 
   private tweets: Array<Tweet> = [];
   private currentTweet: Tweet;

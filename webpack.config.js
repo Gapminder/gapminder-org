@@ -49,14 +49,18 @@ const config = {
       'zone.js',
       'es7-reflect-metadata',
       'rxjs',
-      '@angular/platform-browser',
       '@angular/common',
       '@angular/core',
-      '@angular/router',
+      '@angular/http',
+      '@angular/compiler',
+      '@angular/platform-browser',
+      '@angular/platform-browser-dynamic',
+      '@angular/router-deprecated',
       // common
       'moment',
       'ng2-bootstrap',
-      'ng2-contentful/src'
+      'ng2-contentful-blog',
+      'ng2-contentful'
     ],
     // vendors: [
     //   // 3rd libs
@@ -82,6 +86,7 @@ const config = {
       // Support for *.json files.
       {test: /\.json$/, loader: 'json'},
       // Support for CSS as raw text
+      {test: /\.css$/, loader: 'to-string!css?-url'},
       {test: /\.styl$/, loader: 'to-string!css?-url!stylus'},
 
       // support for .html as raw text

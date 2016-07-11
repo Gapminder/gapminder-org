@@ -1,9 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Inject} from '@angular/core';
 import {DonateComponent} from './donate/donate.component';
 import {RouterLink} from '@angular/router-deprecated';
-import {RoutesGatewayService} from '../../services/routes-gateway.service';
-import {appInjector} from '../../tools/app-injector.tool';
-import {ContenfulContent} from '../../services/contentful-content.service';
+import {ContenfulContent, RoutesGatewayService} from 'ng2-contentful-blog';
 import {Angulartics2On} from 'angulartics2/index';
 
 @Component({
@@ -16,18 +14,17 @@ export class SidebarComponent implements OnInit {
   @Input()
   private relatedItems: Array<any> = [];
 
-  // noinspection TsLint
-  @Input()
-  private contentSlug: string;
+  /* tslint:disable:no-unused-variable */
+  @Input() private contentSlug: string;
+  /* tslint:enable:no-unused-variable */
 
   private routesGatewayService: RoutesGatewayService;
   private contentfulContentServise: ContenfulContent;
 
-  public constructor(contentfulContentServise: ContenfulContent) {
+  public constructor(@Inject(ContenfulContent) contentfulContentServise: ContenfulContent,
+                     @Inject(RoutesGatewayService) routesGatewayService: RoutesGatewayService) {
     this.contentfulContentServise = contentfulContentServise;
-
-    // FIXME: Workaround for now - should be injected in a proper way not using the injector explicitly
-    this.routesGatewayService = appInjector().get(RoutesGatewayService);
+    this.routesGatewayService = routesGatewayService;
   }
 
   public ngOnInit(): void {

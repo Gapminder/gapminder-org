@@ -1,10 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ROUTER_DIRECTIVES, RouteData, RouteParams} from '@angular/router-deprecated';
-import {MarkdownPipe} from '../../shared/pipes/markdown.pipe';
-import {ContenfulContent} from '../../shared/services/contentful-content.service';
-import {NodePageContent} from '../../shared/structures/content-type.structures';
+import {ContenfulContent, MarkdownPipe, NodePageContent, ContentfulNodePage} from 'ng2-contentful-blog';
 import {SidebarComponent} from '../../shared/components/sidebar/sidebar.component.ts';
-import {ContentfulNodePage} from '../../shared/structures/aliases.structures';
 
 @Component({
   template: require('./about.component.html') as string,
@@ -33,8 +30,8 @@ export class AboutComponent implements OnInit {
     this.contentfulContentService
       .getAboutPage(slug)
       .subscribe((response: {submenuItems: any[], content: ContentfulNodePage}) => {
-          this.submenuItems = response.submenuItems;
-          this.content = response.content;
+        this.submenuItems = response.submenuItems;
+        this.content = response.content;
       });
   }
 }

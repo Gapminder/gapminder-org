@@ -1,19 +1,17 @@
 import {Component, OnInit, Inject} from '@angular/core';
-import {RouterLink, Router, Instruction} from '@angular/router-deprecated';
+import {RouterLink, Router} from '@angular/router-deprecated';
 import {CollapseDirective, DROPDOWN_DIRECTIVES} from 'ng2-bootstrap';
 import {RootComponent} from '../../../sections/root/root.component';
 import {SearchComponent} from '../search/search.component';
-import {Menu} from '../../structures/content-type.structures';
-import {ContenfulContent} from '../../services/contentful-content.service';
-import {RoutesGatewayService} from '../../services/routes-gateway.service';
+import {RoutesGatewayService, ContentfulMenu, ContenfulContent, Menu, HeaderMenuComponent} from 'ng2-contentful-blog';
+
 import {Angulartics2On} from 'angulartics2/index';
-import {ContentfulMenu} from '../../structures/aliases.structures';
 
 @Component({
   selector: 'gm-header',
   template: require('./header.html') as string,
   styles: [require('./header.styl') as string],
-  directives: [CollapseDirective, DROPDOWN_DIRECTIVES, RouterLink, SearchComponent, Angulartics2On]
+  directives: [HeaderMenuComponent, CollapseDirective, DROPDOWN_DIRECTIVES, RouterLink, SearchComponent, Angulartics2On]
 })
 export class HeaderComponent implements OnInit {
   private isOnRootView: boolean;
@@ -22,6 +20,7 @@ export class HeaderComponent implements OnInit {
   private menuType: string = 'header';
   private contentfulContentService: ContenfulContent;
   private routesGatewayService: RoutesGatewayService;
+  private router: Router;
 
   public constructor(@Inject(Router) router: Router,
                      @Inject(ContenfulContent) contentfulContentService: ContenfulContent,
@@ -29,11 +28,9 @@ export class HeaderComponent implements OnInit {
 
     this.contentfulContentService = contentfulContentService;
     this.routesGatewayService = routesGatewayService;
-
-    router.subscribe((url: string) => {
-      router.recognize(url).then((instruction: Instruction) => {
-        this.isOnRootView = instruction.component.componentType === RootComponent;
-      });
+    this.router = router;
+    this.router.subscribe((res: any) => {
+      this.isOnRootView = res.instruction.componentType === RootComponent;
     });
   }
 
