@@ -1,33 +1,30 @@
 import {
   it,
-  beforeEachProviders,
+  addProviders,
   beforeEach,
   inject,
-  async
+  TestComponentBuilder, ComponentFixture
 } from '@angular/core/testing';
-import {TestComponentBuilder, ComponentFixture} from '@angular/compiler/testing';
 import {RootComponent} from './root.component';
 import {getBaseTestProviders} from '../../shared/tools/tests.tools';
 
-xdescribe('Component: Root', () => {
+describe('Component: Root', () => {
 
-  beforeEachProviders(() => [
+  beforeEach(() => addProviders([
     ...getBaseTestProviders(),
     RootComponent
-  ]);
+  ]));
 
   describe('View', () => {
     let fixture: ComponentFixture<any>;
 
-    beforeEachProviders(() => [
+    beforeEach(() => addProviders([
       TestComponentBuilder
-    ]);
+    ]));
 
-    beforeEach(async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-      return tcb
-        .createAsync(RootComponent)
-        .then((f: ComponentFixture<any>) => fixture = f);
-    })));
+    beforeEach(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+      fixture = tcb.createSync(RootComponent);
+    }));
 
     it('should have all subsections', (done: () => void) => {
       fixture.detectChanges();

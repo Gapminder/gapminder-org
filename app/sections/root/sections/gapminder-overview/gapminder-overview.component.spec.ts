@@ -3,21 +3,16 @@ import {
   addProviders,
   beforeEach,
   inject,
-  async
+  TestComponentBuilder, ComponentFixture
 } from '@angular/core/testing';
-import {TestComponentBuilder, ComponentFixture} from '@angular/compiler/testing';
-
 import {getBaseTestProviders, TestContentfulNodePage} from '../../../../shared/tools/tests.tools';
 import {GapminderOverviewComponent} from './gapminder-overview.component';
 
-xdescribe('Component: Gapminder Overview', () => {
-  beforeEach(() => {
-    addProviders([
-      ...getBaseTestProviders(),
-      GapminderOverviewComponent
-    ]);
-  });
-
+describe('Component: Gapminder Overview', () => {
+  beforeEach(() => addProviders([
+    ...getBaseTestProviders(),
+    GapminderOverviewComponent
+  ]));
   describe('View', () => {
     let fixture: ComponentFixture<any>;
 
@@ -26,18 +21,15 @@ xdescribe('Component: Gapminder Overview', () => {
         TestComponentBuilder
       ]);
     });
-    beforeEach(async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
-      return tcb
-        .createAsync(GapminderOverviewComponent)
-        .then((f: ComponentFixture<any>) => fixture = f);
-    })));
+    beforeEach(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+      fixture = tcb.createSync(GapminderOverviewComponent);
+
+    }));
 
     it('should have proper slide title', (done: () => void) => {
       fixture.detectChanges();
       const element = fixture.nativeElement;
-      expect(element.querySelector('.title').textContent).toBe(
-        TestContentfulNodePage.fields.title
-      );
+      expect(element.querySelector('.title').textContent).toBe(TestContentfulNodePage.fields.title);
       done();
     });
 

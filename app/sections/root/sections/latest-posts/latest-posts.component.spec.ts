@@ -1,23 +1,22 @@
 import {
-  it, beforeEachProviders, beforeEach, async, inject
+  it, addProviders, beforeEach, async, inject, TestComponentBuilder, ComponentFixture
 } from '@angular/core/testing';
-import {TestComponentBuilder, ComponentFixture} from '@angular/compiler/testing';
 import {getBaseTestProviders} from '../../../../shared/tools/tests.tools';
 import {LatestPostsComponent} from './latest-posts.component';
 
 describe('Component: Latest Posts', () => {
 
-  beforeEachProviders(() => [
+  beforeEach(() => addProviders([
     ...getBaseTestProviders(),
     LatestPostsComponent
-  ]);
+  ]));
 
   describe('View', () => {
     let fixture: ComponentFixture<any>;
 
-    beforeEachProviders(() => [
+    beforeEach(() => addProviders([
       TestComponentBuilder
-    ]);
+    ]));
 
     beforeEach(async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
       return tcb

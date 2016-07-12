@@ -1,24 +1,21 @@
 import {
-  it, beforeEachProviders, beforeEach, inject, async
+  it, addProviders, beforeEach, inject, async, TestComponentBuilder, ComponentFixture
 } from '@angular/core/testing';
-import {TestComponentBuilder, ComponentFixture} from '@angular/compiler/testing';
-
 import {DynamicContentDetailsComponent} from './dynamic-content-details.component';
 import {getBaseTestProviders} from '../../tools/tests.tools';
 
 describe('Component: Dynamic Content Details', () => {
 
-  beforeEachProviders(() => [
+  beforeEach(() => addProviders([
     ...getBaseTestProviders(),
     DynamicContentDetailsComponent
-  ]);
-
+  ]));
   xdescribe('View', () => {
     let fixture: ComponentFixture<any>;
 
-    beforeEachProviders(() => [
+    beforeEach(() => addProviders([
       TestComponentBuilder
-    ]);
+    ]));
 
     beforeEach(async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
       return tcb
