@@ -1,5 +1,5 @@
 import {
-  it, beforeEachProviders, beforeEach, inject, async
+  it, addProviders, beforeEach, inject, async
 } from '@angular/core/testing';
 import {TestComponentBuilder, ComponentFixture} from '@angular/compiler/testing';
 
@@ -7,18 +7,17 @@ import {LatestVideosComponent} from './latest-videos.component';
 import {getBaseTestProviders} from '../../../../shared/tools/tests.tools';
 
 describe('Component: Latest Videos', () => {
-
-  beforeEachProviders(() => [
+  beforeEach(() => addProviders([
     ...getBaseTestProviders(),
     LatestVideosComponent
-  ]);
+  ]));
 
   describe('View', () => {
     let fixture: ComponentFixture<any>;
 
-    beforeEachProviders(() => [
+    beforeEach(() => addProviders([
       TestComponentBuilder
-    ]);
+    ]));
 
     beforeEach(async(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
       return tcb
