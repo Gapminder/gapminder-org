@@ -30,7 +30,7 @@ export class SidebarComponent implements OnInit {
   public ngOnInit(): void {
     if (this.relatedItems) {
       for (let item of this.relatedItems) {
-        this.routesGatewayService.getSlugParent(item.sys.id, (url: string) => {
+        this.routesGatewayService.getArticleParentSlug(item.sys.id, (url: string) => {
           item.fields.url = this.routesGatewayService.addRoute(url, {name: item.fields.title});
         });
       }

@@ -41,7 +41,7 @@ bootstrap(AppComponent, [
   GAPMINDER_PROVIDERS,
   provide('ComponentUseDefault', {useValue: DynamicContentDetailsComponent}),
   provide('RootComponent', {useValue: AppComponent}),
-  provide('ContentfulConstantId', {useValue: ContentfulConfig}),
+  provide('ContentfulTypeIds', {useValue: ContentfulConfig}),
   provide(LocationStrategy, {useClass: HashLocationStrategy}),
   provide(PLATFORM_DIRECTIVES, {
     useValue: ContentfulImageDirective, multi: true

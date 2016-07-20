@@ -10,7 +10,7 @@ import {
   BreadcrumbsService,
   RoutesGatewayService,
   BreadcrumbsComponent,
-  TagComponent
+  TagComponent, ProfileComponent
 } from 'ng2-contentful-blog';
 
 @Component({
@@ -37,6 +37,7 @@ import {
 @RouteConfig([
   {path: '/', component: RootComponent, name: 'Root', useAsDefault: true},
   {path: '/tag/:tag', component: TagComponent, name: 'TagComponent'},
+  {path: '/profile/:userName', component: ProfileComponent, name: 'ProfileComponent'},
   {path: '/**', component: RoutesGatewayComponent}
 ])
 export class AppComponent implements OnInit {

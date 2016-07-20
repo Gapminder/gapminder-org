@@ -5,6 +5,7 @@ import {LatestVideosComponent} from './sections/latest-videos/latest-videos.comp
 import {TweetsComponent} from './sections/tweets/tweets.component';
 
 @Component({
+  selector: 'gm-root',
   template: require('./root.component.html') as string,
   styles: [require('./root.component.styl') as string],
   directives: [
