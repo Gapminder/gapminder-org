@@ -11,12 +11,12 @@ import {
   EntriesViewComponent,
   NodePageContent,
   ContentfulNodePage,
-  ToDatePipe
+  ToDatePipe, ContributorsComponent
 } from 'ng2-contentful-blog';
 
 @Component({
   template: require('./dynamic-content-details.component.html') as string,
-  directives: [EntriesViewComponent, SidebarComponent, LineSocialComponent, RouterLink, Angulartics2On, TagsComponent],
+  directives: [EntriesViewComponent, SidebarComponent, LineSocialComponent, RouterLink, Angulartics2On, TagsComponent, ContributorsComponent],
   styles: [require('./dynamic-content-details.component.styl') as string],
   pipes: [ToDatePipe]
 })
@@ -26,6 +26,7 @@ export class DynamicContentDetailsComponent implements OnActivate, CanReuse {
   private routesGatewayService: RoutesGatewayService;
   private urlPath: string;
   private contentSlug: string;
+  private articleSysId: string;
   private router: Router;
   private contentfulContentService: ContenfulContent;
   private breadcrumbsService: BreadcrumbsService;
@@ -50,10 +51,11 @@ export class DynamicContentDetailsComponent implements OnActivate, CanReuse {
           if (!content) {
             this.router.navigate(['Root']);
           }
+          this.articleSysId = content[0].sys.id;
           this.content = content[0].fields;
           this.breadcrumbsService.breadcrumbs$.next({url: next.urlPath, name: this.content.title});
           this.contentfulContentService
-            .getChildrenOf(content[0].sys.id)
+            .getChildrenOfArticle(content[0].sys.id)
             .subscribe(
               (children: ContentfulNodePage[]) => {
                 this.childrenList = children;

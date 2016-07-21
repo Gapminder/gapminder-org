@@ -1,8 +1,7 @@
-import {Component, Input, OnInit, Inject} from '@angular/core';
-import {RouterLink} from '@angular/router-deprecated';
-import {ContenfulContent, ContentfulNodePage, ToDatePipe, RoutesGatewayService} from 'ng2-contentful-blog';
-
-import {Angulartics2On} from 'angulartics2/index';
+import { Component, Input, OnInit, Inject } from '@angular/core';
+import { RouterLink } from '@angular/router-deprecated';
+import { ContenfulContent, ContentfulNodePage, ToDatePipe, RoutesGatewayService } from 'ng2-contentful-blog';
+import { Angulartics2On } from 'angulartics2/index';
 
 @Component({
   selector: 'gm-latest-videos',
@@ -19,6 +18,8 @@ export class LatestVideosComponent implements OnInit {
   private routesGatewayService: RoutesGatewayService;
   private parentSlug: string = 'videos';
   private parentName: string = 'Videos';
+  private tagId: string;
+  private nameTag: string = 'video';
 
   public constructor(@Inject(ContenfulContent) contentfulContentService: ContenfulContent,
                      @Inject(RoutesGatewayService) routesGatewayService: RoutesGatewayService) {
@@ -29,15 +30,20 @@ export class LatestVideosComponent implements OnInit {
 
   public ngOnInit(): void {
     this.routesGatewayService.addRoute(this.parentSlug, {name: this.parentName});
-    this.contentfulContentService.getLatestVideo(this.limit)
-      .subscribe((videos: ContentfulNodePage[]) => {
-        for (let video of videos) {
-          this.routesGatewayService.getSlugParent(video.sys.id, (url: string) => {
-            video.fields.url = this.routesGatewayService.addRoute(url, {name: video.fields.title});
+    this.contentfulContentService
+      .getTagsBySlug(this.nameTag).subscribe((contentTag: any[]) => {
+      this.tagId = contentTag[0].sys.id;
+      this.contentfulContentService
+        .getLatestArticlesByTag(this.tagId, this.limit)
+        .subscribe(
+          (res: ContentfulNodePage[]) => {
+            this.videos = res;
+            for (let item of this.videos) {
+              this.routesGatewayService.getArticleParentSlug(item.sys.id, (url: string) => {
+                item.fields.url = this.routesGatewayService.addRoute(url, {name: item.fields.title});
+              });
+            }
           });
-        }
-        this.videos = videos;
-        return this.videos;
-      });
+    });
   }
 }

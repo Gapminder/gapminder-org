@@ -1,7 +1,5 @@
 import {
-  it,
   addProviders,
-  beforeEach,
   inject,
   TestComponentBuilder, ComponentFixture
 } from '@angular/core/testing';
@@ -15,7 +13,7 @@ describe('Component: Root', () => {
     RootComponent
   ]));
 
-  describe('View', () => {
+  xdescribe('View', () => {
     let fixture: ComponentFixture<any>;
 
     beforeEach(() => addProviders([

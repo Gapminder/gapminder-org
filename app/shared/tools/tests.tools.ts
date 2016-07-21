@@ -176,7 +176,7 @@ export class RoutesGatewayServiceMock {
     });
   }
 
-  public getSlugParent(id: any, cb: any): any {
+  public getArticleParentSlug(id: any, cb: any): any {
     return 'blog';
   }
 
