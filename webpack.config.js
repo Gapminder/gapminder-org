@@ -13,8 +13,9 @@ const isProduction = (process.env.NODE_ENV || 'development') === 'production';
 const devtool = isProduction ? 'cheap-module-eval-source-map' : 'source-map';
 const dest = 'dist';
 const absDest = root(dest);
-const contentfulConfig = JSON.parse(
-  fs.readFileSync('./contentful.json') //eslint-disable-line no-sync
+
+const contentfulDevConfig = JSON.parse(
+  fs.readFileSync('./contentful-dev.json') // eslint-disable-line no-sync
 );
 
 const twitterConfig = JSON.parse(
@@ -56,18 +57,11 @@ const config = {
       '@angular/platform-browser',
       '@angular/platform-browser-dynamic',
       '@angular/router-deprecated',
-      // common
       'moment',
       'ng2-bootstrap',
       'ng2-contentful-blog',
       'ng2-contentful'
     ],
-    // vendors: [
-    //   // 3rd libs
-    //   'moment',
-    //   'ng2-bootstrap',
-    //   'ng2-contentful'
-    // ],
     app: 'app'
   },
 
@@ -80,18 +74,12 @@ const config = {
 
   module: {
     loaders: [
-      // support markdown
       {test: /\.(png|svg)$/, loader: 'raw'},
       {test: /\.md$/, loader: 'html?minimize=false!markdown'},
-      // Support for *.json files.
       {test: /\.json$/, loader: 'json'},
-      // Support for CSS as raw text
       {test: /\.css$/, loader: 'to-string!css?-url'},
       {test: /\.styl$/, loader: 'to-string!css?-url!stylus'},
-
-      // support for .html as raw text
       {test: /\.html$/, loader: 'raw'},
-      // Support for .ts files.
       {
         test: /\.ts$/,
         loader: 'ts',
@@ -113,22 +101,20 @@ const config = {
   },
 
   plugins: [
-    // faster without it and now we don't need this
-    //new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(true),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'common',
       minChunks: Infinity
     }),
-    // static assets
-    //new CopyWebpackPlugin([{from: 'demo/favicon.ico', to: 'favicon.ico'}]),
     new CopyWebpackPlugin([{from: 'app/assets', to: 'assets'}]),
-    // generating html
-    new HtmlWebpackPlugin({template: 'app/index.html'}),
+    new HtmlWebpackPlugin({
+      template: 'app/index.html.template',
+      googleAnalytics: isProduction ? {trackingId: 'UA-67908993-3', pageViewOnLoad: true} : null
+    }),
     new webpack.DefinePlugin({
-      CONTENTFUL_ACCESS_TOKEN: JSON.stringify(contentfulConfig.accessToken),
-      CONTENTFUL_SPACE_ID: JSON.stringify(contentfulConfig.spaceId),
-      CONTENTFUL_HOST: JSON.stringify(contentfulConfig.host),
+      CONTENTFUL_ACCESS_TOKEN: process.env.CONTENTFUL_ACCESS_TOKEN || JSON.stringify(contentfulDevConfig.accessToken),
+      CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID || JSON.stringify(contentfulDevConfig.spaceId),
+      CONTENTFUL_HOST: process.env.CONTENTFUL_HOST || JSON.stringify(contentfulDevConfig.host),
       TWITTER_CONSUMER_KEY: JSON.stringify(twitterConfig.consumerKey),
       TWITTER_CONSUMER_SECRET: JSON.stringify(twitterConfig.consumerSecret),
       TWITTER_ACCESS_TOKEN_KEY: JSON.stringify(twitterConfig.accessTokenKey),
@@ -143,19 +129,13 @@ function pushPlugins(conf) {
   }
 
   conf.plugins.push(
-    //production only
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
       mangle: false,
       comments: false,
       compress: {
         screw_ie8: true
-        //warnings: false,
-        //drop_debugger: false
       }
-      //verbose: true,
-      //beautify: false,
-      //quote_style: 3
     }),
     new CompressionPlugin({
       asset: '{file}.gz',

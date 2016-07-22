@@ -42,7 +42,7 @@ script:
 #- npm run karma-sauce
 
 after_success:
-  - npm run deploy:$TRAVIS_BRANCH -- --token "$FIREBASE_TOKEN"
+  - node ./deploy.js
 
 addons:
   # sauce labs tunel connector (read more https://docs.travis-ci.com/user/sauce-connect/ )
