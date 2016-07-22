@@ -110,7 +110,10 @@ const config = {
     new CopyWebpackPlugin([{from: 'app/assets', to: 'assets'}]),
     new HtmlWebpackPlugin({
       template: 'app/index.html.template',
-      googleAnalytics: isProduction ? {trackingId: 'UA-67908993-3', pageViewOnLoad: true} : null
+      googleAnalytics: {
+        trackingId: isProduction ? 'UA-67908993-3' : 'UA-XXXXX-Y',
+        pageViewOnLoad: false
+      }
     }),
     new webpack.DefinePlugin({
       CONTENTFUL_ACCESS_TOKEN:
