@@ -24,20 +24,23 @@
   Loading...
 </gm-app>
 
-<!-- Google analytics-->
+<% if (htmlWebpackPlugin.options.googleAnalytics) { %>
 <script>
-  var _gaq = window._gaq || null;
-  var ga = window.ga || null;
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-//  ga('create', 'UA-78245179-1', 'auto'); // test
-  ga('create', 'UA-67908993-3', 'auto');
 
+  <% if (htmlWebpackPlugin.options.googleAnalytics.trackingId) { %>
+    ga('create', '<%= htmlWebpackPlugin.options.googleAnalytics.trackingId%>', 'auto');
+  <% } else { throw new Error("html-webpack-template requires googleAnalytics.trackingId config"); }%>
+
+  <% if (htmlWebpackPlugin.options.googleAnalytics.pageViewOnLoad) { %>
+    ga('send', 'pageview');
+  <% } %>
 </script>
-<!-- End Google Analytics -->
+<% } %>
 
 <script type="text/javascript">window.liveSettings={api_key:"059ce75375d340a38584fc6b502e0501"}</script>
 <script type="text/javascript" src="//cdn.transifex.com/live.js"></script>
