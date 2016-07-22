@@ -10,6 +10,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProduction = (process.env.NODE_ENV || 'development') === 'production';
+const isLocal = process.env.NODE_ENV === 'local';
 const devtool = isProduction ? 'cheap-module-eval-source-map' : 'source-map';
 const dest = 'dist';
 const absDest = root(dest);
@@ -112,9 +113,12 @@ const config = {
       googleAnalytics: isProduction ? {trackingId: 'UA-67908993-3', pageViewOnLoad: true} : null
     }),
     new webpack.DefinePlugin({
-      CONTENTFUL_ACCESS_TOKEN: process.env.CONTENTFUL_ACCESS_TOKEN || JSON.stringify(contentfulDevConfig.accessToken),
-      CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID || JSON.stringify(contentfulDevConfig.spaceId),
-      CONTENTFUL_HOST: process.env.CONTENTFUL_HOST || JSON.stringify(contentfulDevConfig.host),
+      CONTENTFUL_ACCESS_TOKEN:
+        JSON.stringify(process.env.CONTENTFUL_ACCESS_TOKEN) || JSON.stringify(contentfulDevConfig.accessToken),
+      CONTENTFUL_SPACE_ID:
+        JSON.stringify(process.env.CONTENTFUL_SPACE_ID) || JSON.stringify(contentfulDevConfig.spaceId),
+      CONTENTFUL_HOST:
+        JSON.stringify(process.env.CONTENTFUL_HOST) || JSON.stringify(contentfulDevConfig.host),
       TWITTER_CONSUMER_KEY: JSON.stringify(twitterConfig.consumerKey),
       TWITTER_CONSUMER_SECRET: JSON.stringify(twitterConfig.consumerSecret),
       TWITTER_ACCESS_TOKEN_KEY: JSON.stringify(twitterConfig.accessTokenKey),
@@ -124,7 +128,7 @@ const config = {
 };
 
 function pushPlugins(conf) {
-  if (!isProduction) {
+  if (isLocal) {
     return;
   }
 
