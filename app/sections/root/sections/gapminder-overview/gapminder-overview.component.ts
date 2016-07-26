@@ -1,15 +1,15 @@
-import {Component, ViewEncapsulation, OnInit, Inject} from '@angular/core';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, AsyncPipe} from '@angular/common';
-import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap';
-import {RouterLink} from '@angular/router-deprecated';
-import {Angulartics2On} from 'angulartics2/index';
-import {RoutesGatewayService, ContentfulNodePage, ContenfulContent, ToDatePipe} from 'ng2-contentful-blog';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { CORE_DIRECTIVES, FORM_DIRECTIVES, AsyncPipe } from '@angular/common';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+import { CAROUSEL_DIRECTIVES } from 'ng2-bootstrap';
+import { Angulartics2On } from 'angulartics2/index';
+import { RoutesManagerService, ContentfulNodePage, ContenfulContent, ToDatePipe } from 'ng2-contentful-blog';
 
 @Component({
   selector: 'gm-gapminder-overview',
   encapsulation: ViewEncapsulation.None,
   template: require('./gapminder-overview.html') as string,
-  directives: [CAROUSEL_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, RouterLink, Angulartics2On],
+  directives: [CAROUSEL_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES, Angulartics2On],
   styles: [require('./gapminder-overview.styl') as string],
   pipes: [AsyncPipe, ToDatePipe]
 })
@@ -17,7 +17,7 @@ import {RoutesGatewayService, ContentfulNodePage, ContenfulContent, ToDatePipe} 
 export class GapminderOverviewComponent implements OnInit {
   private slides: ContentfulNodePage[];
   private contentfulContentService: ContenfulContent;
-  private routesGatewayService: RoutesGatewayService;
+  private routesManager: RoutesManagerService;
 
   /* tslint:disable:no-unused-variable */
   private carouselConfig: CarouselConfig = {
@@ -27,10 +27,10 @@ export class GapminderOverviewComponent implements OnInit {
   };
   /* tslint:enable:no-unused-variable */
 
-  public constructor(@Inject(ContenfulContent) contentfulContentService: ContenfulContent,
-                     @Inject(RoutesGatewayService) routesGatewayService: RoutesGatewayService) {
+  public constructor(contentfulContentService: ContenfulContent,
+                     routesManager: RoutesManagerService) {
     this.contentfulContentService = contentfulContentService;
-    this.routesGatewayService = routesGatewayService;
+    this.routesManager = routesManager;
 
   }
 
@@ -38,8 +38,8 @@ export class GapminderOverviewComponent implements OnInit {
     this.contentfulContentService.getOverviewPages()
       .subscribe((slides: ContentfulNodePage[]) => {
         for (let slide of slides) {
-          this.routesGatewayService.getArticleParentSlug(slide.sys.id, (url: string) => {
-            slide.fields.url = this.routesGatewayService.addRoute(url, {name: slide.fields.title});
+          this.contentfulContentService.getArticleParentSlug(slide.sys.id, (url: string) => {
+            slide.fields.url = this.routesManager.addRoute(url, {name: slide.fields.title});
           });
         }
         this.slides = slides;

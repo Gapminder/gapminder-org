@@ -48,7 +48,8 @@ export class TwitterRequest {
     return this;
   }
 
-  public getTweets(): Observable<Array<Tweet>> {
+  // TODO: fix type `Observable<Array<Tweet>>`
+  public getTweets(): Observable<any> {
     const tweetsWrapper: (author: string, params: any) => Observable<any> = bindCallback(cb.__call.bind(cb));
     return tweetsWrapper('statuses_userTimeline', this.params)
       .map((response: any) => _.head(response));

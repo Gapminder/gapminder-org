@@ -4,6 +4,7 @@
          alt="{{content.name}}">-->
     {{ content.title }}
   </h1>
+  <p class="margin-top-0" *ngIf="content.description">{{ content.description}}</p>
   <p class="date-info margin-top-0">{{ content.createdAt | gmToDate | date }}</p>
   <div class="entry-content" *ngIf="content.entries">
     <gm-entries-view [entries]="content.entries"></gm-entries-view>
@@ -14,7 +15,7 @@
 
     <div class="dynamic-item col-md-6 col-sm-6 margin-bottom-35" *ngFor="let child of childrenList">
       <a *ngIf="child.fields.thumbnail"
-         [routerLink]="[routesGatewayService.getRouteName(urlPath + '/'+ child.fields.slug)]"
+         [routerLink]="[routesManager.getRouteName(urlPath + '/'+ child.fields.slug)]"
          angulartics2On="click"
          angularticsEvent="{{child.fields.title}}"
          class="dynamic-wrap-img">
@@ -24,7 +25,7 @@
       </a>
       <div class="date-info">{{child.fields.createdAt | gmToDate | date}}</div>
 
-      <a [routerLink]="[routesGatewayService.getRouteName(urlPath + '/'+ child.fields.slug)]"
+      <a [routerLink]="[routesManager.getRouteName(urlPath + '/'+ child.fields.slug)]"
          angulartics2On="click"
          angularticsEvent="{{child.fields.title}}"
          class="post-title">

@@ -9,7 +9,7 @@ import {CollapseDirective} from 'ng2-bootstrap';
 })
 export class SearchComponent {
   @Output()
-  private toggleSearchMenu: EventEmitter<boolean> = new EventEmitter();
+  private toggleSearchMenu: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   private collapsed: boolean = true;
 
