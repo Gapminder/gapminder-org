@@ -18,6 +18,7 @@
 
   <!--link to bootstrap.css-->
 
+<base href="/">
 </head>
 <body>
 <gm-app>

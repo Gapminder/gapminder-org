@@ -7,7 +7,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12" *ngIf="slides && slides.length">
       <carousel [interval]="carouselConfig.interval" [noWrap]="carouselConfig.noWrap">
         <slide *ngFor="let slide of slides; let index=index">
           <div class="col-xs-12 col-sm-6 col-md-7">

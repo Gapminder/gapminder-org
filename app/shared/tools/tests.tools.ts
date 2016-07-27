@@ -1,9 +1,8 @@
-import {PLATFORM_DIRECTIVES, provide, Directive, ElementRef, Input, Inject} from '@angular/core';
-import {AppComponent} from '../../app.component';
-import {ROUTER_PRIMARY_COMPONENT, Router, RouteRegistry, RouteDefinition} from '@angular/router-deprecated';
-import {Location} from '@angular/common';
-import {ROUTER_FAKE_PROVIDERS} from '@angular/router/testing';
-import {SpyLocation} from '@angular/common/testing';
+import {PLATFORM_DIRECTIVES, Directive, ElementRef, Input, Inject} from '@angular/core';
+// import {AppComponent} from '../../app.component';
+// import { Router, ROUTER_DIRECTIVES } from '@angular/router';
+// import {ROUTER_PRIMARY_COMPONENT, Router, RouteRegistry, RouteDefinition} from '@angular/router-deprecated';
+// import {ROUTER_FAKE_PROVIDERS} from '@angular/router/testing';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/observable/bindCallback';
 import 'rxjs/add/operator/map';
@@ -11,35 +10,25 @@ import {TwitterService, Tweet, TwitterUser} from '../services/twitter.service';
 import {Angulartics2} from 'angulartics2/index';
 import {Angulartics2GoogleAnalytics} from 'angulartics2/src/providers/angulartics2-google-analytics';
 import {
-  BreadcrumbsService,
-  RoutesGatewayService,
-  DynamicRouteConfigurator,
+  RoutesManagerService,
+  RoutesGatewayGuard,
   ContentfulNodePage,
-  ContenfulContent
+  ContenfulContent,
+  BreadcrumbsService
 } from 'ng2-contentful-blog';
 
 export function getBaseTestProviders(): any[] {
   return [
-    provide(PLATFORM_DIRECTIVES, {
-      useValue: ContentfulImageDirectiveMock, multi: true
-    }),
-    provide(RoutesGatewayService, {
-      useClass: RoutesGatewayServiceMock
-    }),
-    DynamicRouteConfigurator,
+    {provide: PLATFORM_DIRECTIVES, useClass: ContentfulImageDirectiveMock, multi: true},
+    {provide: RoutesManagerService, useClass: RoutesGatewayServiceMock},
+    RoutesGatewayGuard,
     BreadcrumbsService,
-    provide(ContenfulContent, {
-      useClass: ContenfulContentMock
-    }),
-    provide(TwitterService, {
-      useClass: TwitterServiceMock
-    }),
+    {provide: ContenfulContent, useClass: ContenfulContentMock},
+    {provide: TwitterService, useClass: TwitterServiceMock},
     Angulartics2,
-    Angulartics2GoogleAnalytics,
-    RouteRegistry,
-    provide(Location, {useClass: SpyLocation}),
-    provide(Router, {useValue: ROUTER_FAKE_PROVIDERS}),
-    provide(ROUTER_PRIMARY_COMPONENT, {useValue: AppComponent})
+    Angulartics2GoogleAnalytics
+    // provide(Router, {useValue: ROUTER_FAKE_PROVIDERS}),
+    // provide(ROUTER_PRIMARY_COMPONENT, {useValue: AppComponent})
   ];
 }
 
@@ -166,7 +155,7 @@ export class RoutesGatewayServiceMock {
     return 'AYmxvZy9nYXBtaW5kZXItYmxvZy1wb3N0';
   }
 
-  public getAnnotations(component: any): Observable<RouteDefinition[]> {
+ /* public getAnnotations(component: any): Observable<RouteDefinition[]> {
     const annotations: RouteDefinition = {
       path: 'videos',
       name: 'AdmlkZW9z'
@@ -174,7 +163,7 @@ export class RoutesGatewayServiceMock {
     return new Observable((observer: any) => {
       observer.next([annotations]);
     });
-  }
+  }*/
 
   public getArticleParentSlug(id: any, cb: any): any {
     return 'blog';
@@ -184,9 +173,9 @@ export class RoutesGatewayServiceMock {
     return undefined;
   }
 
-  public getRouteDefinitions(component: any): RouteDefinition[] {
+  /*public getRouteDefinitions(component: any): RouteDefinition[] {
     return undefined;
-  }
+  }*/
 
   /* tslint:enable:no-unused-variable */
 

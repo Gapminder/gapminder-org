@@ -35,7 +35,7 @@
     "@angular/http": "2.0.0-rc.4",
     "@angular/platform-browser": "2.0.0-rc.4",
     "@angular/platform-browser-dynamic": "2.0.0-rc.4",
-    "@angular/router-deprecated": "2.0.0-rc.2"
+    "@angular/router": "3.0.0-beta.2"
   },
   "dependencies": {
     "angulartics2": "1.0.11",
@@ -43,14 +43,13 @@
     "core-js": "2.4.0",
     "es6-promise": "3.2.1",
     "es6-shim": "0.35.1",
-    "es7-reflect-metadata": "1.6.0",
     "intl": "1.2.2",
     "json-loader": "0.5.4",
     "lodash": "4.13.1",
     "marked": "0.3.5",
     "ng2-bootstrap": "1.0.17",
     "ng2-contentful": "0.0.8-2",
-    "ng2-contentful-blog": "0.0.2",
+    "ng2-contentful-blog": "1.0.0",
     "rxjs": "5.0.0-beta.6",
     "zone.js": "0.6.12"
   },
@@ -62,8 +61,7 @@
     "@angular/http": "2.0.0-rc.4",
     "@angular/platform-browser": "2.0.0-rc.4",
     "@angular/platform-browser-dynamic": "2.0.0-rc.4",
-    "@angular/router": "2.0.0-rc.2",
-    "@angular/router-deprecated": "2.0.0-rc.2",
+    "@angular/router": "3.0.0-beta.2",
     "compression-webpack-plugin": "0.3.1",
     "concurrently": "2.0.0",
     "conventional-changelog-cli": "1.1.1",

@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="posts">
   <h2 class="post-head">Latest Blog Posts</h2>
   <section class="posts-list">
     <div class="row">
@@ -22,7 +22,7 @@
     </div>
   </section>
   <div class="row text-center">
-    <button *ngIf="routesGatewayService.getRouteName(parentSlug)" [routerLink]="[routesGatewayService.getRouteName(parentSlug)]"
+    <button *ngIf="routesManager.getRouteName(parentSlug)" [routerLink]="[routesManager.getRouteName(parentSlug)]"
             angulartics2On="click"
             angularticsEvent="{{parentName}}"
             class="btn-yellow  margin-top-50">View All Posts &#187;</button>

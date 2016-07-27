@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { RouterLink } from '@angular/router-deprecated';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { FooterMenuComponent } from 'ng2-contentful-blog';
 import { Angulartics2On } from 'angulartics2/index';
@@ -8,7 +8,7 @@ import { Angulartics2On } from 'angulartics2/index';
   selector: 'gm-footer',
   encapsulation: ViewEncapsulation.None,
   template: require('./footer.html') as string,
-  directives: [RouterLink, Angulartics2On, FooterMenuComponent],
+  directives: [ROUTER_DIRECTIVES, Angulartics2On, FooterMenuComponent],
   styles: [require('./footer.styl') as string],
   pipes: [AsyncPipe]
 })
