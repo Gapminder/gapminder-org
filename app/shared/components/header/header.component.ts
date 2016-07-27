@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, NavigationStart } from '@angular/router';
 import { CollapseDirective, DROPDOWN_DIRECTIVES } from 'ng2-bootstrap';
 import { SearchComponent } from '../search/search.component';
-import { HeaderMenuComponent, BreadcrumbsService, BreadcrumbsEvent } from 'ng2-contentful-blog';
+import { HeaderMenuComponent, BreadcrumbsService } from 'ng2-contentful-blog';
 
 import { Angulartics2On } from 'angulartics2/index';
 
