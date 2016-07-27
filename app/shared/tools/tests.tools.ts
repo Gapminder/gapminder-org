@@ -1,8 +1,6 @@
 import {PLATFORM_DIRECTIVES, Directive, ElementRef, Input, Inject} from '@angular/core';
 // import {AppComponent} from '../../app.component';
 // import { Router, ROUTER_DIRECTIVES } from '@angular/router';
-// import {ROUTER_PRIMARY_COMPONENT, Router, RouteRegistry, RouteDefinition} from '@angular/router-deprecated';
-// import {ROUTER_FAKE_PROVIDERS} from '@angular/router/testing';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/observable/bindCallback';
 import 'rxjs/add/operator/map';
@@ -28,7 +26,6 @@ export function getBaseTestProviders(): any[] {
     Angulartics2,
     Angulartics2GoogleAnalytics
     // provide(Router, {useValue: ROUTER_FAKE_PROVIDERS}),
-    // provide(ROUTER_PRIMARY_COMPONENT, {useValue: AppComponent})
   ];
 }
 

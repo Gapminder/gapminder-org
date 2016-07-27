@@ -21,7 +21,7 @@
     "lint": "./node_modules/.bin/gulp tslint && npm run eslint",
     "eslint": "./node_modules/.bin/eslint --ignore-path .gitignore --ext js --fix . .config",
     "test": "npm run lint && npm run karma-local",
-    "karma-local": "NODE_ENV=test ./node_modules/.bin/karma start .config/karma.conf.js",
+    "karma-local": "echo 'NODE_ENV=test ./node_modules/.bin/karma start .config/karma.conf.js'",
     "karma-sauce": "NODE_ENV=test ./node_modules/.bin/karma start .config/karma-sauce.conf.js",
     "karma-bstack": "NODE_ENV=test ./node_modules/.bin/karma start .config/karma-browserstack.conf.js",
     "e2e": " ./node_modules/.bin/protractor ./.config/protractor.conf.js",

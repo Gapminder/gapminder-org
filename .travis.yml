@@ -35,7 +35,7 @@ script:
 # run protractor tests
 #- npm run e2e
 # submit coverage report to coveralls
-- cat ./coverage/report-lcov/lcov.info | ./node_modules/.bin/coveralls --verbose
+#- cat ./coverage/report-lcov/lcov.info | ./node_modules/.bin/coveralls --verbose
 # run karma tests at browser stack
 #- npm run karma-sauce
 # run karma tests at sauce labs
