@@ -1,5 +1,5 @@
 import { bootstrap } from '@angular/platform-browser-dynamic';
-import { APP_BASE_HREF, LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { APP_BASE_HREF } from '@angular/common';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
 import { AppComponent } from './app.component';
 import { ComponentRef, PLATFORM_DIRECTIVES } from '@angular/core';
@@ -39,7 +39,6 @@ bootstrap(AppComponent, [
   APP_ROUTER_PROVIDER,
   GAPMINDER_PROVIDERS,
   {provide: APP_BASE_HREF, useValue: '/'},
-  {provide: LocationStrategy, useClass: HashLocationStrategy},
   {provide: 'Routes', useValue: appRoutes},
   {provide: 'DefaultArticleComponent', useValue: DynamicContentDetailsComponent},
   {provide: 'ContentfulTypeIds', useValue: ContentfulConfig},
