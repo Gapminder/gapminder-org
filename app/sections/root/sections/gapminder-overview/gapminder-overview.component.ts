@@ -39,7 +39,7 @@ export class GapminderOverviewComponent implements OnInit {
       .subscribe((slides: ContentfulNodePage[]) => {
         for (let slide of slides) {
           this.contentfulContentService.getArticleParentSlug(slide.sys.id, (url: string) => {
-            slide.fields.url = this.routesManager.addRoute(url, {name: slide.fields.title});
+            slide.fields.url = this.routesManager.addRoute({path: url, data: {name: slide.fields.title}});
           });
         }
         this.slides = slides;

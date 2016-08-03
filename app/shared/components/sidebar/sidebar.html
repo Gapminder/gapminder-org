@@ -1,12 +1,14 @@
-<div class="sidebar" *ngIf="relatedItems">
-  <div>
-    <h3 class="title">Related</h3>
-
+<div [ngClass]="{'related': relatedLocation, 'sidebar': !relatedLocation}" *ngIf="relatedItems">
+  <h3 class="title" *ngIf="!relatedLocation">Related</h3>
+  <h2 class="post-head margin-top-0" *ngIf="relatedLocation">Related</h2>
+  <div class="row">
     <ul class="list-proposals">
-      <li *ngFor="let item of relatedItems">
-          <a *ngIf="item.fields.url" [routerLink]="[item.fields.url]"
-             angulartics2On="click"
-             angularticsEvent="{{item.fields.title}}">
+      <li *ngFor="let item of relatedItems"
+          class="col-xs-12 col-sm-6"
+          [ngClass]="{'col-md-4': relatedLocation, 'col-md-6': !relatedLocation}">
+        <a *ngIf="item.fields.url" [routerLink]="[item.fields.url]"
+           angulartics2On="click"
+           angularticsEvent="{{item.fields.title}}">
           <span class="wrap-img">
             <img *ngIf="item.fields.thumbnail" [gmContentfulSrcId]="item.fields.thumbnail.sys.id"
                  alt="{{item.fields.title}}">
@@ -16,31 +18,4 @@
       </li>
     </ul>
   </div>
-
-  <!--<div class="col-md-12">
-    <div class="row">
-      <h3 class="title pull-left">TEDTalks</h3>
-      <a href class="link-view-more pull-right">View All »</a>
-    </div>
-  </div>
-  <p>Hans Rosling's TEDTalks have been seen by millions. Tune in and see the talks from 2006 onwards:</p>
-
-  <ul class="list-proposals">
-    <li *ngFor="let listProposal of listProposals">
-      <a href class="wrap-img">
-        <img src="{{listProposal.img}}">
-      </a>
-      <a href>{{listProposal.title}}</a>
-    </li>
-  </ul>
-
-  <p class="note">TED stands for Technology, Entertainment & Design and has arranged conferences since 1984. Their
-    annual
-    conferences bring together the world's most fascinating thinkers and doers, who are challenged to give the talk of
-    their lives (in 18 minutes).</p>
-  <a class="link-view-more margin-top-15">Terms of Use »</a>-->
-
-  <!--<hr>-->
-
-  <!--<gm-donate-section></gm-donate-section>-->
 </div>

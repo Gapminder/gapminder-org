@@ -31,7 +31,6 @@ export class DynamicContentDetailsComponent implements OnInit {
   private contentfulContentService: ContenfulContent;
   private routesManager: RoutesManagerService;
   private breadcrumbsService: BreadcrumbsService;
-
   public constructor(router: Router,
                      activatedRoute: ActivatedRoute,
                      routesManager: RoutesManagerService,
@@ -43,6 +42,7 @@ export class DynamicContentDetailsComponent implements OnInit {
     this.routesManager = routesManager;
     this.activatedRoute = activatedRoute;
   }
+
   public ngOnInit(): void {
     this.activatedRoute.url
       .subscribe((urls: UrlPathWithParams[]) => {
@@ -62,7 +62,10 @@ export class DynamicContentDetailsComponent implements OnInit {
                 this.childrenList = children;
                 for (let item of children) {
                   if (item.fields) {
-                    this.routesManager.addRoute(`${this.urlPath}/${item.fields.slug}`, {name: item.fields.title});
+                    this.routesManager.addRoute({
+                      path: `${this.urlPath}/${item.fields.slug}`,
+                      data: {name: item.fields.title}
+                    });
                   }
                 }
               });
