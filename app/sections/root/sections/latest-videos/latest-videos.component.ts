@@ -29,7 +29,7 @@ export class LatestVideosComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.routesManager.addRoute(this.parentSlug, {name: this.parentName});
+    this.routesManager.addRoute({path: this.parentSlug, data: {name: this.parentName}});
     this.contentfulContentService
       .getTagsBySlug(this.nameTag).subscribe((tags: any[]) => {
       if (!_.isEmpty(tags)) {
@@ -41,7 +41,7 @@ export class LatestVideosComponent implements OnInit {
               this.videos = videos;
               for (let item of this.videos) {
                 this.contentfulContentService.getArticleParentSlug(item.sys.id, (url: string) => {
-                  item.fields.url = this.routesManager.addRoute(url, {name: item.fields.title});
+                  item.fields.url = this.routesManager.addRoute({path: url, data: {name: item.fields.title}});
                 });
               }
             });

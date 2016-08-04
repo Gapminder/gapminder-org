@@ -13,8 +13,8 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 export class SidebarComponent implements OnInit {
   @Input()
   private relatedItems: Array<any> = [];
-
   /* tslint:disable:no-unused-variable */
+  @Input() private relatedLocation: boolean = false;
   @Input() private contentSlug: string;
   /* tslint:enable:no-unused-variable */
 
@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit {
     if (this.relatedItems) {
       for (let item of this.relatedItems) {
         this.contentfulContentService.getArticleParentSlug(item.sys.id, (url: string) => {
-          item.fields.url = this.routesManager.addRoute(url, {name: item.fields.title});
+          item.fields.url = this.routesManager.addRoute({path: url, data: {name: item.fields.title}});
         });
       }
     }

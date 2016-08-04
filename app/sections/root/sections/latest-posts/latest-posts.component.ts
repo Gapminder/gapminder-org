@@ -39,7 +39,7 @@ export class LatestPostsComponent implements OnInit {
   }
 
   public ngOnInit(): any {
-    this.routesManager.addRoute(this.parentSlug, {name: this.parentName});
+    this.routesManager.addRoute({path: this.parentSlug, data: {name: this.parentName}});
     this.contentfulContentService
       .getTagsBySlug('blog').subscribe((tags: any[]) => {
       if (!_.isEmpty(tags)) {
@@ -51,7 +51,7 @@ export class LatestPostsComponent implements OnInit {
               this.posts = posts;
               for (let post of posts) {
                 this.contentfulContentService.getArticleParentSlug(post.sys.id, (url: string) => {
-                  post.fields.url = this.routesManager.addRoute(url, {name: post.fields.title});
+                  post.fields.url = this.routesManager.addRoute({path: url, data: {name: post.fields.title}});
                 });
               }
             });
