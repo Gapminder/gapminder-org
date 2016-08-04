@@ -1,3 +1,4 @@
+'use strict';
 // @AngularClass
 /*
  * When testing with webpack and ES6, we have to do some extra
@@ -9,20 +10,45 @@
  * all here! Crazy huh. So we need to do some setup
  */
 Error.stackTraceLimit = Infinity;
-require('phantomjs-polyfill');
-require('es6-promise');
-require('es6-shim');
-require('es7-reflect-metadata/dist/browser');
 
-require('zone.js/dist/zone-microtask.js');
+require('core-js');
+
+require('zone.js/dist/zone.js');
 require('zone.js/dist/long-stack-trace-zone.js');
 require('zone.js/dist/jasmine-patch.js');
+require('zone.js/dist/async-test.js');
+require('zone.js/dist/fake-async-test');
+require('zone.js/dist/sync-test');
 
-var testing = require('angular2/testing');
-var browser = require('angular2/platform/testing/browser');
+require('angulartics2');
+require('angulartics2/src/providers/angulartics2-google-analytics');
+require('rxjs/Rx');
+
+/*eslint-disable vars-on-top, no-var */
+var testing = require('@angular/core/testing');
+var browser = require('@angular/platform-browser-dynamic/testing');
+
+/*eslint-enable vars-on-top, no-var */
+
 testing.setBaseTestProviders(
-  browser.TEST_BROWSER_PLATFORM_PROVIDERS,
-  browser.TEST_BROWSER_APPLICATION_PROVIDERS);
+  browser.TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
+  browser.TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS);
+
+Object.assign(global, testing);
+
+/*eslint-disable prefer-arrow-callback, func-names */
+// fix for PhantomJS Intl
+if (!global.Intl) {
+  require.ensure([
+    'intl',
+    'intl/locale-data/jsonp/en.js'
+  ], function (require) {
+    require('intl');
+    require('intl/locale-data/jsonp/en.js');
+  });
+}
+
+/*eslint-enable prefer-arrow-callback, func-names */
 
 /*
  Ok, this is kinda crazy. We can use the the context method on
@@ -33,9 +59,19 @@ testing.setBaseTestProviders(
  any file that ends with spec.js and get its path. By passing in true
  we say do this recursively
  */
+
+/*eslint-disable vars-on-top, no-var */
 var testContext = require.context('../app', true, /\.spec\.ts/);
+
+/*eslint-enable vars-on-top, no-var */
 
 // get all the files, for each file, call the context function
 // that will require the file and load it up here. Context will
 // loop and require those spec files here
-testContext.keys().forEach(testContext);
+function requireAll(requireContext) {
+  return requireContext.keys().map(requireContext);
+}
+
+requireAll(testContext);
+// requires and returns all modules that match
+

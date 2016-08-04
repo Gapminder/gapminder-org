@@ -1,0 +1,27 @@
+<section class="twitter-slider">
+  <h2 class="post-head"><i class="fa fa-twitter"></i> Hans Tweets</h2>
+  <div *ngIf="currentTweet" class="col-md-12">
+    <div class="row">
+      <button [disabled]="disabled" class="prev" (click)="previousTweet()"><i class="fa fa-angle-left"></i></button>
+      <div class="col-md-3 col-sm-4 text-center">
+        <div class="twitter-user-info">
+          <img class="wrap-avatar" [src]="currentTweet.user.profile_image_url_https">
+          <div>{{currentTweet.user.name}}</div>
+          <span>
+            {{count}}
+            {{infFollow.count}}
+          </span>
+        </div>
+        <div class="text-center">
+          <a class="shared-link" href="{{infFollow.link}}" target="_blank">{{infFollow.title}} »</a>
+        </div>
+      </div>
+      <div class="col-md-9 col-sm-8 twitter-description">
+        <div class="date-info">{{currentTweet.created_at | gmToDate | date}}</div>
+        <p>{{currentTweet.text}}</p>
+        <a href="{{currentTweet.user.url}}" class="more">{{currentTweet.user.url}}</a>
+      </div>
+      <button [disabled]="disabled" class="next" (click)="nextTweet()"><i class="fa fa-angle-right"></i></button>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+@import "../../../../variables.styl"
+
+.blog-item
+  &:hover
+    .post-title
+      color color-yellow
+      text-decoration underline
+
+.post-wrap-img
+    border-radius 3px
+    overflow hidden
+    border 1px solid #dce3ec
+    img
+      height 240px
+      width 100%
+
+
+  @media medium
+    display inline-block
+    float none
+    vertical-align top
+    margin-bottom 15px
+  @media small
+    margin-bottom 15px

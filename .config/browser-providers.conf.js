@@ -4,7 +4,7 @@
 // If the target is set to null, then the browser is not run anywhere during CI.
 // If a category becomes empty (e.g. BS and required),
 // then the corresponding job must be commented out in Travis configuration.
-var CIconfiguration = {
+const CIconfiguration = {
   'Chrome': {
     unitTest: {target: 'SL', required: true},
     e2e: {target: null, required: true}
@@ -97,7 +97,7 @@ var CIconfiguration = {
   }
 };
 
-var customLaunchers = {
+const customLaunchers = {
   'DartiumWithWebPlatform': {
     base: 'Dartium',
     flags: ['--enable-experimental-web-platform-features']
@@ -340,10 +340,8 @@ var customLaunchers = {
   }
 };
 
-var sauceAliases = {
-  'ALL': Object.keys(customLaunchers).filter(function (item) {
-    return customLaunchers[item].base == 'SauceLabs';
-  }),
+const sauceAliases = {
+  'ALL': Object.keys(customLaunchers).filter(item => customLaunchers[item].base == 'SauceLabs'),
   'DESKTOP': ['SL_CHROME', 'SL_FIREFOX', 'SL_IE9', 'SL_IE10', 'SL_IE11',
     'SL_EDGE', 'SL_SAFARI7', 'SL_SAFARI8', 'SL_SAFARI9'],
   'MOBILE': ['SL_ANDROID4.1', 'SL_ANDROID4.2', 'SL_ANDROID4.3',
@@ -359,10 +357,8 @@ var sauceAliases = {
   'CI_OPTIONAL': buildConfiguration('unitTest', 'SL', false)
 };
 
-var browserstackAliases = {
-  'ALL': Object.keys(customLaunchers).filter(function (item) {
-    return customLaunchers[item].base == 'BrowserStack';
-  }),
+const browserstackAliases = {
+  'ALL': Object.keys(customLaunchers).filter(item => customLaunchers[item].base == 'BrowserStack'),
   'DESKTOP': ['BS_CHROME', 'BS_FIREFOX', 'BS_IE9', 'BS_IE10', 'BS_IE11',
     'BS_EDGE', 'BS_SAFARI7', 'BS_SAFARI8', 'BS_SAFARI9'],
   'MOBILE': ['BS_ANDROID4.3', 'BS_ANDROID4.4', 'BS_IOS7', 'BS_IOS8', 'BS_IOS9', 'BS_WINDOWSPHONE'],
@@ -375,9 +371,9 @@ var browserstackAliases = {
 };
 
 module.exports = {
-  customLaunchers: customLaunchers,
-  sauceAliases: sauceAliases,
-  browserstackAliases: browserstackAliases
+  customLaunchers,
+  sauceAliases,
+  browserstackAliases
 };
 
 if (process.env.TRAVIS) {
@@ -387,11 +383,10 @@ if (process.env.TRAVIS) {
 
 function buildConfiguration(type, target, required) {
   return Object.keys(CIconfiguration)
-    .filter((item) => {
-      var conf = CIconfiguration[item][type];
+    .filter(item => {
+      const conf = CIconfiguration[item][type];
+
       return conf.required === required && conf.target === target;
     })
-    .map((item) => {
-      return target + '_' + item.toUpperCase();
-    });
+    .map(item => `${target}_${item.toUpperCase()}`);
 }

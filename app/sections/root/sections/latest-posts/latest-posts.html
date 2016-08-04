@@ -1,0 +1,31 @@
+<section *ngIf="posts">
+  <h2 class="post-head">Latest Blog Posts</h2>
+  <section class="posts-list">
+    <div class="row">
+      <div *ngFor="let post of posts" class="blog-item col-md-4 col-xs-12 col-sm-6">
+        <a *ngIf="post.fields.url" [routerLink]="[post.fields.url]"
+           angulartics2On="click"
+           angularticsEvent="{{post.fields.title}}"
+           class="post-wrap-img">
+          <img [gmContentfulSrcId]="post.fields.thumbnail.sys.id"
+               [fit]="'scale'"
+               alt="{{post.fields.title}}">
+        </a>
+        <div class="date-info">{{ post.fields.createdAt | gmToDate | date }}</div>
+        <a *ngIf="post.fields.url" [routerLink]="[post.fields.url]"
+           angulartics2On="click"
+           angularticsEvent="{{post.fields.title}}"
+           class="post-title">{{post.fields.title}}
+        </a>
+        <p class="post-p">{{post.fields.description}}</p>
+      </div>
+    </div>
+  </section>
+  <div class="row text-center">
+    <button *ngIf="routesManager.getRouteName(parentSlug)" [routerLink]="[routesManager.getRouteName(parentSlug)]"
+            angulartics2On="click"
+            angularticsEvent="{{parentName}}"
+            class="btn-yellow  margin-top-50">View All Posts &#187;</button>
+
+  </div>
+</section>

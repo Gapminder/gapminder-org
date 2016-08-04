@@ -1,29 +1,23 @@
-var gulp = require('gulp');
+'use strict';
 
-gulp.paths = {
-  tssrc: [
-    '**/*.ts',
-    '!node_modules/**/*',
-    '!bundles/**/*',
-    '!typings/**/*',
-    '!**/*.{ts,coffee}.js']
-};
+const gulp = require('gulp');
+
+const gitignore = require('gitignore-to-glob')();
+
+gitignore.push('**/*.ts');
 
 // Code linting
-var tslint = require('gulp-tslint');
+const tslint = require('gulp-tslint');
 
-var paths = gulp.paths;
-
-gulp.task('tslint', function () {
-  return gulp.src(paths.tssrc)
+gulp.task('tslint', () =>
+  gulp.src(gitignore)
     .pipe(tslint())
-    .pipe(tslint.report('verbose', {
+    .pipe(tslint.report('prose', {
       emitError: true,
-      reportLimit: 0
-    }));
-});
+      summarizeFailureOutput: true,
+      reportLimit: 50
+    }))
+);
 
-// gulp default task
-gulp.task('default', function () {
-  gulp.start('tslint');
-});
+gulp.task('default', ['tslint']);
+

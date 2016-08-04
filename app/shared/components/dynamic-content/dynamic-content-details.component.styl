@@ -1,0 +1,60 @@
+@import "../../../variables.styl"
+
+.dynamic-details
+  h1
+    font-size 38px
+    margin-bottom 0
+
+  ul
+    li
+      font-size: 20px;
+      line-height: 30px;
+      color color-grey
+      margin-bottom 10px
+      &:before
+        content "- "
+
+.dynamic-item
+  margin-bottom 70px
+  float none
+  display inline-block
+  vertical-align top
+
+.dynamic-wrap-img
+  border-radius 3px
+  overflow hidden
+  border 1px solid #dce3ec
+  position relative
+  display block
+  img
+    height 240px
+    width 100%
+  .play
+    width 50px
+    height 50px
+    opacity 0.7
+    border-radius 50%
+    border 1px solid color-dark
+    position absolute
+    top 40%
+    left 43%
+    z-index 2
+    background #f2fafc
+    .fa-play
+      color color-dark
+      font-size 24px
+      top 12px
+      left 17px
+      position absolute
+  &:hover
+    .post-title
+      color color-yellow
+    .play
+      opacity 1
+
+.thumbnail-title
+  max-width 50px
+  max-height 50px
+  float left
+  margin-right 15px
+  margin-top 10px

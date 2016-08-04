@@ -1,0 +1,19 @@
+<header>
+  <div class="navbar navbar-fixed-top">
+    <div class="container">
+      <div class="row">
+        <a [routerLink]="['/']" class="logo" *ngIf="!isOnRootView"
+           angulartics2On="click"
+           angularticsEvent="'Gapminder.org'">
+          <img src="../../../assets/img/logo-yellow.svg">
+        </a>
+
+        <gm-header-menu></gm-header-menu>
+
+        <gm-search (toggleSearchMenu)="toggle($event)"></gm-search>
+
+      </div>
+    </div>
+  </div>
+
+</header>

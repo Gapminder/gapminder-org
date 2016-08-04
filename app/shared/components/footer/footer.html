@@ -1,0 +1,50 @@
+<footer>
+  <div class="container">
+    <div class="col-md-3">
+      <div class="row">
+        <a [routerLink]="['Root']"
+           angulartics2On="click"
+           angularticsEvent="go to Home">
+          <img src="../assets/img/logo.svg">
+        </a>
+        <!--TODO: add page/link-->
+        <ul class="menu-footer-small">
+          <li><a href="">Gapminder World</a></li>
+          <li><a href="">For Teachers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="row">
+        <ul class="social">
+          <li>
+            <a href="https://twitter.com/Gapminder" target="_blank">
+              <i class="fa fa-twitter-square"></i>
+
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/gapminder.org" target="_blank">
+              <i class="fa fa-facebook-square"></i>
+            </a>
+          </li>
+          <li>
+            <a href="" target="_blank">
+              <i class="fa fa-youtube-square"></i>
+            </a>
+          </li>
+          <li>
+            <a href="" target="_blank">
+              <i class="fa fa-google-plus-square"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <gm-footer-menu></gm-footer-menu>
+    </div>
+
+  </div>
+</footer>

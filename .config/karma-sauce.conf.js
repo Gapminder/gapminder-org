@@ -2,20 +2,21 @@
 const pkg = require('../package.json');
 const webpackConfig = require('./webpack-karma.config');
 
-module.exports = function (config) {
+module.exports = config => {
   if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_ACCESS_KEY) {
     console.log('Make sure the SAUCE_USERNAME and SAUCE_ACCESS_KEY environment variables are set.');
     process.exit(1);
   }
   // Browsers to run on Sauce Labs
   // Check out https://saucelabs.com/platforms for all browser/OS combos
-  var customLaunchers = {
+  const customLaunchers = {
     'SL_CHROME': {
       base: 'SauceLabs',
       browserName: 'chrome',
       version: '45',
       platform: 'OS X 10.10'
     }
+
     /*,
     'SL_CHROMEBETA': {
       base: 'SauceLabs',
@@ -133,6 +134,7 @@ module.exports = function (config) {
       version: '5.1'
     }*/
   };
+
   config.set({
     // base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: '',
@@ -171,6 +173,7 @@ module.exports = function (config) {
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
+
 /*    sauceLabs: {
       testName: 'Karma and Sauce Labs demo',
       recordScreenshots: false,
@@ -191,11 +194,11 @@ module.exports = function (config) {
         'idle-timeout': 600,
         'max-duration': 5400
       },
-      build: 'TRAVIS #' + process.env.TRAVIS_BUILD_NUMBER + ' (' + process.env.TRAVIS_BUILD_ID + ')',
+      build: `TRAVIS #${process.env.TRAVIS_BUILD_NUMBER} (${process.env.TRAVIS_BUILD_ID})`,
       tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER || Date.now()
     },
     captureTimeout: 120000,
-    customLaunchers: customLaunchers,
+    customLaunchers,
     browsers: Object.keys(customLaunchers),
     reporters: ['progress', 'saucelabs'],
     singleRun: true

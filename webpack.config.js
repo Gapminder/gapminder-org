@@ -1,20 +1,30 @@
 /*eslint no-process-env:0, camelcase:0*/
 'use strict';
 
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 
 const CompressionPlugin = require('compression-webpack-plugin');
-//const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProduction = (process.env.NODE_ENV || 'development') === 'production';
-const devtool = process.env.NODE_ENV !== 'test' ? 'source-map' : 'inline-source-map';
+const isLocal = process.env.NODE_ENV === 'local';
+const devtool = isProduction ? 'cheap-module-eval-source-map' : 'source-map';
 const dest = 'dist';
 const absDest = root(dest);
 
+const contentfulDevConfig = JSON.parse(
+  fs.readFileSync('./contentful-dev.json') // eslint-disable-line no-sync
+);
+
+const twitterConfig = JSON.parse(
+  fs.readFileSync('./twitter.json') //eslint-disable-line no-sync
+);
+
 const config = {
-  devtool: devtool,
+  devtool,
   debug: false,
 
   verbose: true,
@@ -32,14 +42,26 @@ const config = {
   },
 
   entry: {
-    angular2: [
-      // Angular 2 Deps
-      'zone.js/dist/zone-microtask',
+    common: [
+      // Angular 2 Deps + common libs - I split it into separated entries but
+      // current version of webpack has problem with that
+      // due https://github.com/webpack/webpack/issues/1016
+      'es6-shim',
+      'es6-promise',
+      'zone.js',
       'reflect-metadata',
       'rxjs',
-      'angular2/platform/browser',
-      'angular2/common',
-      'angular2/core'
+      '@angular/common',
+      '@angular/core',
+      '@angular/router',
+      '@angular/http',
+      '@angular/compiler',
+      '@angular/platform-browser',
+      '@angular/platform-browser-dynamic',
+      'moment',
+      'ng2-bootstrap',
+      'ng2-contentful-blog',
+      'ng2-contentful'
     ],
     app: 'app'
   },
@@ -51,26 +73,14 @@ const config = {
     chunkFilename: '[id].chunk.js'
   },
 
-  // our Development Server configs
-  /*devServer: {
-   inline: true,
-   colors: true,
-   historyApiFallback: true,
-   contentBase: dest,
-   //publicPath: dest,
-   watchOptions: {aggregateTimeout: 300, poll: 1000}
-   },*/
   module: {
     loaders: [
-      // support markdown
+      {test: /\.(png|svg)$/, loader: 'raw'},
       {test: /\.md$/, loader: 'html?minimize=false!markdown'},
-      // Support for *.json files.
       {test: /\.json$/, loader: 'json'},
-      // Support for CSS as raw text
-      {test: /\.css$/, loader: 'raw'},
-      // support for .html as raw text
+      {test: /\.css$/, loader: 'to-string!css?-url'},
+      {test: /\.styl$/, loader: 'to-string!css?-url!stylus'},
       {test: /\.html$/, loader: 'raw'},
-      // Support for .ts files.
       {
         test: /\.ts$/,
         loader: 'ts',
@@ -86,45 +96,53 @@ const config = {
     noParse: [
       /rtts_assert\/src\/rtts_assert/,
       /reflect-metadata/,
-      /zone\.js\/dist/
+      /zone\.js\/dist/,
+      /codebird/
     ]
   },
 
   plugins: [
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(true),
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'angular2',
-      minChunks: Infinity,
-      filename: 'angular2.js'
+      name: 'common',
+      minChunks: Infinity
     }),
-    // static assets
-    //new CopyWebpackPlugin([{from: 'demo/favicon.ico', to: 'favicon.ico'}]),
-    //new CopyWebpackPlugin([{from: 'demo/assets', to: 'assets'}]),
-    // generating html
-    new HtmlWebpackPlugin({template: 'app/index.html'})
+    new CopyWebpackPlugin([{from: 'app/assets', to: 'assets'}]),
+    new HtmlWebpackPlugin({
+      template: 'app/index.html.template',
+      googleAnalytics: {
+        trackingId: isProduction ? 'UA-67908993-3' : 'UA-XXXXX-Y',
+        pageViewOnLoad: false
+      }
+    }),
+    new webpack.DefinePlugin({
+      CONTENTFUL_ACCESS_TOKEN:
+        JSON.stringify(process.env.CONTENTFUL_ACCESS_TOKEN) || JSON.stringify(contentfulDevConfig.accessToken),
+      CONTENTFUL_SPACE_ID:
+        JSON.stringify(process.env.CONTENTFUL_SPACE_ID) || JSON.stringify(contentfulDevConfig.spaceId),
+      CONTENTFUL_HOST:
+        JSON.stringify(process.env.CONTENTFUL_HOST) || JSON.stringify(contentfulDevConfig.host),
+      TWITTER_CONSUMER_KEY: JSON.stringify(twitterConfig.consumerKey),
+      TWITTER_CONSUMER_SECRET: JSON.stringify(twitterConfig.consumerSecret),
+      TWITTER_ACCESS_TOKEN_KEY: JSON.stringify(twitterConfig.accessTokenKey),
+      TWITTER_ACCESS_TOKEN_SECRET: JSON.stringify(twitterConfig.accessTokenSecret)
+    })
   ]
 };
 
 function pushPlugins(conf) {
-  if (!isProduction) {
+  if (isLocal) {
     return;
   }
 
-  conf.plugins.push.apply(conf.plugins, [
-    //production only
+  conf.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
       mangle: false,
       comments: false,
       compress: {
         screw_ie8: true
-        //warnings: false,
-        //drop_debugger: false
       }
-      //verbose: true,
-      //beautify: false,
-      //quote_style: 3
     }),
     new CompressionPlugin({
       asset: '{file}.gz',
@@ -133,13 +151,13 @@ function pushPlugins(conf) {
       threshold: 10240,
       minRatio: 0.8
     })
-  ]);
+  );
 }
 
 pushPlugins(config);
 
 module.exports = config;
 
-function root(p) {
-  return path.join(__dirname, p);
+function root(location) {
+  return path.join(__dirname, location);
 }

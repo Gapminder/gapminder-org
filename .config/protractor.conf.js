@@ -1,7 +1,7 @@
 'use strict';
 
 //const pkg = require('../package.json');
-let config = {
+const config = {
   baseUrl: 'http://localhost:3000/',
 
   specs: [
@@ -18,9 +18,7 @@ let config = {
     showColors: true,
     isVerbose: false,
     includeStackTrace: false,
-    defaultTimeoutInterval: 400000,
-    print: function () {
-    }
+    defaultTimeoutInterval: 400000
   },
   //directConnect: true,
 
@@ -31,15 +29,21 @@ let config = {
     }
   },
 
-  onPrepare: function () {
+  onPrepare: () => {
     browser.ignoreSynchronization = true;
-    var SpecReporter = require('jasmine-spec-reporter');
+
+    /*eslint-disable global-require */
+    const SpecReporter = require('jasmine-spec-reporter');
+
+    /*eslint-enable global-require */
+
     // add jasmine spec reporter
     jasmine.getEnv().addReporter(new SpecReporter({displayStacktrace: 'all'}));
   },
 
   //seleniumServerJar: 'node_modules/protractor/selenium/selenium-server-standalone-2.48.2.jar',
   reporter: ['spec'],
+
   /**
    * Angular 2 configuration
    *
