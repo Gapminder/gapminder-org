@@ -2,14 +2,13 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { CORE_DIRECTIVES, FORM_DIRECTIVES, AsyncPipe } from '@angular/common';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { CAROUSEL_DIRECTIVES } from 'ng2-bootstrap';
-import { Angulartics2On } from 'angulartics2/index';
 import { RoutesManagerService, ContentfulNodePage, ContenfulContent, ToDatePipe } from 'ng2-contentful-blog';
 
 @Component({
   selector: 'gm-gapminder-overview',
   encapsulation: ViewEncapsulation.None,
   template: require('./gapminder-overview.html') as string,
-  directives: [CAROUSEL_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES, Angulartics2On],
+  directives: [CAROUSEL_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES],
   styles: [require('./gapminder-overview.styl') as string],
   pipes: [AsyncPipe, ToDatePipe]
 })

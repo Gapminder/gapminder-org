@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES, NavigationStart } from '@angular/router';
+import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { CollapseDirective, DROPDOWN_DIRECTIVES } from 'ng2-bootstrap';
 import { SearchComponent } from '../search/search.component';
 import { HeaderMenuComponent, BreadcrumbsService } from 'ng2-contentful-blog';
-
-import { Angulartics2On } from 'angulartics2/index';
 
 @Component({
   selector: 'gm-header',
   template: require('./header.html') as string,
   styles: [require('./header.styl') as string],
-  directives: [HeaderMenuComponent, CollapseDirective, DROPDOWN_DIRECTIVES, ROUTER_DIRECTIVES, SearchComponent, Angulartics2On]
+  directives: [HeaderMenuComponent, CollapseDirective, DROPDOWN_DIRECTIVES, ROUTER_DIRECTIVES, SearchComponent]
 })
 export class HeaderComponent implements OnInit {
   private isOnRootView: boolean;
@@ -25,10 +23,9 @@ export class HeaderComponent implements OnInit {
   }
 
   public ngOnInit(): any {
-    this.router.events.filter((value: any) => value instanceof NavigationStart && value.url === '/')
-      .subscribe((value: NavigationStart) => {
-        this.isOnRootView = value.url === '/' || value.url === '';
-      });
+    this.router.events.subscribe((path: any) => {
+      this.isOnRootView = path.url === '/' || path.url === '';
+    });
   }
 
   public toggle(collapsed: boolean): void {
