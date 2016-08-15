@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ContenfulContent, ContentfulNodePage, ToDatePipe, RoutesManagerService } from 'ng2-contentful-blog';
-import { Angulartics2On } from 'angulartics2';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import * as _ from 'lodash';
@@ -9,7 +8,7 @@ import * as _ from 'lodash';
   selector: 'gm-latest-videos',
   template: require('./latest-videos.html') as string,
   styles: [require('./latest-videos.styl') as string],
-  directives: [ROUTER_DIRECTIVES, Angulartics2On],
+  directives: [ROUTER_DIRECTIVES],
   pipes: [ToDatePipe]
 })
 export class LatestVideosComponent implements OnInit {
@@ -39,9 +38,9 @@ export class LatestVideosComponent implements OnInit {
           .subscribe(
             (videos: ContentfulNodePage[]) => {
               this.videos = videos;
-              for (let item of this.videos) {
-                this.contentfulContentService.getArticleParentSlug(item.sys.id, (url: string) => {
-                  item.fields.url = this.routesManager.addRoute({path: url, data: {name: item.fields.title}});
+              for (let video of this.videos) {
+                this.contentfulContentService.getArticleParentSlug(video.sys.id, (url: string) => {
+                  video.fields.url = this.routesManager.addRoute({path: url, data: {name: video.fields.title}});
                 });
               }
             });

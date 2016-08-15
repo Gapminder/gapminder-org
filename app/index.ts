@@ -6,7 +6,7 @@ import { ComponentRef, PLATFORM_DIRECTIVES } from '@angular/core';
 import { Ng2ContentfulConfig, ContentfulService } from 'ng2-contentful';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { TwitterService } from './shared/services/twitter.service';
-import { Angulartics2 } from 'angulartics2/index';
+import { Angulartics2, Angulartics2On } from 'angulartics2/index';
 import { DynamicContentDetailsComponent } from './shared/components/dynamic-content/dynamic-content-details.component';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
@@ -17,7 +17,9 @@ import {
   ContentfulImageDirective
 } from 'ng2-contentful-blog';
 
+const Constants = require('./constants.json');
 const ContentfulConfig = require('./contentTypeIds.json');
+
 declare var CONTENTFUL_ACCESS_TOKEN: string;
 declare var CONTENTFUL_SPACE_ID: string;
 declare var CONTENTFUL_HOST: string;
@@ -39,11 +41,12 @@ bootstrap(AppComponent, [
   APP_ROUTER_PROVIDER,
   GAPMINDER_PROVIDERS,
   {provide: APP_BASE_HREF, useValue: '/'},
-  {provide: 'ProjectTag', useValue: 'gapminder-org'},
+  {provide: 'Constants', useValue: Constants},
   {provide: 'Routes', useValue: appRoutes},
   {provide: 'DefaultArticleComponent', useValue: DynamicContentDetailsComponent},
   {provide: 'ContentfulTypeIds', useValue: ContentfulConfig},
-  {provide: PLATFORM_DIRECTIVES, useValue: ContentfulImageDirective, multi: true}
+  {provide: PLATFORM_DIRECTIVES, useValue: ContentfulImageDirective, multi: true},
+  {provide: PLATFORM_DIRECTIVES, useValue: Angulartics2On, multi: true}
 ]).then(
   (appRef: ComponentRef<any>) => {
     appInjector(appRef.injector);
