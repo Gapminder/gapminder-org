@@ -17,7 +17,7 @@ import {
   ContentfulImageDirective
 } from 'ng2-contentful-blog';
 
-const Constants = require('./constants.json');
+const Constants = require('./constants');
 const ContentfulConfig = require('./contentTypeIds.json');
 
 declare var CONTENTFUL_ACCESS_TOKEN: string;

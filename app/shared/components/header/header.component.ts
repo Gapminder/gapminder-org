@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { CollapseDirective, DROPDOWN_DIRECTIVES } from 'ng2-bootstrap';
 import { SearchComponent } from '../search/search.component';
-import { HeaderMenuComponent, BreadcrumbsService } from 'ng2-contentful-blog';
+import { HeaderMenuComponent, BreadcrumbsService, ContenfulContent, ContentfulImage } from 'ng2-contentful-blog';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'gm-header',
@@ -15,14 +16,25 @@ export class HeaderComponent implements OnInit {
   private collapsed: boolean = true;
   private router: Router;
   private breadcrumbsService: BreadcrumbsService;
+  private contentfulContentService: ContenfulContent;
+  private headerLogo: ContentfulImage;
+  private constants: any;
 
   public constructor(router: Router,
-                     breadcrumbsService: BreadcrumbsService) {
+                     contentfulContentService: ContenfulContent,
+                     breadcrumbsService: BreadcrumbsService,
+                     @Inject('Constants') constants: any) {
     this.router = router;
+    this.constants = constants;
+    this.contentfulContentService = contentfulContentService;
     this.breadcrumbsService = breadcrumbsService;
   }
 
   public ngOnInit(): any {
+    this.contentfulContentService.getImagesByTitle(this.constants.HEADER_LOGO_TITLE)
+      .subscribe((images: ContentfulImage[]) => {
+        this.headerLogo = _.first(images);
+      });
     this.router.events.subscribe((path: any) => {
       this.isOnRootView = path.url === '/' || path.url === '';
     });
@@ -32,3 +44,4 @@ export class HeaderComponent implements OnInit {
     this.collapsed = collapsed;
   }
 }
+

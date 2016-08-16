@@ -13,6 +13,7 @@ coverage
 
 # ts generated
 app/**/*.js
+!/app/constants.js
 app/**/*.js.map
 
 #ts typings

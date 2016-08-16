@@ -1,7 +1,7 @@
 <section>
   <div class="text-center margin-bottom-35 margin-top-35">
     <div class="logo">
-      <img src="../../../../assets/img/logo-yellow.svg">
+      <img *ngIf="gapminderLogo" [gmContentfulSrcId]="gapminderLogo.fields.image.sys.id">
     </div>
     <h2 class="head">{{carouselConfig.head}}</h2>
   </div>

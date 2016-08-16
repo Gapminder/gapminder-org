@@ -5,11 +5,10 @@
         <a [routerLink]="['/']" class="logo" *ngIf="!isOnRootView"
            angulartics2On="click"
            angularticsEvent="'Gapminder.org'">
-          <img src="../../../assets/img/logo-yellow.svg">
+          <img *ngIf="headerLogo" [gmContentfulSrcId]="headerLogo.fields.image.sys.id">
         </a>
 
         <gm-header-menu></gm-header-menu>
-
         <gm-search (toggleSearchMenu)="toggle($event)"></gm-search>
 
       </div>
