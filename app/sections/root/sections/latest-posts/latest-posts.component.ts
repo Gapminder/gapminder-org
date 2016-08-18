@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
-import { Angulartics2On } from 'angulartics2';
 import {
   ToDatePipe,
   ContentfulNodePage,
@@ -15,7 +14,7 @@ import * as _ from 'lodash';
   selector: 'gm-latest-posts',
   template: require('./latest-posts.html') as string,
   styles: [require('./latest-posts.styl') as string],
-  directives: [ROUTER_DIRECTIVES, Angulartics2On],
+  directives: [ROUTER_DIRECTIVES],
   pipes: [AsyncPipe, ToDatePipe]
 })
 export class LatestPostsComponent implements OnInit {
