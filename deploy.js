@@ -10,7 +10,7 @@ if (shell.env.TRAVIS_BRANCH === 'master') {
 
   //TODO: enable me when hosting is set up
   // deploy(contenfulProdConfig);
-} else {
+} else if (shell.env.TRAVIS_BRANCH === 'development') {
   deploy(contenfulDevConfig);
 }
 
