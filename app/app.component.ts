@@ -8,7 +8,7 @@ import { SubscribeComponent } from './shared/components/subscribe/subscribe.comp
 import { Angulartics2 } from 'angulartics2/index';
 import {
   BreadcrumbsService,
-  BreadcrumbsComponent, ShareFooterLineComponent, FooterComponent
+  BreadcrumbsComponent, ShareFooterLineComponent, FooterComponent, CoverImageComponent
 } from 'ng2-contentful-blog';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
@@ -18,7 +18,7 @@ import 'rxjs/add/operator/toPromise';
   selector: 'gm-app',
   encapsulation: ViewEncapsulation.None,
   providers: [Angulartics2GoogleAnalytics],
-  directives: [HeaderComponent, FooterComponent, ShareFooterLineComponent, SubscribeComponent, ROUTER_DIRECTIVES, BreadcrumbsComponent],
+  directives: [HeaderComponent, FooterComponent, CoverImageComponent, ShareFooterLineComponent, SubscribeComponent, ROUTER_DIRECTIVES, BreadcrumbsComponent],
   styles: [
     require('./main.styl') as string,
     require('./fonts.styl') as string,
@@ -27,6 +27,7 @@ import 'rxjs/add/operator/toPromise';
   template: `
   <div class='page-wrap'>
     <gm-header id="goTo"></gm-header>
+    <gm-cover></gm-cover>
      <div class='container'>
       <gm-breadcrumbs></gm-breadcrumbs>
       <router-outlet></router-outlet>

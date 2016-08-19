@@ -6,13 +6,8 @@
         <a *ngIf="video.fields.url" [routerLink]="[video.fields.url]"
            angulartics2On="click"
            angularticsEvent="{{video.fields.title}}"
-           class="video-wrap-img">
+           class="video-wrap-img" [gmContentfulSrcId]="video.fields.thumbnail.sys.id">
           <span class="play"><i class="fa fa-play"></i></span>
-          <img [gmContentfulSrcId]="video.fields.thumbnail.sys.id"
-               [width]="300"
-               [height]="240"
-               [fit]="'scale'"
-               alt="{{video.fields.title}}">
         </a>
         <div class="date-info">{{ video.fields.createdAt | gmToDate | date }}</div>
         <a *ngIf="video.fields.url" [routerLink]="[video.fields.url]"

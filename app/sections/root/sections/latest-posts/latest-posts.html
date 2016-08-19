@@ -6,10 +6,8 @@
         <a *ngIf="post.fields.url" [routerLink]="[post.fields.url]"
            angulartics2On="click"
            angularticsEvent="{{post.fields.title}}"
-           class="post-wrap-img">
-          <img [gmContentfulSrcId]="post.fields.thumbnail.sys.id"
-               [fit]="'scale'"
-               alt="{{post.fields.title}}">
+           class="post-wrap-img" [gmContentfulSrcId]="post.fields.thumbnail.sys.id">
+
         </a>
         <div class="date-info">{{ post.fields.createdAt | gmToDate | date }}</div>
         <a *ngIf="post.fields.url" [routerLink]="[post.fields.url]"
