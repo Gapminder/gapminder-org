@@ -11,7 +11,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isProduction = (process.env.NODE_ENV || 'development') === 'production';
 const isLocal = process.env.NODE_ENV === 'local';
-const devtool = isProduction ? 'cheap-module-eval-source-map' : 'source-map';
 const dest = 'dist';
 const absDest = root(dest);
 
@@ -24,7 +23,7 @@ const twitterConfig = JSON.parse(
 );
 
 const config = {
-  devtool,
+  // devtool: isProduction ? 'eval' : 'source-map',
   debug: false,
 
   verbose: true,

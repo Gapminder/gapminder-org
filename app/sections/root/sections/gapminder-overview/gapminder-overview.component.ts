@@ -3,7 +3,10 @@ import { CORE_DIRECTIVES, FORM_DIRECTIVES, AsyncPipe } from '@angular/common';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 import { CAROUSEL_DIRECTIVES } from 'ng2-bootstrap';
 import {
-  RoutesManagerService, ContentfulNodePage, ContenfulContent, ToDatePipe,
+  RoutesManagerService,
+  ContentfulNodePage,
+  ContenfulContent,
+  ToDatePipe,
   ContentfulImage
 } from 'ng2-contentful-blog';
 import * as _ from 'lodash';
@@ -47,14 +50,10 @@ export class GapminderOverviewComponent implements OnInit {
         this.gapminderLogo = _.first(images);
       });
     this.contentfulContentService.getOverviewPages()
+      .mergeMap((slides: ContentfulNodePage[]) => this.contentfulContentService.getArticleWithFullUrlPopulated(slides))
       .subscribe((slides: ContentfulNodePage[]) => {
-        for (let slide of slides) {
-          this.contentfulContentService.getArticleParentSlug(slide.sys.id, (url: string) => {
-            slide.fields.url = this.routesManager.addRoute({path: url, data: {name: slide.fields.title}});
-          });
-        }
+        this.routesManager.addRoutesFromArticles(... slides);
         this.slides = slides;
-        return this.slides;
       });
   }
 }

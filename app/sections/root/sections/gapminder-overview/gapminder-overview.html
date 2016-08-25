@@ -25,13 +25,13 @@
             <div class="block-description">
               <div class="date-info">{{slide.fields.createdAt | gmToDate | date}}</div>
               <a *ngIf="!slide.fields.url" class="title">{{slide.fields.title}}</a>
-              <a *ngIf="slide.fields.url" [routerLink]="[slide.fields.url]"
+              <a *ngIf="slide.fields.url" [routerLink]="[routesManager.getRouteName(slide.fields.url)]"
                  angulartics2On="click"
                  angularticsEvent="{{slide.fields.title}}"
                  class="title">{{slide.fields.title}}</a>
               <p>{{slide.fields.description}}</p>
               <a *ngIf="!slide.fields.url" class="more-info">Read more »</a>
-              <a *ngIf="slide.fields.url" [routerLink]="[slide.fields.url]"
+              <a *ngIf="slide.fields.url" [routerLink]="[routesManager.getRouteName(slide.fields.url)]"
                  angulartics2On="click"
                  angularticsEvent="{{slide.fields.title}}"
                  class="more-info">Read more »</a>
