@@ -16,6 +16,7 @@ import {
 import { ContentfulProfilePage } from 'ng2-contentful-blog/components/contentful/aliases.structures';
 import { Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
+import { ArticleService } from '../../services/article.service';
 
 @Component({
   selector: 'gm-content',
@@ -37,19 +38,22 @@ export class DynamicContentDetailsComponent implements OnInit {
   private constants: any;
   private profiles: ContentfulProfilePage[];
   private cssClassSmallColumn: boolean = false;
+  private articleService: ArticleService;
 
   public constructor(router: Router,
                      activatedRoute: ActivatedRoute,
                      routesManager: RoutesManagerService,
                      contentfulContentService: ContenfulContent,
                      @Inject('Constants') constants: any,
-                     breadcrumbsService: BreadcrumbsService) {
+                     breadcrumbsService: BreadcrumbsService,
+                     articleService: ArticleService) {
     this.router = router;
     this.contentfulContentService = contentfulContentService;
     this.breadcrumbsService = breadcrumbsService;
     this.routesManager = routesManager;
     this.constants = constants;
     this.activatedRoute = activatedRoute;
+    this.articleService = articleService;
   }
 
   public ngOnInit(): void {
@@ -62,9 +66,11 @@ export class DynamicContentDetailsComponent implements OnInit {
           .getTagsBySlug(this.constants.PROJECT_TAG)
           .mergeMap((tags: ContentfulTagPage[]) => Observable.from(tags))
           .map((tag: ContentfulTagPage) => tag.sys.id)
-          .mergeMap((tagSysId: string) => this.contentfulContentService.getArticleByTagAndSlug(tagSysId, this.contentSlug))
+          .mergeMap((tagSysId: string) => {
+            // FIXME: Should be removed - we need to ask contentful to filter this for us
+            return this.articleService.filterArticlesByProjectTag(this.contentfulContentService.getArticleByTagAndSlug(tagSysId, this.contentSlug));
+          })
           .mergeMap((articles: ContentfulNodePage[]) => Observable.from(articles))
-          .filter((article: ContentfulNodePage) => !!_.find(article.fields.tags, (tag: ContentfulTagPage) => tag.fields.slug === this.constants.PROJECT_TAG))
           .subscribe((article: ContentfulNodePage) => this.onArticleReceived(article));
       });
   }
