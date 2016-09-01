@@ -17,7 +17,12 @@ export class ArticleService {
     }
     return notFilteredArticles
       .mergeMap((articles: ContentfulNodePage[]) => Observable.from(articles))
-      .filter((article: ContentfulNodePage) => !!_.find(article.fields.tags, (tag: ContentfulTagPage) => tag.fields.slug === this.constants.PROJECT_TAG))
+      .filter((article: ContentfulNodePage) => Boolean(article.fields))
+      .filter((article: ContentfulNodePage) => {
+        return Boolean(_.find(article.fields.tags, (tag: ContentfulTagPage) => {
+          return tag.fields && tag.fields.slug === this.constants.PROJECT_TAG;
+        }));
+      })
       .toArray();
   }
 }
