@@ -10,6 +10,7 @@ import {
   ContentfulImage
 } from 'ng2-contentful-blog';
 import * as _ from 'lodash';
+import { ArticleService } from '../../../../shared/services/article.service';
 
 @Component({
   selector: 'gm-gapminder-overview',
@@ -26,6 +27,7 @@ export class GapminderOverviewComponent implements OnInit {
   private routesManager: RoutesManagerService;
   private constants: any;
   private gapminderLogo: ContentfulImage;
+  private articleService: ArticleService;
 
   /* tslint:disable:no-unused-variable */
   private carouselConfig: CarouselConfig = {
@@ -37,10 +39,12 @@ export class GapminderOverviewComponent implements OnInit {
 
   public constructor(contentfulContentService: ContenfulContent,
                      routesManager: RoutesManagerService,
-                     @Inject('Constants') constants: any) {
+                     @Inject('Constants') constants: any,
+                     articleService: ArticleService) {
     this.contentfulContentService = contentfulContentService;
     this.routesManager = routesManager;
     this.constants = constants;
+    this.articleService = articleService;
 
   }
 
@@ -50,7 +54,10 @@ export class GapminderOverviewComponent implements OnInit {
         this.gapminderLogo = _.first(images);
       });
     this.contentfulContentService.getOverviewPages()
-      .mergeMap((slides: ContentfulNodePage[]) => this.contentfulContentService.getArticleWithFullUrlPopulated(slides))
+      .mergeMap((slides: ContentfulNodePage[]) => {
+        // FIXME: Should be removed - we need to ask contentful to filter this for us
+        return this.articleService.filterArticlesByProjectTag(this.contentfulContentService.getArticleWithFullUrlPopulated(slides));
+      })
       .subscribe((slides: ContentfulNodePage[]) => {
         this.routesManager.addRoutesFromArticles(... slides);
         this.slides = slides;
