@@ -1,8 +1,7 @@
-import {Component} from '@angular/core';
-import {LatestPostsComponent} from './sections/latest-posts/latest-posts.component';
-import {GapminderOverviewComponent} from './sections/gapminder-overview/gapminder-overview.component';
-import {LatestVideosComponent} from './sections/latest-videos/latest-videos.component';
-import {TweetsComponent} from './sections/tweets/tweets.component';
+import { Component } from '@angular/core';
+import { GapminderOverviewComponent } from './sections/gapminder-overview/gapminder-overview.component';
+import { TweetsComponent } from './sections/tweets/tweets.component';
+import { LatestComponent } from '../../shared/components/gm-latest/latest.component';
 
 @Component({
   selector: 'gm-root',
@@ -10,8 +9,7 @@ import {TweetsComponent} from './sections/tweets/tweets.component';
   styles: [require('./root.component.styl') as string],
   directives: [
     GapminderOverviewComponent,
-    LatestVideosComponent,
-    LatestPostsComponent,
+    LatestComponent,
     TweetsComponent
   ]
 })

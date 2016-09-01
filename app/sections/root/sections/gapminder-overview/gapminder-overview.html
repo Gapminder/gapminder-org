@@ -1,7 +1,7 @@
 <section>
   <div class="text-center margin-bottom-35 margin-top-35">
     <div class="logo">
-      <img src="../../../../assets/img/logo-yellow.svg">
+      <img *ngIf="gapminderLogo" [gmContentfulSrcId]="gapminderLogo.fields.image.sys.id">
     </div>
     <h2 class="head">{{carouselConfig.head}}</h2>
   </div>
@@ -25,13 +25,13 @@
             <div class="block-description">
               <div class="date-info">{{slide.fields.createdAt | gmToDate | date}}</div>
               <a *ngIf="!slide.fields.url" class="title">{{slide.fields.title}}</a>
-              <a *ngIf="slide.fields.url" [routerLink]="[slide.fields.url]"
+              <a *ngIf="slide.fields.url" [routerLink]="[routesManager.getRouteName(slide.fields.url)]"
                  angulartics2On="click"
                  angularticsEvent="{{slide.fields.title}}"
                  class="title">{{slide.fields.title}}</a>
               <p>{{slide.fields.description}}</p>
               <a *ngIf="!slide.fields.url" class="more-info">Read more »</a>
-              <a *ngIf="slide.fields.url" [routerLink]="[slide.fields.url]"
+              <a *ngIf="slide.fields.url" [routerLink]="[routesManager.getRouteName(slide.fields.url)]"
                  angulartics2On="click"
                  angularticsEvent="{{slide.fields.title}}"
                  class="more-info">Read more »</a>
