@@ -11,6 +11,7 @@
     "update-webdriver": "./node_modules/.bin/webdriver-manager update",
     "deploy": "npm run build:prod && npm run publish:gh-pages",
     "deploy:master": "npm run build:prod && ./node_modules/.bin/firebase deploy --project gapminder-org-stage",
+    "deploy:testing": "npm run build:dev && ./node_modules/.bin/firebase deploy --project gapminder-org-testing",
     "deploy:development": "npm run build:dev && ./node_modules/.bin/firebase deploy",
     "publish:gh-pages": "./tools/gh-pages-publish.js",
     "build:dev": "./node_modules/.bin/webpack --progress --color",
