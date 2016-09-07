@@ -15,7 +15,11 @@
            angularticsEvent="{{article.fields.title}}"
            class="post-title">{{article.fields.title}}
         </a>
-        <p class="post-p">{{article.fields.description}}</p>
+        <p class="post-p">
+          {{article.fields.description | slice:0:100}}<span *ngIf="article.fields.description.length >101">...
+            <a [routerLink]="[routesManager.getRouteName(article.fields.url)]">Read more&nbsp;»</a>
+          </span>
+        </p>
       </div>
     </div>
   </section>

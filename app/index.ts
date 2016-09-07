@@ -16,7 +16,6 @@ import {
   GAPMINDER_PROVIDERS,
   ContentfulImageDirective
 } from 'ng2-contentful-blog';
-import { ArticleService } from './shared/services/article.service';
 
 const Constants = require('./constants');
 const ContentfulConfig = require('./contentTypeIds.json');
@@ -37,7 +36,6 @@ bootstrap(AppComponent, [
   Angulartics2,
   TwitterService,
   ContentfulService,
-  ArticleService,
   Angulartics2GoogleAnalytics,
   HTTP_PROVIDERS,
   APP_ROUTER_PROVIDER,
