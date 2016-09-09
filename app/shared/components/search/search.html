@@ -1,13 +1,15 @@
-<form class="search-form hidden-xs">
+<form class="search-form">
   <fieldset>
-    <button class="btn-search pull-right col-md-1" (click)="toggle()">
-      <img *ngIf="collapsed" src="../assets/img/ico-search.png">
-      <span *ngIf="!collapsed">Cancel</span>
-    </button>
-    <div [hidden]="collapsed" class="wrap-input col-md-11">
-      <input type="search" class="text" placeholder="Enter keywords ...">
-      <button type="submit" class="submit">
-        <img src="../assets/img/ico-array-right.svg">
+    <div [ngClass]="{'indent': collapsed, 'no-indent': !collapsed}">
+      <div [hidden]="collapsed" class="wrap-input">
+        <input type="search" class="text" placeholder="Enter keywords ...">
+        <button type="submit" class="submit">
+          <img src="../assets/img/ico-array-right.svg">
+        </button>
+      </div>
+      <button class="btn-search pull-right" (click)="toggle()">
+        <img [hidden]="!collapsed" src="../assets/img/search-icon.png">
+        <span [hidden]="collapsed">Cancel</span>
       </button>
     </div>
   </fieldset>

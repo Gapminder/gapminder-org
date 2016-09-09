@@ -7,9 +7,9 @@
            angularticsEvent="'Gapminder.org'">
           <img *ngIf="headerLogo" [gmContentfulSrcId]="headerLogo.fields.image.sys.id">
         </a>
-
-        <gm-header-menu></gm-header-menu>
-        <gm-search (toggleSearchMenu)="toggle($event)"></gm-search>
+        <gm-search (toggleSearchMenu)="toggle($event)" class="hidden-lg hidden-md hidden-sm mobile-search"></gm-search>
+        <gm-header-menu [hidden]="!collapsed"></gm-header-menu>
+        <gm-search (toggleSearchMenu)="toggle($event)" class="hidden-xs"></gm-search>
 
       </div>
     </div>

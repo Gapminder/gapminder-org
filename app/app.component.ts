@@ -35,7 +35,7 @@ import 'rxjs/add/operator/toPromise';
   </div>   
   <gm-subscribe></gm-subscribe>
   <gm-footer></gm-footer>
-  <gm-share-line-footer *ngIf="showShareLine"></gm-share-line-footer>
+  <gm-share-line-footer [hidden]="!showShareLine"></gm-share-line-footer>
   `
 })
 

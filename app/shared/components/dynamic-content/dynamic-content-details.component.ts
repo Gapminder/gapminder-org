@@ -16,7 +16,6 @@ import {
 import { ContentfulProfilePage } from 'ng2-contentful-blog/components/contentful/aliases.structures';
 import { Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
-import { ArticleService } from '../../services/article.service';
 
 @Component({
   selector: 'gm-content',
@@ -25,6 +24,7 @@ import { ArticleService } from '../../services/article.service';
   styles: [require('./dynamic-content-details.component.styl') as string],
   pipes: [ToDatePipe]
 })
+
 export class DynamicContentDetailsComponent implements OnInit {
   private content: NodePageContent;
   private children: ContentfulNodePage[];
@@ -38,22 +38,21 @@ export class DynamicContentDetailsComponent implements OnInit {
   private constants: any;
   private profiles: ContentfulProfilePage[];
   private cssClassSmallColumn: boolean = false;
-  private articleService: ArticleService;
+  private projectTagId: string;
+  private relatedArticles: ContentfulNodePage[];
 
   public constructor(router: Router,
                      activatedRoute: ActivatedRoute,
                      routesManager: RoutesManagerService,
-                     contentfulContentService: ContenfulContent,
                      @Inject('Constants') constants: any,
-                     breadcrumbsService: BreadcrumbsService,
-                     articleService: ArticleService) {
+                     contentfulContentService: ContenfulContent,
+                     breadcrumbsService: BreadcrumbsService) {
     this.router = router;
     this.contentfulContentService = contentfulContentService;
     this.breadcrumbsService = breadcrumbsService;
     this.routesManager = routesManager;
-    this.constants = constants;
     this.activatedRoute = activatedRoute;
-    this.articleService = articleService;
+    this.constants = constants;
   }
 
   public ngOnInit(): void {
@@ -65,26 +64,37 @@ export class DynamicContentDetailsComponent implements OnInit {
         this.contentfulContentService
           .getTagsBySlug(this.constants.PROJECT_TAG)
           .mergeMap((tags: ContentfulTagPage[]) => Observable.from(tags))
+          .do((projectTagId: ContentfulTagPage)=> this.projectTagId = projectTagId.sys.id)
           .map((tag: ContentfulTagPage) => tag.sys.id)
-          .mergeMap((tagSysId: string) => {
-            // FIXME: Should be removed - we need to ask contentful to filter this for us
-            return this.articleService.filterArticlesByProjectTag(this.contentfulContentService.getArticleByTagAndSlug(tagSysId, this.contentSlug));
-          })
+          .mergeMap((tagSysId: string) => this.contentfulContentService.getArticleByTagAndSlug(tagSysId, this.contentSlug))
           .mergeMap((articles: ContentfulNodePage[]) => Observable.from(articles))
           .subscribe((article: ContentfulNodePage) => this.onArticleReceived(article));
       });
+  }
+
+  private related(related: ContentfulNodePage[]): Observable<ContentfulNodePage[]> {
+    return Observable
+      .from(related)
+      .filter((article: ContentfulNodePage) => !!_.find(article.fields.tags, (tag: ContentfulTagPage) => tag.sys.id === this.projectTagId))
+      .toArray();
   }
 
   private onArticleReceived(article: ContentfulNodePage): void {
     if (!article) {
       this.router.navigate(['/']);
     }
-
     this.content = article.fields;
-    this.breadcrumbsService.breadcrumbs$.next({url: this.urlPath, name: this.content.title});
+    if (this.content.related) {
 
-    this.contentfulContentService
-      .gerProfilesByArticleId(article.sys.id)
+      this.related(this.content.related).subscribe((related: ContentfulNodePage[]) => {
+        if (!_.isEmpty(related)) {
+          this.relatedArticles = related;
+        }
+      });
+    }
+
+    this.breadcrumbsService.breadcrumbs$.next({url: this.urlPath, name: this.content.title});
+    this.contentfulContentService.gerProfilesByArticleIdAndProjectTag(article.sys.id, this.constants.PROJECT_TAG)
       .subscribe((profiles: ContentfulProfilePage[]) => {
         this.profiles = profiles;
         this.cssClassSmallColumn = this.relatedSectionIsAtRight() || !_.isEmpty(profiles);
@@ -93,8 +103,8 @@ export class DynamicContentDetailsComponent implements OnInit {
     this.contentfulContentService.getChildrenOfArticleByTag(article.sys.id, this.constants.PROJECT_TAG)
       .subscribe((children: ContentfulNodePage[]) => {
         _.forEach(children, (child: ContentfulNodePage) => {
-          const currentPath: string = _.map(this.activatedRoute.snapshot.url, 'path').join('/');
-          child.fields.url = `${currentPath}/${child.fields.slug}`;
+          const currentPagePath: string = _.map(this.activatedRoute.snapshot.url, 'path').join('/');
+          child.fields.url = `${currentPagePath}/${child.fields.slug}`;
         });
         this.routesManager.addRoutesFromArticles(... children);
         this.children = children;
@@ -109,4 +119,3 @@ export class DynamicContentDetailsComponent implements OnInit {
     return !Boolean(this.content.relatedLocation);
   }
 }
-
