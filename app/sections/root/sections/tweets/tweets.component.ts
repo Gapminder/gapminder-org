@@ -1,8 +1,8 @@
-import {Component, Input, OnInit, Inject} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {TwitterService, Tweet, TwitterRequest} from '../../../../shared/services/twitter.service';
-import {formatTwitterFollowersAmount} from '../../../../shared/components/dynamic-content/tools';
-import {ToDatePipe} from 'ng2-contentful-blog';
+import { Component, Input, OnInit, Inject } from '@angular/core';
+import { CORE_DIRECTIVES } from '@angular/common';
+import { TwitterService, Tweet, TwitterRequest } from '../../../../shared/services/twitter.service';
+import { formatTwitterFollowersAmount } from '../../../../shared/components/dynamic-content/tools';
+import { ToDatePipe } from 'ng2-contentful-blog';
 
 import * as _ from 'lodash';
 

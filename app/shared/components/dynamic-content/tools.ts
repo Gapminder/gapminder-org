@@ -1,9 +1,9 @@
-import {StringWrapper} from '@angular/core/src/facade/lang';
+import { StringWrapper } from '@angular/core/src/facade/lang';
 
 const _cssSelectorRe: RegExp = /([^\r\n,{}]+)(,(?=[^}]*{)|\s*{)/gmi;
 
 export function encapsulateCss(css: string, prefix: string): string {
-  return StringWrapper.replaceAllMapped(css, _cssSelectorRe, function(m: any): string {
+  return StringWrapper.replaceAllMapped(css, _cssSelectorRe, function (m: any): string {
     const rule = m[0];
     return `${prefix} ${rule}`;
   });

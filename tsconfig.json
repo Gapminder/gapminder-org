@@ -1,5 +1,4 @@
 {
-  "version": "1.8.7",
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
@@ -11,9 +10,19 @@
     "listFiles": false,
     "noLib": false,
     "outDir": "dist",
-    "allowJs": true
+    "stripInternal": true,
+    "lib": ["dom", "es6"],
+    "types": [
+      "lodash",
+      "marked",
+      "node",
+      "webpack"
+    ]
   },
+  "exclude": [
+    "node_modules", "bundles", "dist"
+  ],
+  "atom": { "rewriteTsconfig": false },
   "files": [
-    "typings/index.d.ts"
    ]
 }

@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {CollapseDirective} from 'ng2-bootstrap';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { CollapseDirective } from 'ng2-bootstrap';
 
 @Component({
   selector: 'gm-search',
