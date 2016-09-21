@@ -1,0 +1,16 @@
+wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+heroku login
+
+** Using web console create app.
+** Back to terminal
+
+heroku git:remote -a <app-name>
+
+heroku config:set NPM_CONFIG_PRODUCTION=false PRERENDER_TOKEN=<token> -a <app-name>
+
+git push heroku <git branch you are in>:master
+
+heroku ps:scaling web=1 -a <app-name>
+
+heroku domains:add gapminderdev.org -a <app-name>
+heroku domains:add www.gapminderdev.org -a <app-name>
