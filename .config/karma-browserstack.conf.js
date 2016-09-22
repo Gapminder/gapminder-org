@@ -138,9 +138,7 @@ module.exports = config => {
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      'test.bundle.js': ['webpack', 'sourcemap']
-    },
+    preprocessors: {'test.bundle.js': ['webpack', 'sourcemap']},
 
     webpack: webpackConfig,
 
@@ -159,8 +157,7 @@ module.exports = config => {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
 
-    browserStack: {
-    },
+    browserStack: {},
     customLaunchers,
     browsers: Object.keys(customLaunchers),
     reporters: ['spec'],

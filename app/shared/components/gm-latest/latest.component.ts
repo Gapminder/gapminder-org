@@ -1,14 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router';
-import { ToDatePipe, ContentfulNodePage, ContenfulContent, RoutesManagerService } from 'ng2-contentful-blog';
 import * as _ from 'lodash';
+import { ContentfulNodePage } from 'ng2-contentful-blog/components/contentful/aliases.structures';
+import { ContenfulContent } from 'ng2-contentful-blog/components/contentful/contentful-content.service';
+import { RoutesManagerService } from 'ng2-contentful-blog/components/routes-gateway/routes-manager.service';
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
   selector: 'gm-latest',
   template: require('./latest.html') as string,
-  styles: [require('./latest.styl') as string],
-  directives: [ROUTER_DIRECTIVES],
-  pipes: [ToDatePipe]
+  styles: [require('./latest.styl') as string]
 })
 export class LatestComponent implements OnInit {
   @Input()

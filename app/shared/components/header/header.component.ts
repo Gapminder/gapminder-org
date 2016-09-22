@@ -1,15 +1,14 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES } from '@angular/router';
-import { CollapseDirective, DROPDOWN_DIRECTIVES } from 'ng2-bootstrap';
-import { SearchComponent } from '../search/search.component';
-import { HeaderMenuComponent, BreadcrumbsService, ContenfulContent, ContentfulImage } from 'ng2-contentful-blog';
+import { Router } from '@angular/router';
 import * as _ from 'lodash';
+import { BreadcrumbsService } from 'ng2-contentful-blog/components/breadcrumbs/breadcrumbs.service';
+import { ContenfulContent } from 'ng2-contentful-blog/components/contentful/contentful-content.service';
+import { ContentfulImage } from 'ng2-contentful-blog/components/contentful/aliases.structures';
 
 @Component({
   selector: 'gm-header',
   template: require('./header.html') as string,
-  styles: [require('./header.styl') as string],
-  directives: [HeaderMenuComponent, CollapseDirective, DROPDOWN_DIRECTIVES, ROUTER_DIRECTIVES, SearchComponent]
+  styles: [require('./header.styl') as string]
 })
 export class HeaderComponent implements OnInit {
   private isOnRootView: boolean;

@@ -139,9 +139,7 @@ function pushPlugins(conf) {
       beautify: false,
       mangle: false,
       comments: false,
-      compress: {
-        screw_ie8: true
-      }
+      compress: {screw_ie8: true}
     }),
     new CompressionPlugin({
       asset: '{file}.gz',

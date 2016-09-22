@@ -1,17 +1,11 @@
-import { Component, Input, OnInit, Inject } from '@angular/core';
-import { CORE_DIRECTIVES } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { TwitterService, Tweet, TwitterRequest } from '../../../../shared/services/twitter.service';
-import { formatTwitterFollowersAmount } from '../../../../shared/components/dynamic-content/tools';
-import { ToDatePipe } from 'ng2-contentful-blog';
-
 import * as _ from 'lodash';
 
 @Component({
   selector: 'gm-tweets',
   template: require('./tweets.html') as string,
-  styles: [require('./tweets.styl') as string],
-  directives: [...CORE_DIRECTIVES],
-  pipes: [ToDatePipe]
+  styles: [require('./tweets.styl') as string]
 })
 export class TweetsComponent implements OnInit {
   private static NEXT_TWEETS: string = 'next';
@@ -34,7 +28,7 @@ export class TweetsComponent implements OnInit {
   private count: string;
   private twitter: TwitterService;
 
-  public constructor(@Inject(TwitterService) twitter: TwitterService) {
+  public constructor(twitter: TwitterService) {
     this.twitter = twitter;
   }
 
@@ -81,13 +75,21 @@ export class TweetsComponent implements OnInit {
 
   private processTweets(tweets: Tweet[]): void {
     this.currentTweet = _.head(this.sortTweets(tweets)) || this.currentTweet;
-    this.count = formatTwitterFollowersAmount(this.currentTweet.user.followers_count);
+    this.count = this.formatTwitterFollowersAmount(this.currentTweet.user.followers_count);
     this.tweets = this.sortTweets(this.tweets ? this.tweets.concat(tweets) : tweets);
   }
 
   private sortTweets(tweets: Array<Tweet>): Array<Tweet> {
     return _.orderBy(tweets, ['id'], ['desc']);
   }
+
+  private formatTwitterFollowersAmount(amount: number): string {
+    if (amount > 1000) {
+      return (Math.round((amount / 1000) * 10) / 10) + 'K';
+    }
+    return String(amount);
+  }
+
 }
 
 interface FollowerInfo {

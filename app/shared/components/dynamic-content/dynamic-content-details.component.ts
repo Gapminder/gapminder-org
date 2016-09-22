@@ -1,28 +1,22 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Router, ActivatedRoute, UrlPathWithParams, ROUTER_DIRECTIVES } from '@angular/router';
+import { Router, ActivatedRoute, UrlSegment } from '@angular/router';
 import {
-  BreadcrumbsService,
-  ContenfulContent,
-  RoutesManagerService,
-  TagsComponent,
-  EntriesViewComponent,
-  NodePageContent,
-  ContentfulNodePage,
-  ToDatePipe,
-  ContributorsComponent,
-  RelatedComponent,
-  ContentfulTagPage
-} from 'ng2-contentful-blog';
-import { ContentfulProfilePage } from 'ng2-contentful-blog/components/contentful/aliases.structures';
+  ContentfulProfilePage,
+  ContentfulTagPage,
+  ContentfulNodePage
+} from 'ng2-contentful-blog/components/contentful/aliases.structures';
+import 'rxjs/add/operator/mergeMap';
 import { Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
+import { NodePageContent } from 'ng2-contentful-blog/components/contentful/content-type.structures';
+import { BreadcrumbsService } from 'ng2-contentful-blog/components/breadcrumbs/breadcrumbs.service';
+import { RoutesManagerService } from 'ng2-contentful-blog/components/routes-gateway/routes-manager.service';
+import { ContenfulContent } from 'ng2-contentful-blog/components/contentful/contentful-content.service';
 
 @Component({
   selector: 'gm-content',
   template: require('./dynamic-content-details.component.html') as string,
-  directives: [EntriesViewComponent, ROUTER_DIRECTIVES, RelatedComponent, TagsComponent, ContributorsComponent],
-  styles: [require('./dynamic-content-details.component.styl') as string],
-  pipes: [ToDatePipe]
+  styles: [require('./dynamic-content-details.component.styl') as string]
 })
 
 export class DynamicContentDetailsComponent implements OnInit {
@@ -57,8 +51,8 @@ export class DynamicContentDetailsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.activatedRoute.url
-      .subscribe((urls: UrlPathWithParams[]) => {
-        this.urlPath = urls.map((value: UrlPathWithParams) => value.path).join('/');
+      .subscribe((urls: UrlSegment[]) => {
+        this.urlPath = urls.map((value: UrlSegment) => value.path).join('/');
         this.contentSlug = this.urlPath.split('/').pop();
 
         this.contentfulContentService
@@ -94,7 +88,7 @@ export class DynamicContentDetailsComponent implements OnInit {
     }
 
     this.breadcrumbsService.breadcrumbs$.next({url: this.urlPath, name: this.content.title});
-    this.contentfulContentService.gerProfilesByArticleIdAndProjectTag(article.sys.id, this.constants.PROJECT_TAG)
+    this.contentfulContentService.getProfilesByArticleIdAndProjectTag(article.sys.id, this.constants.PROJECT_TAG)
       .subscribe((profiles: ContentfulProfilePage[]) => {
         this.profiles = profiles;
         this.cssClassSmallColumn = this.relatedSectionIsAtRight() || !_.isEmpty(profiles);

@@ -1,3 +1,5 @@
+/*eslint max-lines: ["error", 400]*/
+
 'use strict';
 // Unique place to configure the browsers
 // which are used in the different CI jobs in Sauce Labs (SL) and BrowserStack (BS).
