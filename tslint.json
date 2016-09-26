@@ -4,6 +4,7 @@
   "rules": {
     "directive-selector-prefix": [true, "gm"],
     "component-selector-prefix": [true, "gm"],
-    "pipe-naming": [true, "camelCase", "gm"]
+    "pipe-naming": [true, "camelCase", "gm"],
+    "only-arrow-functions": false
   }
 }

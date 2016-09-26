@@ -1,24 +1,14 @@
 import { Component, ViewEncapsulation, OnInit, Inject } from '@angular/core';
-import { CORE_DIRECTIVES, FORM_DIRECTIVES, AsyncPipe } from '@angular/common';
-import { ROUTER_DIRECTIVES } from '@angular/router';
-import { CAROUSEL_DIRECTIVES } from 'ng2-bootstrap';
-import {
-  RoutesManagerService,
-  ContentfulNodePage,
-  ContenfulContent,
-  ToDatePipe,
-  ContentfulImage
-} from 'ng2-contentful-blog';
+import { ContenfulContent } from 'ng2-contentful-blog/components/contentful/contentful-content.service';
+import { RoutesManagerService } from 'ng2-contentful-blog/components/routes-gateway/routes-manager.service';
+import { ContentfulNodePage, ContentfulImage } from 'ng2-contentful-blog/components/contentful/aliases.structures';
 import * as _ from 'lodash';
-import { ArticleService } from '../../../../shared/services/article.service';
 
 @Component({
   selector: 'gm-gapminder-overview',
   encapsulation: ViewEncapsulation.None,
   template: require('./gapminder-overview.html') as string,
-  directives: [CAROUSEL_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES, ROUTER_DIRECTIVES],
-  styles: [require('./gapminder-overview.styl') as string],
-  pipes: [AsyncPipe, ToDatePipe]
+  styles: [require('./gapminder-overview.styl') as string]
 })
 
 export class GapminderOverviewComponent implements OnInit {
@@ -27,7 +17,6 @@ export class GapminderOverviewComponent implements OnInit {
   private routesManager: RoutesManagerService;
   private constants: any;
   private gapminderLogo: ContentfulImage;
-  private articleService: ArticleService;
 
   /* tslint:disable:no-unused-variable */
   private carouselConfig: CarouselConfig = {
@@ -39,13 +28,10 @@ export class GapminderOverviewComponent implements OnInit {
 
   public constructor(contentfulContentService: ContenfulContent,
                      routesManager: RoutesManagerService,
-                     @Inject('Constants') constants: any,
-                     articleService: ArticleService) {
+                     @Inject('Constants') constants: any) {
     this.contentfulContentService = contentfulContentService;
     this.routesManager = routesManager;
     this.constants = constants;
-    this.articleService = articleService;
-
   }
 
   public ngOnInit(): void {
@@ -54,10 +40,7 @@ export class GapminderOverviewComponent implements OnInit {
         this.gapminderLogo = _.first(images);
       });
     this.contentfulContentService.getOverviewPages()
-      .mergeMap((slides: ContentfulNodePage[]) => {
-        // FIXME: Should be removed - we need to ask contentful to filter this for us
-        return this.articleService.filterArticlesByProjectTag(this.contentfulContentService.getArticleWithFullUrlPopulated(slides));
-      })
+      .mergeMap((slides: ContentfulNodePage[]) => this.contentfulContentService.getArticleWithFullUrlPopulated(slides))
       .subscribe((slides: ContentfulNodePage[]) => {
         this.routesManager.addRoutesFromArticles(... slides);
         this.slides = slides;

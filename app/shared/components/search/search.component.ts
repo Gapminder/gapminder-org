@@ -1,11 +1,9 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {CollapseDirective} from 'ng2-bootstrap';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'gm-search',
   template: require('./search.html') as string,
-  styles: [require('./search.styl') as string],
-  directives: [CollapseDirective]
+  styles: [require('./search.styl') as string]
 })
 export class SearchComponent {
   @Output()

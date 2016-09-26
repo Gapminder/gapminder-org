@@ -5,6 +5,7 @@
 
   h1
     font-size 38px
+    line-height 1
     margin-bottom 0
 
   ul
@@ -40,6 +41,7 @@
   padding-top 66.66%
   background-position: 50% 50%;
   background-size: cover;
+
   .play
     width 50px
     height 50px
@@ -68,8 +70,11 @@
   color #374551
 
 .post-p
-  font-size 16px
-  color #767d86
+  margin-top 10px
+  font-size 14px
+  a
+    color #b04514
+    line-height 20px
 
 .padding-0
   padding 0
@@ -80,4 +85,27 @@
   float left
   margin-right 15px
   margin-top 10px
+.entry-content
+  margin-bottom 25px
+
+.dynamic-details
+  @media screen and (max-width: 992px)
+    .post-p
+      font-size 16px
+    .post-title
+      font-size 24px
+      line-height 30px
+  @media screen and (max-width: 768px)
+    h1
+      font-size 34px
+    .small-description
+      font-size 20px
+
+  @media screen and (max-width: 375px)
+    h1
+      font-size 24px
+    .small-description
+      font-size 16px
+    .date-info
+      font-size 13px
 

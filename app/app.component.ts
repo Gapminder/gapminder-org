@@ -1,24 +1,14 @@
-import {
-  Component, ViewEncapsulation, OnInit, HostListener
-} from '@angular/core';
-import { ROUTER_DIRECTIVES, Router, NavigationStart } from '@angular/router';
-import { HeaderComponent } from './shared/components/header/header.component';
-import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
-import { SubscribeComponent } from './shared/components/subscribe/subscribe.component';
-import { Angulartics2 } from 'angulartics2/index';
-import {
-  BreadcrumbsService,
-  BreadcrumbsComponent, ShareFooterLineComponent, FooterComponent, CoverImageComponent
-} from 'ng2-contentful-blog';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+import { NavigationStart, Router } from '@angular/router';
+import { BreadcrumbsService } from 'ng2-contentful-blog/components/breadcrumbs/breadcrumbs.service';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'gm-app',
   encapsulation: ViewEncapsulation.None,
-  providers: [Angulartics2GoogleAnalytics],
-  directives: [HeaderComponent, FooterComponent, CoverImageComponent, ShareFooterLineComponent, SubscribeComponent, ROUTER_DIRECTIVES, BreadcrumbsComponent],
   styles: [
     require('./main.styl') as string,
     require('./fonts.styl') as string,
@@ -35,15 +25,13 @@ import 'rxjs/add/operator/toPromise';
   </div>   
   <gm-subscribe></gm-subscribe>
   <gm-footer></gm-footer>
-  <gm-share-line-footer *ngIf="showShareLine"></gm-share-line-footer>
+  <gm-share-line-footer [hidden]="!showShareLine"></gm-share-line-footer>
   `
 })
 
 export class AppComponent implements OnInit {
   public type: string = 'app component';
   private router: Router;
-  private angulartics2: Angulartics2;
-  private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics;
   private breadcrumbsService: BreadcrumbsService;
   private showShareLine: boolean;
 
@@ -55,11 +43,7 @@ export class AppComponent implements OnInit {
   }
 
   public constructor(router: Router,
-                     angulartics2: Angulartics2,
-                     angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
                      breadcrumbsService: BreadcrumbsService) {
-    this.angulartics2 = angulartics2;
-    this.angulartics2GoogleAnalytics = angulartics2GoogleAnalytics;
     this.breadcrumbsService = breadcrumbsService;
     this.router = router;
   }

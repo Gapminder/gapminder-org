@@ -2,6 +2,13 @@
 
 .search-form
   margin 18px 15px 0
+  .indent
+    padding-right 35px
+
+  .no-indent
+    flex-wrap nowrap
+    display flex
+    flex-direction row
 
   .text
     width 100%
@@ -12,6 +19,7 @@
   .wrap-input
     position relative
     padding 0
+    flex-grow 1
 
     &.in
       @media small
@@ -34,3 +42,4 @@
     font-size 18px
     font-family 'Bariol Regular', sans-serif
     outline none
+    margin-left 5px
