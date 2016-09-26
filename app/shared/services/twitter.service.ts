@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
-import {bindCallback} from 'rxjs/observable/bindCallback';
+import { bindCallback } from 'rxjs/observable/bindCallback';
 import 'rxjs/add/operator/map';
 
 declare const TWITTER_CONSUMER_KEY: string;
@@ -70,4 +70,3 @@ export interface TwitterUser {
   profile_image_url: string;
   followers_count: number;
 }
-

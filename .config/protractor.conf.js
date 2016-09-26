@@ -24,9 +24,7 @@ const config = {
 
   capabilities: {
     browserName: 'chrome',
-    chromeOptions: {
-      args: ['show-fps-counter=true']
-    }
+    chromeOptions: {args: ['show-fps-counter=true']}
   },
 
   onPrepare: () => {
