@@ -1,7 +1,5 @@
 import { Component, ViewEncapsulation, OnInit, Inject } from '@angular/core';
-import { ContenfulContent } from 'ng2-contentful-blog/components/contentful/contentful-content.service';
-import { RoutesManagerService } from 'ng2-contentful-blog/components/routes-gateway/routes-manager.service';
-import { ContentfulNodePage, ContentfulImage } from 'ng2-contentful-blog/components/contentful/aliases.structures';
+import { ContenfulContent, RoutesManagerService, ContentfulNodePage, ContentfulImage } from 'ng2-contentful-blog';
 import * as _ from 'lodash';
 
 @Component({
