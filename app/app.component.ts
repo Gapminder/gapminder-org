@@ -3,7 +3,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import { NavigationStart, Router } from '@angular/router';
-import { BreadcrumbsService } from 'ng2-contentful-blog/components/breadcrumbs/breadcrumbs.service';
+import { BreadcrumbsService } from 'ng2-contentful-blog';
 import { HostListener } from '@angular/core';
 
 @Component({

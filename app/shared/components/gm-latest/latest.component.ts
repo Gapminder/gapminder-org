@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import * as _ from 'lodash';
-import { ContentfulNodePage } from 'ng2-contentful-blog/components/contentful/aliases.structures';
-import { ContenfulContent } from 'ng2-contentful-blog/components/contentful/contentful-content.service';
-import { RoutesManagerService } from 'ng2-contentful-blog/components/routes-gateway/routes-manager.service';
+import { ContentfulNodePage, ContenfulContent, RoutesManagerService, ContentfulTagPage } from 'ng2-contentful-blog';
 import 'rxjs/add/operator/mergeMap';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'gm-latest',
@@ -21,15 +20,18 @@ export class LatestComponent implements OnInit {
   @Input()
   private title: string = '';
   /* tslint:enable */
-
+  private constants: any;
   private articles: ContentfulNodePage[];
   private contentfulContentService: ContenfulContent;
   private routesManager: RoutesManagerService;
 
   public constructor(contentfulContentService: ContenfulContent,
+                     @Inject('Constants') constants: any,
                      routesManager: RoutesManagerService) {
     this.contentfulContentService = contentfulContentService;
     this.routesManager = routesManager;
+    this.constants = constants;
+
   }
 
   public ngOnInit(): void {
@@ -37,13 +39,22 @@ export class LatestComponent implements OnInit {
       .getTagsBySlug(this.tag).subscribe((tags: any[]) => {
       if (!_.isEmpty(tags)) {
         const tagId = _.get(_.first(tags), 'sys.id') as string;
-        this.contentfulContentService.getLatestArticlesByTag(tagId, this.limit)
-          .mergeMap((articles: ContentfulNodePage[]) => this.contentfulContentService.getArticleWithFullUrlPopulated(articles))
-          .subscribe((articles: ContentfulNodePage[]) => {
-            this.routesManager.addRoutesFromArticles(... articles);
-            this.articles = articles;
-          });
+        this.getProjectTagId().subscribe((projectTagId: string) => {
+          this.contentfulContentService.getArticlesByTags([tagId, projectTagId], this.limit)
+            .mergeMap((articles: ContentfulNodePage[]) => this.contentfulContentService.getArticleWithFullUrlPopulated(articles))
+            .subscribe((articles: ContentfulNodePage[]) => {
+              this.routesManager.addRoutesFromArticles(... articles);
+              this.articles = articles;
+            });
+        });
       }
     });
+  }
+
+  private getProjectTagId(): Observable<string> {
+    return this.contentfulContentService
+      .getTagsBySlug(this.constants.PROJECT_TAG)
+      .mergeMap((tags: ContentfulTagPage[]) => Observable.from(tags))
+      .map((tag: ContentfulTagPage) => tag.sys.id);
   }
 }
