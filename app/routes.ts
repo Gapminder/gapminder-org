@@ -1,10 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { RootComponent } from './sections/root/root.component';
 import { ModuleWithProviders } from '@angular/core';
-import { TagComponent } from 'ng2-contentful-blog/components/tags/tag.component';
-import { RoutesGatewayGuard } from 'ng2-contentful-blog/components/routes-gateway/routes-gateway.guard';
-import { ProfileComponent } from 'ng2-contentful-blog/components/profile/profile.component';
-import { RoutesGatewayComponent } from 'ng2-contentful-blog/components/routes-gateway/routes-gateway.component';
+import { TagComponent, RoutesGatewayGuard, ProfileComponent, RoutesGatewayComponent } from 'ng2-contentful-blog';
 
 export const routes: Routes = [
   {path: '', component: RootComponent},

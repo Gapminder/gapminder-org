@@ -1,9 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
-import { BreadcrumbsService } from 'ng2-contentful-blog/components/breadcrumbs/breadcrumbs.service';
-import { ContenfulContent } from 'ng2-contentful-blog/components/contentful/contentful-content.service';
-import { ContentfulImage } from 'ng2-contentful-blog/components/contentful/aliases.structures';
+import { BreadcrumbsService, ContenfulContent, ContentfulImage } from 'ng2-contentful-blog';
 
 @Component({
   selector: 'gm-header',
