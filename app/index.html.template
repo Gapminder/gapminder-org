@@ -8,6 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Gapminder: Unveiling the beauty of statistics for a fact based world view.">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="fragment" content="!">
 
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
