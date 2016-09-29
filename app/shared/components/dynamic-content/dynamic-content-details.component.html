@@ -39,12 +39,13 @@
         <div class="date-info">{{child.fields.createdAt | gmToDate | date}}</div>
 
         <a [routerLink]="[routesManager.getRouteName(child.fields.url)]"
+           *ngIf="child.fields.title"
            angulartics2On="click"
            angularticsEvent="{{child.fields.title}}"
            class="post-title">
           {{child.fields.title}}
         </a>
-        <p class="post-p">
+        <p class="post-p" *ngIf="child.fields.description">
           {{child.fields.description | slice:0:100}}<span *ngIf="child.fields.description.length >101">...
             <a [routerLink]="[routesManager.getRouteName(child.fields.url)]">Read more&nbsp;»</a>
           </span>
