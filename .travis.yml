@@ -1,8 +1,6 @@
 language: node_js
 sudo: false
-# test with node 4.* and 5.*
 node_js:
-  - "5"
   - "4"
 
 # cache node_modules (read more: https://docs.travis-ci.com/user/caching/)
@@ -54,3 +52,13 @@ addons:
     # required by node-gyp to build some packages
     packages:
     - g++-4.8
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: XvhmyO0k139HvNvbyKxuMx10FRgpGQiDRU0l6OY/LdgkIURgqddDfCuUZ1j1llZTVOJ1Ch4XsC7ZrI4BPqcDsp9aOHv9usOZ1GZRBy0ZScsuRIYGrur8YzLaL1Y9hYP5huGuLSMegilICKitAY24qKmbSpm3AxbR4FlW8Bm+EQSiJ4T0A9JrPM2095sQZfvCbZgAVmSlQpdt0tfFwYVGlq5ZZj02ABSmpt6iJnKNVmPJuDoUz94Uk4oMAxiA6SJuxR6sZwJl6dKyOWdDaC+U+TKmQWsArMrHWuRi4EdtcN3OlJ+YGW6vZax/8V0Vs2oIYQKVcYBHdIUxTb3h5nFMBIb/BuB//9pzEQWKWh7jgsdWZAzdGd9xZjAR6ICTGOJIMUnz3mCJrCJcYed1zfH6ZDjgr/BPzJcm9iNbDGHCVb6IfBdt3IqLkdcmlFdbuaxE+QU3X8bcwNX54dMyrEQaWmMz7hNcFj/LIYe6+eXjrFThgrDwgt31hr0pl0YXHoyTsGSsWnQEJ5P8u0+c/iUoMlNDDM2guzYMJ0hqPUyQxduMLewbIgq2iwgKBcI+PGCbe7x1IRVDDWa0VCIWmA/4FWNyIdSvDrJKYp4yPNQ9SXz+XOf65X3BTLdoP7l4yBwRykwVt3nWAoqYHqlGO5s7r+/eqxG2P5JP+jr9Md8hKpY=
+  app:
+    master: gapminder-org-stage
+    development: gapminderdev-org
+    release: gapminder-org-production
+

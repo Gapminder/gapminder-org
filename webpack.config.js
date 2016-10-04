@@ -9,7 +9,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const isProduction = (process.env.NODE_ENV || 'development') === 'production';
+const isProduction = (process.env.NODE_ENV || 'dev') === 'prod';
 const isLocal = process.env.NODE_ENV === 'local';
 const dest = 'dist';
 const absDest = root(dest);
