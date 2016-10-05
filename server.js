@@ -14,8 +14,17 @@ const rss = require('rss');
 const Datastore = require('nedb');
 const db = new Datastore({filename: path.join(__dirname, '/db'), autoload: true});
 
+const contentfulDevConfig = require('./contentful-dev.json');
+const contentful = require('contentful');
+
 // prerender
 /*eslint-disable*/
+const client = contentful.createClient({
+  'accessToken': process.env.CONTENTFUL_ACCESS_TOKEN || contentfulDevConfig.accessToken,
+  'space': process.env.CONTENTFUL_SPACE_ID || contentfulDevConfig.spaceId,
+  'host': process.env.CONTENTFUL_HOST || contentfulDevConfig.host
+});
+
 if (!process.env.PRERENDER_TOKEN) {
   console.error('Error: PRERENDER_TOKEN was not provided');
 }
@@ -32,52 +41,70 @@ const feed = new rss({
   title: 'Gapminder RSS Feed',
   description: 'Gapminder.org RSS Feed',
   author: 'Gapminder.org',
+  feed_url: 'https://www.gapminder.org/',
   site_url: 'https://www.gapminder.org/',
   image_url: 'http://www.gapminder.org/public/logo.png'
 });
 /*eslint-enable*/
-
 /*eslint-disable*/
 app.post('/rss', (req, res) => {
   feed.feed_url = `https://${req.headers.host}`;
   feed.site_url = `https://${req.headers.host}`;
-  if (req.body.sys.contentType.sys.id === 'article') {
 
-    const itemTemplate = {
-      title: req.body.fields.title['en-US'],
-      description: req.body.fields.description ? req.body.fields.description['en-US'] : '',
-      url: `https://${req.headers.host}/${req.body.fields.slug['en-US']}`,
-      guid: req.body.fields.slug['en-US'],
-      categories: [],
-      author: 'gapminder',
-      date: req.body.fields.createdAt,
-      enclosure: false,
-      custom_elements: []
-    };
-    db.findOne({guid: req.body.fields.slug['en-US']}, function (err, item) {
-      if (!_.isEmpty(item)) {
-        db.remove(item, {multi: true}, function (err) {
-          if (err) {
-            console.error('Error: ', err)
-          }
-        });
-        dbInsert(itemTemplate)
-      } else {
-        dbInsert(itemTemplate);
-      }
-    });
-    res.status(200).json({
-      message: 'ok got it!'
-    });
-  }
-  function dbInsert(itemTemplate) {
-    db.insert(itemTemplate, function (err) {
-      if (err) {
-        console.error('Error: ', err)
-      }
-    })
+  const fields = req.body.fields;
+
+  const itemTemplate = {
+    title: fields.title['en-US'],
+    description: fields.description ? fields.description['en-US'] : '',
+    url: `https://${req.headers.host}/${fields.slug['en-US']}`,
+    guid: fields.slug['en-US'],
+    categories: [],
+    author: 'gapminder',
+    date: fields.createdAt,
+    enclosure: false,
+    custom_elements: []
+  };
+
+  if (req.body.sys.contentType.sys.id === 'article') {
+    client.getEntries({content_type: 'tag'})
+      .then(entries => {
+        const getTagBlog = _.find(entries.items, {fields: {slug: 'blog'}});
+        const isTagsInFields = _.get(fields, 'tags[\'en-US\']', false);
+        const findTag = isTagsInFields ? _.find(fields.tags['en-US'], {sys: {id: getTagBlog.sys.id}}) : '';
+        if (!_.isEmpty(getTagBlog) && !_.isEmpty(findTag)) {
+          findItem(fields.slug['en-US'], itemTemplate);
+          res.status(200).json({message: 'ok got it!'});
+        }
+      });
   }
 });
+
+function findItem(slug, itemTemplate) {
+  db.findOne({guid: slug}, (err, item) => {
+    if (!_.isEmpty(item)) {
+      remove(item);
+      dbInsert(itemTemplate);
+    } else {
+      dbInsert(itemTemplate);
+    }
+  });
+}
+
+function remove(item) {
+  db.remove(item, {}, err => {
+    if (err) {
+      console.error('Error: ', err);
+    }
+  });
+}
+
+function dbInsert(itemTemplate) {
+  db.insert(itemTemplate, err => {
+    if (err) {
+      console.error('Error: ', err);
+    }
+  });
+}
 
 app.get('/feed/rss', (req, res) => {
   res.type('rss');
@@ -85,7 +112,7 @@ app.get('/feed/rss', (req, res) => {
   feed.items = [];
   db.find({}, (err, items) => {
     if (err) {
-      console.error('Error: ', err)
+      console.error('Error: ', err);
     }
     if (!_.isEmpty(items)) {
       items.forEach(product => {
@@ -96,6 +123,7 @@ app.get('/feed/rss', (req, res) => {
   });
 });
 /*eslint-enable*/
+
 app.get('*', (req, res) => res.sendFile(path.resolve(ROOT, 'index.html')));
 
 // catch 404 and forward to error handler
