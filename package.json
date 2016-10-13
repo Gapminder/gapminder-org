@@ -9,7 +9,7 @@
     "npm": "3.10.8"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node ./server",
     "heroku-postbuild": "npm run build",
     "start-dev": "./node_modules/.bin/concurrently \"npm run watch:dev\" \"npm run serve\"",
     "deploy": "npm run build:prod && npm run publish:gh-pages",
@@ -67,6 +67,7 @@
     "json-loader": "0.5.4",
     "lodash": "4.16.1",
     "marked": "0.3.6",
+    "mongodb": "2.2.10",
     "nedb": "1.8.0",
     "ng2-bootstrap": "1.1.5",
     "ng2-contentful": "0.5.1",
