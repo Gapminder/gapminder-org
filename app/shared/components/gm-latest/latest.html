@@ -24,10 +24,10 @@
     </div>
   </section>
   <div class="row text-center">
-    <button *ngIf="tag" [routerLink]="['/tag', tag]"
+    <a *ngIf="tag" [routerLink]="['/tag', tag]"
             angulartics2On="click"
             angularticsEvent="{{tag}}"
-            class="btn-yellow  margin-top-50">View All {{title}} &#187;</button>
+            class="btn-yellow  margin-top-50">View All {{title}} &#187;</a>
 
   </div>
 </section>
