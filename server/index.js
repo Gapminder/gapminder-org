@@ -26,7 +26,9 @@ MongoClient.connect(config.MONGO_URL, (error, db) => {
   app.set('gp.mongodb', db);
   require('./rss/rss.routes.js')(app);
 
+  app.get('/robots.txt', (req, res) => res.sendFile(path.resolve(__dirname, 'robots.txt')));
   app.get('*', (req, res) => res.sendFile(path.resolve(ROOT, 'index.html')));
+
   app.use((req, res, next) => {
     const err = new Error('Not Found');
     err.status = 404;
