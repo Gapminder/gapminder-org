@@ -15,8 +15,6 @@ const config = {
   CONTENTFUL_WEBHOOK_USER: process.env.CONTENTFUL_WEBHOOK_USER
 };
 
-/* eslint-enable */
-
 const optionalParams = new Set([
   'MONGO_URL',
   'PORT',
@@ -27,8 +25,9 @@ const optionalParams = new Set([
 
 const notProvidedParams = _.pickBy(config, (value, param) => !optionalParams.has(param) && !value);
 
-if (!_.isEmpty(notProvidedParams)) {
+if (!_.isEmpty(notProvidedParams) && process.env.NODE_ENV !== 'local') {
   throw Error(`Following params were not provided: ${_.keys(notProvidedParams)}`);
 }
+/* eslint-enable */
 
 module.exports = config;

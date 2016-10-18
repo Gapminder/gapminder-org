@@ -25,6 +25,7 @@ MongoClient.connect(config.MONGO_URL, (error, db) => {
   app.use(express.static(ROOT));
   app.set('gp.mongodb', db);
   require('./rss/rss.routes.js')(app);
+  require('./archive/archive.routes.js')(app);
 
   app.get('/robots.txt', (req, res) => res.sendStatus(404));
   app.get('*', (req, res) => res.sendFile(path.resolve(ROOT, 'index.html')));
