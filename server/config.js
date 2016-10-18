@@ -1,7 +1,7 @@
 'use strict';
 
 const _ = require('lodash');
-const contentfulDevConfig = require('../contentful-dev');
+const contentfulDevConfig = require('../contentful-local');
 
 /* eslint-disable */
 const config = {

@@ -72,7 +72,7 @@
     "nedb": "1.8.0",
     "ng2-bootstrap": "1.1.5",
     "ng2-contentful": "0.5.1",
-    "ng2-contentful-blog": "2.0.3",
+    "ng2-contentful-blog": "2.0.4",
     "prerender-node": "2.4.0",
     "route-cache": "0.3.3",
     "rss": "1.2.1",
