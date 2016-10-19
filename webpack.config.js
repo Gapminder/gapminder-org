@@ -15,7 +15,7 @@ const dest = 'dist';
 const absDest = root(dest);
 
 const contentfulDevConfig = JSON.parse(
-  fs.readFileSync('./contentful-dev.json') // eslint-disable-line no-sync
+  fs.readFileSync('./contentful-local.json') // eslint-disable-line no-sync
 );
 
 const twitterConfig = JSON.parse(
