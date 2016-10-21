@@ -29,23 +29,23 @@
       <div class="dynamic-item col-xs-12 col-sm-6 margin-bottom-35" *ngFor="let child of children"
            [ngClass]="{'col-md-4': !cssClassSmallColumn, 'col-md-6': cssClassSmallColumn}">
 
-        <a *ngIf="child.fields.thumbnail"
+        <a *ngIf="child.fields && child.fields.thumbnail"
            [routerLink]="[routesManager.getRouteName(child.fields.url)]"
            angulartics2On="click"
            angularticsEvent="{{child.fields.title}}"
            class="dynamic-wrap-img"  [gmContentfulSrcId]="child.fields.thumbnail.sys.id">
           <!--<span class="play"><i class="fa fa-play"></i></span>-->
         </a>
-        <div class="date-info">{{child.fields.createdAt | gmToDate | date}}</div>
+        <div *ngIf="child.fields && child.fields.createdAt" class="date-info">{{child.fields.createdAt | gmToDate | date}}</div>
 
         <a [routerLink]="[routesManager.getRouteName(child.fields.url)]"
-           *ngIf="child.fields.title"
+           *ngIf="child.fields && child.fields.title"
            angulartics2On="click"
            angularticsEvent="{{child.fields.title}}"
            class="post-title">
           {{child.fields.title}}
         </a>
-        <p class="post-p" *ngIf="child.fields.description">
+        <p class="post-p" *ngIf="child.fields && child.fields.description">
           {{child.fields.description | slice:0:100}}<span *ngIf="child.fields.description.length >101">...
             <a [routerLink]="[routesManager.getRouteName(child.fields.url)]">Read more&nbsp;»</a>
           </span>
