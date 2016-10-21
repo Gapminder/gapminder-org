@@ -12,6 +12,7 @@ import {
 import 'rxjs/add/operator/mergeMap';
 import { Observable } from 'rxjs/Rx';
 import * as _ from 'lodash';
+import { ContentfulCover } from 'ng2-contentful-blog/components/contentful/aliases.structures';
 
 @Component({
   selector: 'gm-dynamic-page',
@@ -67,7 +68,8 @@ export class DynamicContentDetailsComponent implements OnInit {
             .mergeMap((tagSysId: string) => this.contentfulContentService.getArticleByTagAndSlug(tagSysId, currentArticleSlug))
             .mergeMap((articles: ContentfulNodePage[]) => Observable.from(articles))
             .subscribe((article: ContentfulNodePage) => this.onArticleReceived(article));
-        } else {
+        }
+        if (_.isEmpty(currentArticleSlug)) {
           this.isHomePage = true;
           this.contentfulContentService
             .getTagsBySlug(this.constants.HOME_TAG).subscribe((tags: ContentfulTagPage[]) => {
@@ -112,9 +114,9 @@ export class DynamicContentDetailsComponent implements OnInit {
         }
       });
     }
-    const cover = _.get(this.content.cover, 'sys.id') as string;
 
-    this.coverService.cover$.next({cover});
+    const cover = _.get(this.content, 'coverBlock') as ContentfulCover;
+    this.coverService.cover$.next({cover, show: !_.isEmpty(cover)});
 
     this.breadcrumbsService.breadcrumbs$.next({
       url: this.urlPath,
