@@ -18,10 +18,6 @@ const contentfulDevConfig = JSON.parse(
   fs.readFileSync('./contentful-local.json') // eslint-disable-line no-sync
 );
 
-const twitterConfig = JSON.parse(
-  fs.readFileSync('./twitter.json') //eslint-disable-line no-sync
-);
-
 const config = {
   // devtool: isProduction ? 'eval' : 'source-map',
   debug: false,
@@ -121,10 +117,11 @@ const config = {
         JSON.stringify(process.env.CONTENTFUL_SPACE_ID) || JSON.stringify(contentfulDevConfig.spaceId),
       CONTENTFUL_HOST:
         JSON.stringify(process.env.CONTENTFUL_HOST) || JSON.stringify(contentfulDevConfig.host),
-      TWITTER_CONSUMER_KEY: JSON.stringify(twitterConfig.consumerKey),
-      TWITTER_CONSUMER_SECRET: JSON.stringify(twitterConfig.consumerSecret),
-      TWITTER_ACCESS_TOKEN_KEY: JSON.stringify(twitterConfig.accessTokenKey),
-      TWITTER_ACCESS_TOKEN_SECRET: JSON.stringify(twitterConfig.accessTokenSecret)
+      TWITTER_CONSUMER_KEY: JSON.stringify(process.env.TWITTER_CONSUMER_KEY),
+      TWITTER_CONSUMER_SECRET: JSON.stringify(process.env.TWITTER_CONSUMER_SECRET),
+      TWITTER_ACCESS_TOKEN_KEY: JSON.stringify(process.env.TWITTER_ACCESS_TOKEN_KEY),
+      TWITTER_ACCESS_TOKEN_SECRET: JSON.stringify(process.env.TWITTER_ACCESS_TOKEN_SECRET)
+
     })
   ]
 };
