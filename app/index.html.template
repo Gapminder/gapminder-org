@@ -15,9 +15,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-  <script type="text/javascript">window.liveSettings={api_key:"ce14d30f136e40e69697aa3fdc02eb40"};</script>
-  <script type="text/javascript" src="//cdn.transifex.com/live.js"></script>
-
   <!--link to bootstrap.css-->
 
 <base href="/">
